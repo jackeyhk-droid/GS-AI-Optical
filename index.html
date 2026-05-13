@@ -1,0 +1,2652 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GS Optical Networking · AI 光通訊研究綜述</title>
+<meta name="description" content="Goldman Sachs Global Tech · Optical Networking: The Next Mega Trend in AI Infrastructure · 2026/4/17">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0a0e17;
+  --bg-elev: #0f1520;
+  --bg-card: #111827;
+  --bg-card-hover: #1a2332;
+  --bg-modal: #0f1520;
+  --bg-overlay: rgba(5, 8, 14, 0.92);
+  --border: #1e293b;
+  --border-2: #2a3a55;
+  --border-active: #334155;
+  --text: #e2e8f0;
+  --text-2: #cbd5e1;
+  --text-dim: #94a3b8;
+  --text-muted: #7d8a9b;
+  --text-faint: #5a6779;
+  --cyan: #2563eb;
+  --cyan-bright: #3b82f6;
+  --blue: #60a5fa;
+  --green: #34d399;
+  --amber: #fbbf24;
+  --red: #f87171;
+  --purple: #a78bfa;
+  --pink: #818cf8;
+  --orange: #2dd4bf;
+  --glow-cyan: rgba(37, 99, 235, 0.08);
+  --font-body: 'Inter', 'Noto Sans TC', -apple-system, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  --font-tc: 'Noto Sans TC', 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 1400px 700px at 50% -200px, rgba(37, 99, 235, 0.025), transparent 60%),
+    radial-gradient(ellipse 800px 400px at 90% 30%, rgba(180, 145, 100, 0.018), transparent 60%);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+body[data-lang="tc"] { font-family: var(--font-tc); }
+::selection { background: var(--cyan); color: var(--bg); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: var(--border-active); }
+
+/* ===== Password Gate ===== */
+#gate { position: fixed; inset: 0; z-index: 9999; background: radial-gradient(ellipse at center, var(--bg-elev) 0%, var(--bg) 80%); display: flex; align-items: center; justify-content: center; padding: 20px; }
+#gate.hidden { display: none; }
+#gate::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(0deg, transparent 24%, rgba(37, 99, 235, 0.03) 25%, rgba(37, 99, 235, 0.03) 26%, transparent 27%, transparent 74%, rgba(37, 99, 235, 0.03) 75%, rgba(37, 99, 235, 0.03) 76%, transparent 77%), linear-gradient(90deg, transparent 24%, rgba(37, 99, 235, 0.03) 25%, rgba(37, 99, 235, 0.03) 26%, transparent 27%, transparent 74%, rgba(37, 99, 235, 0.03) 75%, rgba(37, 99, 235, 0.03) 76%, transparent 77%); background-size: 60px 60px; pointer-events: none; }
+.gate-card { width: 100%; max-width: 460px; background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-elev) 100%); border: 1px solid var(--border-2); border-radius: 6px; padding: 40px 36px; position: relative; box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(37, 99, 235, 0.025), inset 0 1px 0 rgba(255, 255, 255, 0.04); }
+.gate-card::before { content: ''; position: absolute; top: -1px; left: 20px; right: 20px; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); opacity: 0.6; }
+.gate-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 24px; padding: 5px 10px; background: var(--glow-cyan); border: 1px solid rgba(37, 99, 235, 0.2); border-radius: 3px; }
+.gate-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.85); } }
+.gate-title { font-family: var(--font-body); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; color: var(--text); margin-bottom: 4px; }
+body[data-lang="tc"] .gate-title { font-family: var(--font-tc); }
+.gate-subtitle { font-size: 12px; color: var(--text-muted); margin-bottom: 28px; font-family: var(--font-mono); letter-spacing: 0.02em; }
+.gate-input { width: 100%; background: var(--bg); border: 1px solid var(--border-2); border-radius: 3px; padding: 13px 16px; color: var(--text); font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.04em; outline: none; transition: border-color 0.15s, box-shadow 0.15s; margin-bottom: 14px; }
+.gate-input:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px var(--glow-cyan); }
+.gate-btn { width: 100%; background: var(--cyan); color: var(--bg); border: 0; border-radius: 3px; padding: 13px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.15s, transform 0.05s; }
+.gate-btn:hover { background: var(--cyan-bright); }
+.gate-btn:active { transform: translateY(1px); }
+.gate-error { color: var(--red); font-size: 12px; margin-top: 10px; font-family: var(--font-mono); min-height: 16px; }
+.gate-meta { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-faint); font-family: var(--font-mono); letter-spacing: 0.04em; line-height: 1.7; }
+
+/* ===== Header ===== */
+header.topbar { position: sticky; top: 0; z-index: 100; background: rgba(10, 14, 23, 0.88); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border-bottom: 1px solid var(--border); }
+.topbar-inner { max-width: 1600px; margin: 0 auto; padding: 12px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
+.brand-mark { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
+.brand-mark svg { width: 100%; height: 100%; }
+.brand-text { font-family: var(--font-body); font-size: 19px; font-weight: 700; letter-spacing: -0.005em; line-height: 1.1; color: var(--text); background: linear-gradient(180deg, #f1f5f9 0%, #cbd5e1 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; display: inline-block; padding-bottom: 7px; }
+.brand-text::after { content: ''; position: absolute; left: 0; bottom: 0; width: 72px; height: 2px; background: linear-gradient(90deg, var(--cyan) 0%, var(--cyan-bright) 55%, transparent 100%); border-radius: 2px; box-shadow: 0 0 8px rgba(37, 99, 235, 0.45); }
+.brand-text::before { content: ''; position: absolute; left: 0; bottom: 0; width: 30px; height: 2px; background: var(--cyan-bright); border-radius: 2px; box-shadow: 0 0 6px rgba(59, 130, 246, 0.6); animation: brand-pulse 3.4s ease-in-out infinite; }
+@keyframes brand-pulse { 0%, 100% { width: 24px; opacity: 0.85; } 50% { width: 48px; opacity: 1; } }
+.brand-sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); margin-top: 7px; }
+.topbar-right { display: flex; align-items: center; gap: 14px; }
+.topbar-status { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; }
+.topbar-status::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px rgba(16, 185, 129, 0.5); animation: pulse 2.5s ease-in-out infinite; }
+.lang-toggle { display: inline-flex; background: var(--bg-card); border: 1px solid var(--border-2); border-radius: 3px; padding: 2px; }
+.lang-toggle button { background: transparent; border: 0; color: var(--text-muted); padding: 5px 11px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; cursor: pointer; border-radius: 2px; transition: all 0.15s; }
+.lang-toggle button.active { background: var(--cyan); color: var(--bg); }
+.lang-toggle button:not(.active):hover { color: var(--text); }
+@media (max-width: 720px) { .topbar-status { display: none; } .topbar-inner { padding: 10px 16px; } .brand-sub { display: none; } }
+
+/* ===== Tabs ===== */
+nav.tabs { position: sticky; top: 53px; z-index: 90; background: rgba(15, 21, 32, 0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+.tabs-inner { max-width: 1600px; margin: 0 auto; padding: 0 28px; display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.tabs-inner::-webkit-scrollbar { display: none; }
+.tab-btn { display: flex; align-items: center; gap: 8px; background: transparent; border: 0; border-bottom: 2px solid transparent; color: var(--text-muted); padding: 14px 18px; cursor: pointer; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; transition: all 0.15s; flex-shrink: 0; }
+body[data-lang="tc"] .tab-btn .tab-label-tc { font-family: var(--font-tc); font-weight: 500; font-size: 13px; letter-spacing: 0.04em; text-transform: none; }
+.tab-btn:hover { color: var(--text); background: rgba(37, 99, 235, 0.04); }
+.tab-btn.active { color: var(--cyan); border-bottom-color: var(--cyan); background: rgba(37, 99, 235, 0.025); }
+.tab-num { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); letter-spacing: 0.1em; }
+.tab-btn.active .tab-num { color: var(--cyan); opacity: 0.7; }
+.tab-label-en { display: inline; }
+.tab-label-tc { display: none; }
+body[data-lang="tc"] .tab-label-en { display: none; }
+body[data-lang="tc"] .tab-label-tc { display: inline; }
+
+/* ===== Main ===== */
+main { max-width: 1600px; margin: 0 auto; padding: 28px; min-height: calc(100vh - 110px); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fade-in 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+@keyframes fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.section-label { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
+.section-label::after { content: ''; flex: 1; max-width: 100px; height: 1px; background: linear-gradient(90deg, var(--border-2), transparent); }
+h1.page-title { font-family: var(--font-body); font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 24px; color: var(--text); background: linear-gradient(180deg, #f1f5f9 0%, #cbd5e1 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; display: inline-block; padding-bottom: 18px; }
+h1.page-title::after { content: ''; position: absolute; left: 0; bottom: 0; width: 120px; height: 3px; background: linear-gradient(90deg, var(--cyan) 0%, var(--cyan-bright) 50%, transparent 100%); border-radius: 2px; box-shadow: 0 0 14px rgba(37, 99, 235, 0.45); }
+h1.page-title::before { content: ''; position: absolute; left: 0; bottom: 0; width: 60px; height: 3px; background: var(--cyan-bright); border-radius: 2px; box-shadow: 0 0 10px rgba(59, 130, 246, 0.6); animation: title-pulse 3.4s ease-in-out infinite; }
+@keyframes title-pulse { 0%, 100% { width: 50px; opacity: 0.85; } 50% { width: 90px; opacity: 1; } }
+body[data-lang="tc"] h1.page-title { font-family: var(--font-tc); font-weight: 700; }
+.page-subtitle { font-size: 16px; color: var(--text-dim); font-weight: 400; margin-bottom: 32px; max-width: 800px; line-height: 1.5; }
+h2.subsec { font-family: var(--font-body); font-size: 20px; font-weight: 700; letter-spacing: -0.01em; margin: 36px 0 16px; color: var(--text); display: flex; align-items: center; gap: 12px; }
+body[data-lang="tc"] h2.subsec { font-family: var(--font-tc); }
+h2.subsec::before { content: ''; width: 3px; height: 18px; background: var(--cyan); border-radius: 1px; }
+h3.subsec-2 { font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--cyan); margin: 24px 0 12px; font-family: var(--font-mono); }
+.tab-panel p { font-size: 14px; line-height: 1.7; color: var(--text-2); margin-bottom: 14px; max-width: 75ch; }
+.tab-panel ul { list-style: none; margin: 12px 0 18px; padding-left: 0; }
+.tab-panel ul li { position: relative; padding-left: 22px; margin-bottom: 10px; font-size: 14px; line-height: 1.65; color: var(--text-2); max-width: 75ch; }
+.tab-panel ul li::before { content: '◇'; position: absolute; left: 0; top: 0; color: var(--cyan); font-size: 12px; }
+.tab-panel strong { color: var(--text); font-weight: 600; }
+
+/* ===== BLUF ===== */
+.bluf-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0 36px; }
+@media (max-width: 900px) { .bluf-grid { grid-template-columns: repeat(2, 1fr); } }
+.bluf-card { background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-elev) 100%); border: 1px solid var(--border); border-radius: 4px; padding: 18px 20px; position: relative; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+.bluf-card:hover { border-color: var(--border-active); transform: translateY(-2px); }
+.bluf-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); opacity: 0.5; }
+.bluf-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+.bluf-value { font-family: var(--font-mono); font-weight: 700; font-size: 36px; line-height: 1; color: var(--cyan); margin-bottom: 8px; letter-spacing: -0.02em; }
+.bluf-caption { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+.bluf-list { margin: 24px 0; }
+.bluf-row { display: flex; gap: 14px; padding: 16px 0; border-top: 1px solid var(--border); }
+.bluf-row:first-child { border-top: 0; padding-top: 0; }
+.bluf-row-num { font-family: var(--font-mono); font-size: 11px; color: var(--cyan); letter-spacing: 0.08em; flex-shrink: 0; padding-top: 3px; width: 30px; font-weight: 600; }
+.bluf-row-text { font-size: 14px; line-height: 1.7; color: var(--text); }
+
+/* ===== Architecture ===== */
+.arch-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 20px 0; }
+.arch-card { background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-elev) 100%); border: 1px solid var(--border); border-radius: 4px; padding: 20px 24px; transition: border-color 0.2s; }
+.arch-card:hover { border-color: var(--border-active); }
+.arch-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed var(--border-2); }
+.arch-card-name { font-family: var(--font-body); font-size: 16px; font-weight: 700; letter-spacing: -0.01em; color: var(--cyan); }
+body[data-lang="tc"] .arch-card-name { font-family: var(--font-tc); }
+.arch-card-period { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--text-muted); background: var(--bg); padding: 4px 9px; border: 1px solid var(--border-2); border-radius: 3px; text-transform: uppercase; }
+.arch-card-body { display: grid; grid-template-columns: 110px 1fr; gap: 6px 16px; font-size: 13px; }
+.arch-card-body dt { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--text-muted); text-transform: uppercase; padding-top: 3px; }
+.arch-card-body dd { color: var(--text-2); line-height: 1.55; }
+
+/* ===== Tables ===== */
+.table-wrap { margin: 20px 0; overflow-x: auto; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-elev); }
+table.data { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 13px; }
+body[data-lang="tc"] table.data { font-family: var(--font-tc); }
+table.data thead th { background: var(--bg-card); color: var(--text); font-weight: 700; text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--border-2); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+table.data tbody td { padding: 11px 14px; border-bottom: 1px solid var(--border); color: var(--text-2); vertical-align: top; line-height: 1.55; }
+table.data tbody tr:last-child td { border-bottom: 0; }
+table.data tbody tr:hover td { background: rgba(37, 99, 235, 0.03); color: var(--text); }
+table.data td.num, table.data th.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--text); }
+table.data td.highlight { color: var(--text); font-weight: 600; background: rgba(37, 99, 235, 0.10); }
+table.data tbody tr.total td { background: var(--bg-card); color: var(--text); font-weight: 600; border-top: 1px solid var(--border-2); }
+
+/* ===== TAM ===== */
+.tam-viz { margin: 24px 0; display: flex; flex-direction: column; gap: 10px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: 4px; padding: 20px 24px; }
+.tam-row { display: grid; grid-template-columns: 220px 1fr 90px; align-items: center; gap: 14px; font-size: 13px; }
+@media (max-width: 720px) { .tam-row { grid-template-columns: 1fr; gap: 4px; } }
+.tam-label { color: var(--text-2); font-size: 13px; }
+.tam-bar-wrap { height: 10px; background: var(--bg); border-radius: 1px; overflow: hidden; border: 1px solid var(--border); }
+.tam-bar { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--cyan-bright)); box-shadow: 0 0 10px rgba(37, 99, 235, 0.4); animation: bar-grow 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; transform-origin: left; transform: scaleX(0); transition: filter 0.18s, box-shadow 0.18s; }
+.tam-data-row { padding: 6px 10px; margin: 0 -10px; border-radius: 3px; transition: background 0.15s; cursor: default; }
+.tam-data-row:hover { background: rgba(37, 99, 235, 0.05); }
+.tam-data-row:hover .tam-bar { filter: brightness(1.18); box-shadow: 0 0 18px rgba(37, 99, 235, 0.6); }
+.tam-data-row:hover .tam-value { color: var(--cyan-bright); }
+.tam-data-row:hover .tam-label { color: var(--text); }
+.tam-value { transition: color 0.15s; }
+.tam-label { transition: color 0.15s; }
+@keyframes bar-grow { to { transform: scaleX(1); } }
+.tam-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--cyan); text-align: right; font-size: 13px; font-weight: 600; }
+
+/* ===== Players ===== */
+.player-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 18px 0; }
+.player-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--cyan); border-radius: 3px; padding: 16px 20px; transition: border-color 0.2s, background 0.2s; }
+.player-card:hover { border-color: var(--border-active); background: var(--bg-card-hover); }
+.player-name { font-family: var(--font-body); font-size: 15px; font-weight: 700; color: var(--cyan); margin-bottom: 6px; }
+body[data-lang="tc"] .player-name { font-family: var(--font-tc); }
+.player-body { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+
+/* ===== SiPh ===== */
+.siph-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+@media (max-width: 720px) { .siph-compare { grid-template-columns: 1fr; } }
+.siph-side { padding: 22px 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; }
+.siph-side.eml { border-top: 2px solid var(--amber); }
+.siph-side.siph { border-top: 2px solid var(--cyan); }
+.siph-side h5 { font-family: var(--font-mono); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 12px; }
+.siph-side.eml h5 { color: var(--amber); }
+.siph-side.siph h5 { color: var(--cyan); }
+.siph-stat { display: flex; justify-content: space-between; padding: 7px 0; font-size: 13px; border-bottom: 1px solid var(--border); }
+.siph-stat:last-child { border-bottom: 0; }
+.siph-stat-label { color: var(--text-muted); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; }
+.siph-stat-value { font-family: var(--font-mono); color: var(--text); font-weight: 600; }
+
+/* ===== Timeline ===== */
+.timeline { display: grid; grid-template-columns: repeat(16, 1fr); gap: 2px; margin: 16px 0 6px; height: 38px; }
+.timeline-cell { display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; border-radius: 1px; }
+.tl-very-tight { background: linear-gradient(180deg, var(--red), #dc2626); color: white; }
+.tl-tight { background: linear-gradient(180deg, var(--amber), #d97706); color: #1a0f00; }
+.tl-balance { background: linear-gradient(180deg, var(--green), #059669); color: #002a17; }
+.timeline-labels { display: grid; grid-template-columns: repeat(16, 1fr); gap: 2px; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.02em; }
+.timeline-labels span { text-align: center; }
+.timeline-legend { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 14px; font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
+.timeline-legend-item { display: flex; align-items: center; gap: 8px; }
+.timeline-legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+/* ===== Adoption ===== */
+table.data.adoption td.adopt-yes { color: var(--green); font-weight: 700; text-align: center; }
+table.data.adoption td.adopt-progress { color: var(--amber); font-weight: 600; text-align: center; font-family: var(--font-mono); font-size: 12px; }
+table.data.adoption td.adopt-none { color: var(--text-faint); text-align: center; }
+
+/* ===== Risks ===== */
+.risk-list { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+.risk-item { display: flex; gap: 16px; padding: 18px 22px; background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 3px; }
+.risk-num { flex-shrink: 0; font-family: var(--font-mono); font-weight: 700; font-size: 24px; color: var(--red); line-height: 1; padding-top: 2px; width: 32px; }
+.risk-text { font-size: 13px; line-height: 1.65; color: var(--text); }
+
+/* ===== Monitoring ===== */
+.monitor-list { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+.monitor-item { display: flex; gap: 14px; padding: 12px 18px; background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--cyan); border-radius: 3px; font-size: 13px; line-height: 1.6; color: var(--text-2); }
+.monitor-item::before { content: '◆'; color: var(--cyan); flex-shrink: 0; font-size: 11px; padding-top: 4px; }
+
+/* ===== Companies tab ===== */
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0 24px; padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: 4px; align-items: center; }
+.filter-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-right: 4px; }
+.filter-btn { background: var(--bg-card); border: 1px solid var(--border-2); color: var(--text-dim); padding: 6px 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; border-radius: 3px; transition: all 0.15s; white-space: nowrap; }
+.filter-btn:hover { color: var(--text); border-color: var(--border-active); }
+.filter-btn.active { background: var(--cyan); color: var(--bg); border-color: var(--cyan); }
+.filter-count { font-size: 11px; opacity: 0.7; margin-left: 4px; }
+.companies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 10px; }
+.company-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 18px 20px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
+.company-card:hover { background: var(--bg-card-hover); border-color: var(--border-active); transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.6); }
+.company-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.cc-ticker { font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--cyan); letter-spacing: 0.02em; line-height: 1; }
+.cc-cat { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 7px; border-radius: 2px; white-space: nowrap; font-weight: 600; }
+.cc-cat.light { background: rgba(251, 191, 36, 0.08); color: var(--amber); border: 1px solid rgba(251, 191, 36, 0.22); }
+.cc-cat.module { background: rgba(37, 99, 235, 0.08); color: var(--cyan); border: 1px solid rgba(37, 99, 235, 0.22); }
+.cc-cat.asic { background: rgba(168, 85, 247, 0.08); color: var(--purple); border: 1px solid rgba(168, 85, 247, 0.22); }
+.cc-cat.silicon { background: rgba(59, 130, 246, 0.08); color: var(--blue); border: 1px solid rgba(59, 130, 246, 0.22); }
+.cc-cat.fiber { background: rgba(52, 211, 153, 0.08); color: var(--green); border: 1px solid rgba(52, 211, 153, 0.22); }
+.cc-cat.pack { background: rgba(129, 140, 248, 0.08); color: var(--pink); border: 1px solid rgba(129, 140, 248, 0.22); }
+.cc-cat.pcb { background: rgba(45, 212, 191, 0.08); color: var(--orange); border: 1px solid rgba(45, 212, 191, 0.22); }
+.cc-cat.system { background: rgba(148, 163, 184, 0.08); color: var(--text-dim); border: 1px solid rgba(148, 163, 184, 0.22); }
+.cc-cat.test { background: rgba(248, 113, 113, 0.08); color: var(--red); border: 1px solid rgba(248, 113, 113, 0.22); }
+.cc-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; line-height: 1.3; }
+.cc-name-2 { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+.cc-meta { display: flex; gap: 12px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.04em; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.cc-meta span { display: flex; gap: 5px; }
+.cc-meta span b { color: var(--text-2); font-weight: 500; }
+.cc-role { font-size: 12px; color: var(--text-2); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.cc-click-hint { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); letter-spacing: 0.12em; margin-top: 10px; text-transform: uppercase; }
+.cc-click-hint::before { content: '→ '; color: var(--cyan); }
+
+/* ===== Modal ===== */
+.modal-overlay { position: fixed; inset: 0; background: var(--bg-overlay); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; visibility: hidden; transition: opacity 0.22s ease-out, visibility 0s linear 0.22s; }
+.modal-overlay.open { opacity: 1; pointer-events: auto; visibility: visible; transition: opacity 0.22s ease-out, visibility 0s; }
+.modal { background: var(--bg-modal); border: 1px solid var(--border-2); border-radius: 6px; max-width: 720px; width: 100%; max-height: calc(100vh - 48px); overflow-y: auto; position: relative; box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.06); transform: scale(0.96) translateY(8px); transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1); } .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+.modal::-webkit-scrollbar { width: 6px; }
+.modal::-webkit-scrollbar-thumb { background: var(--border-active); }
+.modal::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
+.modal-head { padding: 28px 32px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: linear-gradient(180deg, var(--bg-modal) 80%, rgba(15, 21, 32, 0.8) 100%); z-index: 2; }
+.modal-close { position: absolute; top: 20px; right: 20px; width: 32px; height: 32px; border: 1px solid var(--border-2); background: var(--bg-card); color: var(--text-dim); border-radius: 3px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); transition: all 0.15s; z-index: 3; }
+.modal-close:hover { background: var(--bg-card-hover); color: var(--text); border-color: var(--border-active); }
+.modal-ticker-row { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; flex-wrap: wrap; }
+.modal-pager { display: inline-flex; align-items: center; gap: 4px; margin-bottom: 18px; font-family: var(--font-mono); user-select: none; }
+.modal-pager-btn { width: 26px; height: 28px; border: 1px solid var(--border-2); background: var(--bg-card); color: var(--text-dim); border-radius: 3px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; line-height: 1; padding: 0; }
+.modal-pager-btn:hover { background: var(--bg-card-hover); color: var(--cyan-bright); border-color: rgba(37, 99, 235, 0.4); box-shadow: 0 0 8px rgba(37, 99, 235, 0.18); }
+.modal-pager-btn:active { transform: scale(0.95); }
+.modal-pager-counter { font-size: 11px; letter-spacing: 0.12em; color: var(--text-muted); padding: 0 10px; min-width: 60px; text-align: center; }
+.pager-now { color: var(--cyan-bright); font-weight: 700; }
+.pager-divider { color: var(--text-faint); margin: 0 4px; }
+.modal-ticker { font-family: var(--font-mono); font-size: 30px; font-weight: 700; color: var(--cyan); letter-spacing: 0.02em; }
+.modal-exchange { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; color: var(--text-muted); text-transform: uppercase; padding: 3px 8px; background: var(--bg-card); border: 1px solid var(--border-2); border-radius: 2px; }
+.modal-name { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.modal-name-2 { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+.modal-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.modal-stat { background: var(--bg-card); border: 1px solid var(--border); border-radius: 3px; padding: 10px 14px; }
+.modal-stat-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+.modal-stat-value { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--text); }
+.modal-body { padding: 24px 32px 32px; }
+.modal-section { margin-bottom: 22px; }
+.modal-section:last-child { margin-bottom: 0; }
+.modal-section-label { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.modal-section p { font-size: 13px; line-height: 1.7; color: var(--text-2); margin-bottom: 10px; }
+.modal-section p:last-child { margin-bottom: 0; }
+.modal-product-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.modal-product-list li { font-size: 12px; color: var(--text-2); padding-left: 18px; position: relative; line-height: 1.55; }
+.modal-product-list li::before { content: '◆'; position: absolute; left: 0; color: var(--cyan); font-size: 11px; top: 3px; }
+.modal-risks-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.modal-risks-list li { font-size: 12px; color: var(--text-2); padding-left: 18px; position: relative; line-height: 1.55; }
+.modal-risks-list li::before { content: '◇'; position: absolute; left: 0; color: var(--red); font-size: 11px; top: 1px; }
+.modal-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.modal-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--text-dim); padding: 4px 8px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 2px; text-transform: uppercase; }
+
+/* ===== Glossary ===== */
+.glossary { margin-top: 36px; border-top: 1px solid var(--border); padding-top: 28px; }
+.glossary-head { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 13px 18px; width: 100%; text-align: left; cursor: pointer; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); display: flex; justify-content: space-between; align-items: center; transition: border-color 0.15s; }
+.glossary-head:hover { border-color: var(--border-active); }
+.glossary-head::after { content: '+'; font-family: var(--font-mono); font-size: 18px; color: var(--cyan); transition: transform 0.2s; font-weight: 400; }
+.glossary.open .glossary-head::after { transform: rotate(45deg); }
+.glossary-body { display: none; margin-top: 12px; }
+.glossary.open .glossary-body { display: block; }
+
+/* ===== Institutional-grade refinements ===== */
+/* Subtle 1px top highlight on all major cards for depth and precision */
+.bluf-card, .arch-card, .player-card, .company-card, .siph-side,
+.risk-item, .monitor-item, .filter-bar, .tam-viz, .glossary-head,
+.table-wrap, .modal-stat, .gate-card {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.bluf-card { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05); }
+.gate-card { box-shadow:
+  0 30px 80px -20px rgba(0, 0, 0, 0.6),
+  0 0 0 1px rgba(37, 99, 235, 0.05),
+  inset 0 1px 0 rgba(255, 255, 255, 0.06); }
+
+/* Right-edge fade mask on tab nav — signals horizontal scrollability */
+nav.tabs { position: sticky; }
+nav.tabs::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 1px;
+  width: 56px;
+  background: linear-gradient(90deg, transparent, rgba(15, 21, 32, 0.95) 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Password gate spinner */
+.gate-btn:disabled { opacity: 0.85; cursor: wait; }
+.gate-btn .gate-spinner {
+  display: inline-block;
+  width: 11px; height: 11px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-left: 8px;
+  position: relative;
+  top: -1px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.gate-btn.success { background: var(--green); color: var(--bg); }
+
+/* Smaller-text accessibility — for elements that were 9px, restore the
+   "micro label" aesthetic via opacity + letter-spacing rather than tiny size */
+.bluf-label, .modal-stat-label, .cc-click-hint, .filter-count,
+.foot-meta, .timeline-labels { opacity: 0.78; }
+
+/* === Exhibit 6 · Per-Rack Dollar Content Stacked Bars === */
+.perrack-wrap { background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-elev) 100%); border: 1px solid var(--border); border-radius: 4px; padding: 20px 22px; margin: 14px 0 24px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04); }
+.perrack-row { display: grid; grid-template-columns: 180px 1fr 110px; align-items: center; gap: 14px; padding: 7px 10px; margin: 0 -10px; border-radius: 3px; transition: background 0.15s; }
+.perrack-row:hover { background: rgba(37, 99, 235, 0.05); }
+.perrack-label { font-family: var(--font-mono); font-size: 12px; color: var(--text-2); letter-spacing: 0.02em; }
+.perrack-label-sub { font-size: 10px; color: var(--text-faint); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px; }
+.perrack-bar-wrap { height: 18px; background: var(--bg); border-radius: 2px; overflow: hidden; border: 1px solid var(--border); display: flex; position: relative; }
+.perrack-seg-su { height: 100%; background: linear-gradient(180deg, #818cf8, #6366f1); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18); transition: filter 0.15s; transform-origin: left; }
+.perrack-seg-so { height: 100%; background: linear-gradient(180deg, var(--cyan-bright), var(--cyan)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18); transition: filter 0.15s; transform-origin: left; }
+.perrack-row:hover .perrack-seg-su { filter: brightness(1.18); }
+.perrack-row:hover .perrack-seg-so { filter: brightness(1.18); }
+.perrack-total { font-family: var(--font-mono); font-size: 13px; color: var(--text); font-weight: 700; text-align: right; transition: color 0.15s; }
+.perrack-row:hover .perrack-total { color: var(--cyan-bright); }
+.perrack-legend { display: flex; gap: 18px; margin-bottom: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.perrack-legend-dot { width: 10px; height: 10px; border-radius: 1px; display: inline-block; vertical-align: middle; margin-right: 6px; }
+.perrack-legend-dot.su { background: linear-gradient(180deg, #818cf8, #6366f1); }
+.perrack-legend-dot.so { background: linear-gradient(180deg, var(--cyan-bright), var(--cyan)); }
+
+/* === Exhibit 8 · Scale-up vs Scale-out TAM split === */
+.tam-split-table { width: 100%; border-collapse: collapse; margin: 14px 0 24px; font-size: 12px; }
+.tam-split-table thead th { background: var(--bg-elev); border-bottom: 1px solid var(--border-2); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--text-muted); padding: 10px 12px; text-align: right; text-transform: uppercase; font-weight: 600; }
+.tam-split-table thead th:first-child { text-align: left; }
+.tam-split-table tbody td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); }
+.tam-split-table tbody td:first-child { color: var(--text); font-weight: 600; text-align: left; }
+.tam-split-table tbody td:not(:first-child) { text-align: right; color: var(--text-2); }
+.tam-split-table tbody tr:hover { background: rgba(37, 99, 235, 0.04); }
+.tam-split-table .total-cell { color: var(--text) !important; font-weight: 700; background: rgba(37, 99, 235, 0.08); }
+.tam-split-table .pct-cell { color: var(--text-muted) !important; font-size: 11px; }
+
+/* === Exhibit 17 · Speed Migration Roadmap Heatmap === */
+.speed-wrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 20px 22px; margin: 14px 0 24px; overflow-x: auto; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04); }
+.speed-grid { display: grid; gap: 2px; min-width: 880px; grid-template-columns: 70px repeat(20, minmax(34px, 1fr)); }
+.speed-cell { padding: 7px 4px; text-align: center; font-family: var(--font-mono); font-size: 10.5px; border-radius: 1px; min-height: 30px; display: flex; align-items: center; justify-content: center; letter-spacing: 0.02em; transition: filter 0.15s, transform 0.15s; cursor: default; }
+.speed-cell.year-hdr { background: var(--bg-elev); color: var(--text-muted); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+.speed-cell.row-label { background: var(--bg-elev); color: var(--text); font-weight: 700; font-size: 12px; letter-spacing: 0.04em; justify-content: flex-start; padding-left: 10px; border-right: 1px solid var(--border); }
+.speed-cell.empty { background: transparent; }
+.speed-cell.s-verify  { background: rgba(251, 191, 36, 0.14); color: var(--amber); }
+.speed-cell.s-sample  { background: rgba(96, 165, 250, 0.22); color: var(--blue); }
+.speed-cell.s-volume  { background: rgba(59, 130, 246, 0.55); color: #fff; }
+.speed-cell.s-main    { background: rgba(30, 64, 175, 0.88); color: #fff; font-weight: 600; }
+.speed-cell.s-decline { background: rgba(148, 163, 184, 0.18); color: var(--text-dim); }
+.speed-cell:not(.empty):not(.year-hdr):not(.row-label):hover { filter: brightness(1.25); transform: scale(1.03); z-index: 2; position: relative; }
+.speed-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.04em; color: var(--text-muted); }
+.speed-legend-item { display: flex; align-items: center; gap: 6px; }
+.speed-legend-swatch { width: 14px; height: 14px; border-radius: 1px; display: inline-block; }
+.speed-legend-swatch.s-verify  { background: rgba(251, 191, 36, 0.4); }
+.speed-legend-swatch.s-sample  { background: rgba(96, 165, 250, 0.55); }
+.speed-legend-swatch.s-volume  { background: rgba(59, 130, 246, 0.7); }
+.speed-legend-swatch.s-main    { background: rgba(30, 64, 175, 1); }
+.speed-legend-swatch.s-decline { background: rgba(148, 163, 184, 0.35); }
+
+/* Custom tooltip (replaces native title) — cursor-following floating panel */
+.custom-tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-elev) 100%);
+  border: 1px solid var(--border-2);
+  color: var(--text);
+  padding: 9px 13px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  z-index: 2000;
+  opacity: 0;
+  transform: translate(14px, -50%);
+  transition: opacity 0.13s ease-out;
+  box-shadow: 0 10px 26px -6px rgba(0, 0, 0, 0.7),
+              0 0 0 1px rgba(37, 99, 235, 0.08),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  white-space: nowrap;
+  min-width: 180px;
+}
+.custom-tooltip.visible { opacity: 1; }
+.ctt-row { display: flex; justify-content: space-between; gap: 14px; line-height: 1.5; }
+.ctt-key { color: var(--text-muted); text-transform: uppercase; font-size: 10px; letter-spacing: 0.12em; }
+.ctt-val { color: var(--text); font-weight: 600; }
+.ctt-val.accent { color: var(--cyan-bright); }
+.ctt-divider { height: 1px; background: var(--border); margin: 6px 0; }
+
+/* Scroll-aware fade-out mask transition (toggled via .scrolled-right) */
+nav.tabs::after { transition: opacity 0.22s ease-out; opacity: 1; }
+nav.tabs.scrolled-right::after { opacity: 0; }
+
+/* Companies tab — keyword search input */
+.filter-search-wrap { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; position: relative; }
+.filter-search {
+  background: var(--bg-card);
+  border: 1px solid var(--border-2);
+  color: var(--text);
+  padding: 6px 12px 6px 30px;
+  border-radius: 3px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  width: 220px;
+  transition: border-color 0.15s, box-shadow 0.15s, width 0.2s;
+}
+.filter-search::placeholder { color: var(--text-faint); font-size: 11px; }
+.filter-search:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+  width: 260px;
+}
+.filter-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.filter-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px dashed var(--border-2);
+  border-radius: 4px;
+  margin-top: 18px;
+}
+
+/* ===== Footer ===== */
+footer.foot { border-top: 1px solid var(--border); padding: 32px 28px; margin-top: 48px; max-width: 1600px; margin-left: auto; margin-right: auto; }
+footer.foot p { font-size: 11px; color: var(--text-muted); line-height: 1.6; font-family: var(--font-mono); letter-spacing: 0.02em; max-width: 1000px; }
+body[data-lang="tc"] footer.foot p { font-family: var(--font-tc); font-size: 12px; letter-spacing: 0; }
+.foot-meta { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; color: var(--text-faint); text-transform: uppercase; }
+
+/* ===== Lang utility ===== */
+.lang-en { display: block; }
+.lang-tc { display: none; }
+body[data-lang="tc"] .lang-en { display: none; }
+body[data-lang="tc"] .lang-tc { display: block; }
+.inline-en { display: inline; }
+.inline-tc { display: none; }
+body[data-lang="tc"] .inline-en { display: none; }
+body[data-lang="tc"] .inline-tc { display: inline; }
+</style>
+</head>
+
+<body data-lang="tc">
+
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-tag">CLIENT ACCESS · 客戶授權</div>
+    <h1 class="gate-title">
+      <span class="inline-tc">客戶研究綜述</span><span class="inline-en">Research Synthesis</span>
+    </h1>
+    <p class="gate-subtitle">GS OPTICAL NETWORKING · 2026/04/17</p>
+    <div id="gate-form">
+      <input type="password" id="gate-input" class="gate-input" placeholder="Access key · 通行碼" autocomplete="off" autofocus>
+      <button type="button" id="gate-btn" class="gate-btn">Unlock · 解鎖</button>
+      <div id="gate-error" class="gate-error"></div>
+    </div>
+    <div class="gate-meta">
+      Synthesis of Goldman Sachs Global Tech, 17 April 2026<br>
+      Authorized distribution only · 限授權散發
+    </div>
+  </div>
+</div>
+
+<div id="app" style="display:none">
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#" class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="5" stroke="#2563eb" stroke-width="1.5"/>
+          <circle cx="16" cy="16" r="11" stroke="#2563eb" stroke-width="0.8" opacity="0.5"/>
+          <line x1="0" y1="16" x2="32" y2="16" stroke="#2563eb" stroke-width="0.6" opacity="0.4"/>
+          <line x1="16" y1="0" x2="16" y2="32" stroke="#2563eb" stroke-width="0.6" opacity="0.4"/>
+          <circle cx="16" cy="16" r="2" fill="#2563eb"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-text">Goldman Sachs Research</div>
+        <div class="brand-sub">2026·04·17</div>
+      </div>
+    </a>
+    <div class="topbar-right">
+      <div class="topbar-status"><span class="inline-en">Live</span><span class="inline-tc">即時</span></div>
+      <div class="lang-toggle">
+        <button data-lang-btn="tc" class="active">中</button>
+        <button data-lang-btn="en">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs"><div class="tabs-inner" id="tabs-inner"></div></nav>
+
+<main id="main-content"></main>
+
+<footer class="foot">
+  <p id="disclaimer-text"></p>
+  <div class="foot-meta">
+    <span>Research Synthesis · Version 1.0 · Pre-deployment</span>
+    <span>2026 · GS Optical · Authorized Distribution Only</span>
+  </div>
+</footer>
+
+</div>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+    <div class="modal-head" id="modal-head"></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<div class="custom-tooltip" id="custom-tooltip" role="tooltip" aria-hidden="true"></div>
+
+<script>
+/* ===========================================================================
+   DATA — module-level constants (avoid TDZ issues)
+   =========================================================================== */
+
+const TABS = [
+  { id: 'overview', en: 'Overview', tc: '總覽' },
+  { id: 'arch', en: 'Architecture', tc: '架構' },
+  { id: 'tam', en: 'TAM', tc: '市場' },
+  { id: 'tech', en: 'Technology', tc: '技術' },
+  { id: 'adoption', en: 'Adoption', tc: '採用' },
+  { id: 'companies', en: 'Companies', tc: '公司' },
+  { id: 'risks', en: 'Risks', tc: '風險' }
+];
+
+const META = {
+  tc: {
+    overviewSection: '客戶研究綜述 · 機構級分析',
+    title: '光通訊 · AI 基礎建設的下一個 Mega Trend',
+    subtitle: '綜述自 Goldman Sachs Global Tech (Allen Chang 等) · 2026/04/17 · 34 頁原始報告(已遮蔽版)',
+  },
+  en: {
+    overviewSection: 'Client Research · Institutional-Grade Synthesis',
+    title: 'Optical Networking · The Next Mega Trend in AI Infrastructure',
+    subtitle: 'Synthesized from Goldman Sachs Global Tech (Allen Chang et al.) · 17 April 2026 · 34-page redacted original',
+  }
+};
+
+const BLUF_STATS = [
+  { tc:{label:'TAM 解鎖',value:'9×',caption:'GB300 (US$15bn) → Rubin Ultra (US$154bn)'},
+    en:{label:'TAM Expansion',value:'9×',caption:'GB300 ($15B) → Rubin Ultra ($154B)'} },
+  { tc:{label:'單元連線價值',value:'29×',caption:'US$315k → US$9.4bn 每運算單元'},
+    en:{label:'Per-Unit Content',value:'29×',caption:'$315k → $9.4B per computing unit'} },
+  { tc:{label:'CPO 占 TAM',value:'59%',caption:'US$91bn 為新增最大來源'},
+    en:{label:'CPO Share',value:'59%',caption:'$91B · largest incremental driver'} },
+  { tc:{label:'光模組量增',value:'10×',caption:'216 → 2,500 顆/單元 (1.6T 等效)'},
+    en:{label:'Module Growth',value:'10×',caption:'216 → 2,500 units (1.6T equiv.)'} }
+];
+
+const BLUF = {
+  tc: [
+    'GS 預估 AI 機架網路 TAM 將從 GB300 NVL72 的 US$150 億放大至 Rubin Ultra NVL576 的 US$1,543 億,9 倍 TAM 解鎖;此為非零和增長,所有配置(銅纜、PCB midplane、可插拔光模組、CPO)同步擴張。',
+    '單一運算單元 (per computing unit) 之 Scale Up 與 Scale Out 連線總價值將從 US$315k (GB300) 跳升至 US$9.4bn (Rubin Ultra NVL576),增幅 29 倍;其中 CPO 在 US$1,543 億總 TAM 中占比 59%(US$910 億),為新增增量最大來源。',
+    'Scale Out 可插拔光模組市場規模從 GB300 NVL72 至 Rubin Ultra NVL576 期間擴大 10 倍,即便假設 CPO 在 Scale Out 達 29% 滲透率;1.6T 等效光模組用量從 216 顆/單元升至 2,500 顆/單元。',
+    '投資主題:本報告勾勒 AI 光通訊產業鏈未來三年 (2026–2028) 之多年期成長能見度。受惠族群橫跨光模組、光纖與連接、CPO Switch ASIC、先進封裝、PCB Midplane / CCL、InP 上游。關鍵風險為光源 (CW Laser/EML) 供應緊縮、CPO 商用化節奏、地緣政治。'
+  ],
+  en: [
+    'GS forecasts AI rack networking TAM expands from US$15B (GB300 NVL72) to US$154B (Rubin Ultra NVL576) — a 9× unlock. This is non-zero-sum: all configurations (copper, PCB midplane, pluggable optics, CPO) grow simultaneously.',
+    'Per-computing-unit connection value rises 29× from US$315k (GB300) to US$9.4B (Rubin Ultra NVL576). Within the US$154B TAM, CPO accounts for 59% (US$91B) — the single largest incremental contributor.',
+    'Scale-out pluggable optical module TAM expands 10× from GB300 to Rubin Ultra NVL576 — even assuming 29% CPO penetration in scale-out. 1.6T-equivalent module volume per unit rises from 216 to 2,500.',
+    'Investment themes: a multi-year (2026–2028) growth runway across optical modules, fiber & connectors, CPO switch ASIC, advanced packaging, PCB midplane / CCL, and InP upstream. Key risks: light source (CW Laser/EML) supply, CPO commercialization pace, geopolitics.'
+  ]
+};
+
+const THESIS = {
+  tc: `<p>GS 全球科技團隊於 GTC 2026 後發布的橫跨美/台/日/歐五個團隊聯合研究指出,網路 (Networking) 將成為繼運算晶片之後的 AI 基礎建設下一個 Mega Trend。核心邏輯為:單一 AI 晶片的運算力釋放越來越受限於互連 (Interconnect) 頻寬與延遲——當運算密度持續上升時,連線必須能讓多顆 GPU「像一顆晶片」般協同工作,這要求頻寬、能耗、延遲、體積同步突破。</p>
+  <p>投資人最關心的問題之一是:不同的網路配置(銅纜/PCB Midplane/可插拔光模組/CPO/OCS)是否會互相替代?GS 的回答是明確的「不會」——所有配置均將同步成長,因為:(1) 銅纜在 Scale Up 機架內仍具最低成本與功耗優勢;(2) PCB Midplane 在 Rubin Ultra Kyber 架構 (NVL144) 中作為新增中介層;(3) 可插拔光模組在 Scale Out 仍是主流,且因連接埠速率倍增 (800G→1.6T→3.2T) 使 attach rate 大幅提升;(4) CPO 在高頻寬短距離(6.4T、12.8T)場景具備不可替代的 TCO 優勢。</p>
+  <p>GS 透過 GTC 2026 公開資訊與供應鏈訪查,將下兩代 GPU 平台 (Vera Rubin / Rubin Ultra) 拆解為四種可能架構,並對每一架構建立連線價值模型 (dollar content per rack)、TAM 模型、以及對供應鏈個股 EPS 影響,形成本報告的分析骨幹。</p>`,
+  en: `<p>The post-GTC 2026 joint research from Goldman Sachs's five regional tech teams (US/Taiwan/Japan/Europe/HK) positions networking as the next AI infrastructure mega trend following compute silicon. The core logic: per-chip compute capability is increasingly bottlenecked by interconnect bandwidth and latency — as compute density rises, the network must enable multiple GPUs to operate "as a single chip," demanding simultaneous breakthroughs in bandwidth, power, latency, and form factor.</p>
+  <p>A common investor concern is whether different configurations (copper, PCB midplane, pluggable optics, CPO, OCS) will substitute one another. GS argues clearly that they will not — all configurations grow in tandem because: (1) copper retains the lowest cost and power profile within scale-up racks; (2) PCB midplane is a newly added interposer layer in the Rubin Ultra Kyber (NVL144) architecture; (3) pluggable optics remain the dominant scale-out medium, with attach rates rising sharply as port speeds double (800G → 1.6T → 3.2T); (4) CPO offers unmatched TCO advantages in high-bandwidth, short-distance scenarios (6.4T, 12.8T).</p>
+  <p>Combining GTC 2026 disclosures with supply-chain field checks, GS decomposes the next two GPU platforms (Vera Rubin / Rubin Ultra) into four possible architectures, building dollar-content-per-rack models, TAM scenarios, and supply-chain EPS implications — the analytical backbone of this report.</p>`
+};
+
+const ARCH_DATA = [
+  { tc:{name:'GB300 NVL72 (現役)',period:'2H25–2026',scaleUp:'100% 銅纜 (Oberon 機架)',scaleOut:'1.6T 可插拔光模組 100%',gpu:'72 GPU/機架',key:'Attach rate 1:2~3;copper cable 5,184 條 backplane'},
+    en:{name:'GB300 NVL72 (Current)',period:'2H25–2026',scaleUp:'100% copper (Oberon rack)',scaleOut:'100% 1.6T pluggable optics',gpu:'72 GPU/rack',key:'Attach rate 1:2~3; 5,184 copper cables for backplane'} },
+  { tc:{name:'Vera Rubin NVL72 Spec A',period:'2H26–2027',scaleUp:'100% 銅纜 (Oberon 機架)',scaleOut:'1.6T 可插拔光模組 100%',gpu:'72 GPU/機架',key:'Attach rate 升至 1:4~6;Switch ASIC 翻倍至 36 顆;NIC 翻倍至 144 顆'},
+    en:{name:'Vera Rubin NVL72 Spec A',period:'2H26–2027',scaleUp:'100% copper (Oberon rack)',scaleOut:'100% 1.6T pluggable optics',gpu:'72 GPU/rack',key:'Attach rate rises to 1:4~6; Switch ASIC doubles to 36; NIC doubles to 144'} },
+  { tc:{name:'Vera Rubin NVL72 Spec B (25% CPO)',period:'2H26–2027',scaleUp:'100% 銅纜',scaleOut:'75% 1.6T 可插拔 + 25% CPO (1.6T)',gpu:'72 GPU/機架',key:'CPO 首次進入 Scale Out;每機架 108 個 CPO ports;Quantum-X Photonics 商用化 (115.2 Tb/s)'},
+    en:{name:'Vera Rubin NVL72 Spec B (25% CPO)',period:'2H26–2027',scaleUp:'100% copper',scaleOut:'75% 1.6T pluggable + 25% CPO (1.6T)',gpu:'72 GPU/rack',key:'CPO enters scale-out for first time; 108 CPO ports/rack; Quantum-X Photonics commercializes (115.2 Tb/s)'} },
+  { tc:{name:'Rubin Ultra NVL144 Kyber (29% CPO)',period:'2H27–2028',scaleUp:'PCB Midplane (M9 CCL,78+ 層) 取代銅纜',scaleOut:'71% 3.2T 可插拔 + 29% CPO (3.2T)',gpu:'144 GPU/機架(雙倍密度)',key:'ASIC 升級至 72 顆;NIC 288 顆;每機架 dollar content 從 US$489k 跳升至 US$1,113k (+128%)'},
+    en:{name:'Rubin Ultra NVL144 Kyber (29% CPO)',period:'2H27–2028',scaleUp:'PCB midplane (M9 CCL, 78+ layers) replaces copper',scaleOut:'71% 3.2T pluggable + 29% CPO (3.2T)',gpu:'144 GPU/rack (double density)',key:'ASIC rises to 72; NIC to 288; per-rack dollar content jumps US$489k → US$1,113k (+128%)'} },
+  { tc:{name:'Rubin Ultra NVL576 Oberon (8 機架, 29% CPO)',period:'2H27–2028',scaleUp:'L1: 銅纜 (機架內) + L2: CPO 跨機架 (5,184 條 400G 光纖)',scaleOut:'71% 3.2T 可插拔 + 29% CPO (3.2T)',gpu:'72 GPU × 8 機架 = 576 GPU/計算單元',key:'GS 假設此為 2028 主力配置;每運算單元連線價值 US$9.4bn,為 GB300 的 29 倍'},
+    en:{name:'Rubin Ultra NVL576 Oberon (8 racks, 29% CPO)',period:'2H27–2028',scaleUp:'L1: copper (intra-rack) + L2: CPO cross-rack (5,184 × 400G fibers)',scaleOut:'71% 3.2T pluggable + 29% CPO (3.2T)',gpu:'72 GPU × 8 racks = 576 GPU/cluster',key:'GS assumes 2028 mainstream configuration; per-cluster connection value US$9.4B (29× GB300)'} }
+];
+
+const TAM_DATA = [
+  { label:{tc:'GB300 NVL72',en:'GB300 NVL72'}, total:15070, pct:9.8 },
+  { label:{tc:'VR200 Spec A (無 CPO)',en:'VR200 Spec A (no CPO)'}, total:28291, pct:18.3 },
+  { label:{tc:'VR200 Spec B (25% CPO)',en:'VR200 Spec B (25% CPO)'}, total:29158, pct:18.9 },
+  { label:{tc:'Rubin Ultra NVL144 (Kyber)',en:'Rubin Ultra NVL144 (Kyber)'}, total:73458, pct:47.6 },
+  { label:{tc:'Rubin Ultra NVL576 (Oberon)',en:'Rubin Ultra NVL576 (Oberon)'}, total:154313, pct:100 }
+];
+
+/* === EXHIBIT 6 — Dollar content per rack (US$k) ===
+   Source: GS Exhibit 6 · Volume from spec table, ASP from industry checks */
+const EXHIBIT_6 = {
+  archs: [
+    { key:'gb300', short:'GB300', label:{tc:'GB300 NVL72',en:'GB300 NVL72'}, period:'2H25–2026', scaleUp:140, scaleOut:175, total:315 },
+    { key:'vr_a', short:'VR Spec A', label:{tc:'Vera Rubin NVL72 (Spec A)',en:'Vera Rubin NVL72 (Spec A)'}, period:'2H26–2027', scaleUp:140, scaleOut:349, total:489 },
+    { key:'vr_b', short:'VR Spec B', label:{tc:'Vera Rubin NVL72 (25% CPO Spec B)',en:'Vera Rubin NVL72 (25% CPO Spec B)'}, period:'2H26–2027', scaleUp:140, scaleOut:364, total:504 },
+    { key:'ru_a', short:'RU Spec A', label:{tc:'Rubin Ultra NVL144 (29% CPO Spec A)',en:'Rubin Ultra NVL144 (29% CPO Spec A)'}, period:'2H27–2028', scaleUp:381, scaleOut:732, total:1113 },
+    { key:'ru_b', short:'RU Spec B', label:{tc:'Rubin Ultra NVL576 (29% CPO Spec B)',en:'Rubin Ultra NVL576 (29% CPO Spec B)'}, period:'2H27–2028', scaleUp:803, scaleOut:366, total:1169 }
+  ],
+  components: [
+    { group:'su', label:{tc:'Scale-up · 銅纜背板',en:'Scale-up · Copper backplane'}, vals:[93,93,93,null,156] },
+    { group:'su', label:{tc:'Scale-up · 銅纜飛越(switch tray)',en:'Scale-up · Copper flyover (switch tray)'}, vals:[47,47,47,156,78] },
+    { group:'su', label:{tc:'Scale-up · PCB Midplane',en:'Scale-up · PCB Midplane'}, vals:[null,null,null,225,null] },
+    { group:'su', label:{tc:'Scale-up · Optical Engine & FAU (CPO)',en:'Scale-up · Optical Engine & FAU (CPO)'}, vals:[null,null,null,null,324] },
+    { group:'su', label:{tc:'Scale-up · ELS (CPO)',en:'Scale-up · ELS (CPO)'}, vals:[null,null,null,null,65] },
+    { group:'su', label:{tc:'Scale-up · Fiber + MPO (CPO)',en:'Scale-up · Fiber + MPO (CPO)'}, vals:[null,null,null,null,156] },
+    { group:'su', label:{tc:'Scale-up · Shufflebox',en:'Scale-up · Shufflebox'}, vals:[null,null,null,null,25] },
+    { group:'so', label:{tc:'Scale-out · 光模組',en:'Scale-out · Optical module'}, vals:[173,346,259,491,245] },
+    { group:'so', label:{tc:'Scale-out · Optical Engine & FAU (CPO)',en:'Scale-out · Optical Engine & FAU (CPO)'}, vals:[null,null,86,200,100] },
+    { group:'so', label:{tc:'Scale-out · ELS (CPO)',en:'Scale-out · ELS (CPO)'}, vals:[null,null,11,25,13] },
+    { group:'so', label:{tc:'Scale-out · Fiber + MPO',en:'Scale-out · Fiber + MPO'}, vals:[2,4,4,6,3] },
+    { group:'so', label:{tc:'Scale-out · Shufflebox',en:'Scale-out · Shufflebox'}, vals:[null,null,4,10,5] }
+  ]
+};
+
+/* === EXHIBIT 8 — Scale-up / Scale-out TAM split (US$m) ===
+   Source: GS Exhibit 8 · TAM = per-rack content × rack shipments */
+const EXHIBIT_8 = [
+  { short:'GB300', label:{tc:'GB300 NVL72',en:'GB300 NVL72'}, total:15070, scaleUp:6702, scaleOut:8367, racks:48 },
+  { short:'VR Spec A', label:{tc:'Vera Rubin Spec A',en:'Vera Rubin Spec A'}, total:28291, scaleUp:8090, scaleOut:20200, racks:58 },
+  { short:'VR Spec B', label:{tc:'Vera Rubin Spec B (25% CPO)',en:'Vera Rubin Spec B (25% CPO)'}, total:29158, scaleUp:8090, scaleOut:21067, racks:58 },
+  { short:'RU Spec A', label:{tc:'Rubin Ultra NVL144 (29% CPO)',en:'Rubin Ultra NVL144 (29% CPO)'}, total:73458, scaleUp:25114, scaleOut:48344, racks:66 },
+  { short:'RU Spec B', label:{tc:'Rubin Ultra NVL576 (29% CPO)',en:'Rubin Ultra NVL576 (29% CPO)'}, total:154313, scaleUp:105970, scaleOut:48344, racks:132 }
+];
+
+/* === EXHIBIT 17 — Roadmap of data center connection speed ===
+   Source: GS Exhibit 17 · Quarterly penetration %, status: verify/sample/volume/main/decline
+   Penetration rates do not sum to 100% (modules below 400G excluded) */
+const EXHIBIT_17 = {
+  speeds: ['400G','800G','1.6T','3.2T','6.4T'],
+  quarters: [
+    '2024 Q1','2024 Q2','2024 Q3','2024 Q4',
+    '2025 Q1','2025 Q2','2025 Q3','2025 Q4',
+    '2026 Q1','2026 Q2','2026 Q3','2026 Q4',
+    '2027 Q1','2027 Q2','2027 Q3','2027 Q4',
+    '2028 Q1','2028 Q2','2028 Q3','2028 Q4'
+  ],
+  // null = empty cell. status keys: verify | sample | volume | main | decline
+  rows: [
+    // 400G — mainstream→declining
+    [{p:20,s:'main'},{p:22,s:'main'},{p:25,s:'main'},{p:30,s:'main'},
+     {p:27,s:'main'},{p:16,s:'decline'},{p:15,s:'decline'},{p:9,s:'decline'},
+     {p:5,s:'decline'},{p:5,s:'decline'},{p:8,s:'decline'},{p:6,s:'decline'},
+     {p:4,s:'decline'},{p:4,s:'decline'},{p:3,s:'decline'},{p:1,s:'decline'},
+     {p:1,s:'decline'},{p:1,s:'decline'},{p:2,s:'decline'},{p:1,s:'decline'}],
+    // 800G — sample → volume → mainstream → declining
+    [null,{p:1,s:'sample'},{p:3,s:'sample'},{p:4,s:'sample'},
+     {p:4,s:'volume'},{p:17,s:'volume'},{p:24,s:'volume'},{p:41,s:'main'},
+     {p:20,s:'main'},{p:21,s:'main'},{p:29,s:'main'},{p:26,s:'main'},
+     {p:19,s:'main'},{p:23,s:'main'},{p:36,s:'main'},{p:27,s:'main'},
+     {p:20,s:'decline'},{p:18,s:'decline'},{p:30,s:'decline'},{p:23,s:'decline'}],
+    // 1.6T — sample → volume → mainstream
+    [null,null,null,null,
+     null,{p:2,s:'sample'},{p:6,s:'sample'},{p:11,s:'volume'},
+     {p:12,s:'volume'},{p:12,s:'volume'},{p:19,s:'volume'},{p:28,s:'main'},
+     {p:27,s:'main'},{p:26,s:'main'},{p:24,s:'main'},{p:27,s:'main'},
+     {p:23,s:'main'},{p:25,s:'main'},{p:35,s:'main'},{p:26,s:'main'}],
+    // 3.2T — verify → sample → volume
+    [null,null,null,null,
+     null,null,null,null,
+     null,null,null,null,
+     null,{p:6,s:'verify'},{p:10,s:'verify'},{p:16,s:'verify'},
+     {p:15,s:'sample'},{p:16,s:'sample'},{p:15,s:'sample'},{p:11,s:'volume'}],
+    // 6.4T — all verification/empty (not yet)
+    [null,null,null,null,
+     null,null,null,null,
+     null,null,null,null,
+     null,null,null,null,
+     null,null,null,null]
+  ],
+  statusLabels: {
+    verify:  { tc:'驗證與測試',en:'Verification & test' },
+    sample:  { tc:'小量送樣',  en:'Small sample' },
+    volume:  { tc:'量產',      en:'Mass volume' },
+    main:    { tc:'主流',      en:'Mainstream' },
+    decline: { tc:'衰退',      en:'Declining' }
+  }
+};
+
+const CPO_BOM = [
+  { tc:'Switch ASIC', en:'Switch ASIC', unit:3000, qty:4, total:12000, pct:'16%' },
+  { tc:'光引擎 (1.6T) — 含 PIC / Modulator / EIC / Driver / TIA', en:'Optical engine (1.6T) — incl. PIC / Modulator / EIC / Driver / TIA', unit:450, qty:72, total:32400, pct:'43%' },
+  { tc:'FAU (Fiber Array Unit)', en:'FAU (Fiber Array Unit)', unit:50, qty:72, total:3600, pct:'5%' },
+  { tc:'ELS (External Laser Source, 300mw CW)', en:'ELS (External Laser Source, 300mw CW)', unit:400, qty:18, total:7200, pct:'9%' },
+  { tc:'Shuffle Box', en:'Shuffle Box', unit:2500, qty:1, total:2500, pct:'3%' },
+  { tc:'MPO 連接器 / 纜線', en:'MPO connectors / cables', unit:40, qty:144, total:5760, pct:'8%' },
+  { tc:'單模光纖', en:'Single-mode fiber', unit:11, qty:1152, total:12343, pct:'16%' }
+];
+
+const CPO_PLAYERS = [
+  { tc:{name:'Nvidia (NVDA)', body:'Quantum-X (InfiniBand) 與 Spectrum-X (Ethernet) 光子交換機於 2026 年初商用,採 MRM (Micro Ring Modulator) 技術,密度與效率較高,為 AI 機架生態系核心。'},
+    en:{name:'Nvidia (NVDA)', body:'Quantum-X (InfiniBand) and Spectrum-X (Ethernet) photonic switches commercialize in early 2026 using MRM (Micro Ring Modulator). AI rack ecosystem core.'} },
+  { tc:{name:'Broadcom (AVGO)', body:'Bailly (51.2T) 已於 2024 年 3 月交付,Davisson (102.4T) 於 2025 年 10 月交付,採 MZM 為主、同時開發 MRM。ASIC 與 Switch 雙料領先者。'},
+    en:{name:'Broadcom (AVGO)', body:'Bailly (51.2T) delivered March 2024, Davisson (102.4T) delivered October 2025, using MZM primarily. Dual leader in ASIC and switch.'} },
+  { tc:{name:'Marvell (MRVL)', body:'於 2026 年 2 月併購 Celestial AI,計畫 2027 年送樣 204T Ethernet 交換機;策略為 CPO 與客製化 XPU 結合,鎖定 CSP 自研晶片市場。'},
+    en:{name:'Marvell (MRVL)', body:'Acquired Celestial AI in February 2026; plans 204T Ethernet switch sampling in 2027. Strategy combines CPO with custom XPUs.'} },
+  { tc:{name:'Ranovus × MediaTek', body:'聯合開發 Odin CPO (6.4T),目標 XPU 用 CPO。聯發科透過此合作切入 ASIC 平台 CPO 市場。'},
+    en:{name:'Ranovus × MediaTek', body:'Co-developing Odin CPO (6.4T) targeting XPU applications. MediaTek enters the ASIC-platform CPO market.'} }
+];
+
+const ATTACH_DATA = [
+  { customer:{tc:'Nvidia GB200',en:'Nvidia GB200'}, year:2024, rate:'1:2~3', speed:'800G' },
+  { customer:{tc:'Nvidia GB300',en:'Nvidia GB300'}, year:2025, rate:'1:2~3', speed:'1.6T' },
+  { customer:{tc:'Nvidia VR200',en:'Nvidia VR200'}, year:2026, rate:'1:4~6', speed:'1.6T', hl:true },
+  { customer:{tc:'Nvidia Rubin Ultra',en:'Nvidia Rubin Ultra'}, year:2027, rate:'TBA', speed:'3.2T (GSe)' },
+  { customer:{tc:'Google V6',en:'Google V6'}, year:2024, rate:'1:4', speed:'800G' },
+  { customer:{tc:'Google V7',en:'Google V7'}, year:2025, rate:'1:4', speed:'1.6T' },
+  { customer:{tc:'Amazon Trainium 2',en:'Amazon Trainium 2'}, year:2025, rate:'1:4', speed:'400G' },
+  { customer:{tc:'Amazon Trainium 3',en:'Amazon Trainium 3'}, year:2026, rate:'1:4', speed:'TBA' },
+  { customer:{tc:'Meta MITA-T V1',en:'Meta MITA-T V1 (Minerva)'}, year:2026, rate:'1:8~12', speed:'800G (GSe)', hl:true },
+  { customer:{tc:'Huawei CloudMatrix 384',en:'Huawei CloudMatrix 384'}, year:2025, rate:'1:18', speed:'400G', hl:true },
+  { customer:{tc:'Biren BR20x',en:'Biren BR20x'}, year:2026, rate:'TBA', speed:'400G/800G' }
+];
+
+const ADOPTION_DATA = {
+  columns: ['Nvidia', 'Google', 'Microsoft', 'Meta', 'Amazon', 'Oracle', {tc:'中國 CSP',en:'China CSP'}],
+  rows: [
+    { tech:{tc:'800G 可插拔',en:'800G pluggable'}, values:['Y','Y','Y','Y','Y','Y','Y'] },
+    { tech:{tc:'1.6T 可插拔',en:'1.6T pluggable'}, values:['Y','Y','O27','O26','O27','O27','O'] },
+    { tech:{tc:'3.2T 可插拔',en:'3.2T pluggable'}, values:['O28','-','-','-','-','-','O28'] },
+    { tech:{tc:'CPO Scale Up',en:'CPO scale-up'}, values:['O','-','-','-','-','-','O'] },
+    { tech:{tc:'CPO Scale Out',en:'CPO scale-out'}, values:['O','-','O','-','-','-','O'] },
+    { tech:{tc:'OCS',en:'OCS'}, values:['-','Y','-','-','-','-','-'] }
+  ]
+};
+
+const RISKS = {
+  tc: [
+    'CPO 商業化節奏不確定:GS 假設 25–29% 之 CPO Scale Out 滲透率為「樂觀情境」;若 (1) 客戶因維護成本顧慮 (CPO 失效需更換整顆 ASIC) 而延緩採用、(2) Nvidia/Broadcom 之 CPO Switch 良率不如預期、(3) PIC/EIC 壽命差異導致實際換修成本高於模型預期,則 CPO TAM 將實質低於 high-end 之 US$97bn。',
+    '光源 (CW Laser/EML) 供應緊縮持續至 2H28:InP 基板擴產進度若不如預期、或中國政府進一步收緊 InP 出口管制,將直接影響光模組與 CPO 兩條產品線出貨。對光模組廠為毛利率支撐,但對 AI 機架出貨節奏為潛在拖累。',
+    'AI 機架出貨 Mix 不確定:本 TAM 模型基於 GB300 48k 台、Vera Rubin 58k 台、Rubin Ultra 132k 運算單元之假設;若 Hyperscaler Capex 因推論 vs 訓練比重轉變、或地緣政治導致中國市場流失而下修,則所有元件 TAM 同步壓縮。',
+    '技術路徑替代風險:OCS 廣泛採用會降低光模組換代需求 (一台 OCS 可支援 800G/1.6T/3.2T 無需更換),長期可能壓抑光模組總出貨;但短中期 OCS 規模仍小,且雙寡頭 LITE/COHR 同時受惠 OCS,風險可控。',
+    '估值風險:AI 光通訊族群已歷經 2024–2026 多輪估值擴張,目前部分標的本益比已反映多年期成長預期;若 Capex 預期下修或 CPO 商用化節奏不如預期,估值壓縮風險顯著。'
+  ],
+  en: [
+    "CPO commercialization pace uncertainty: GS's 25–29% CPO scale-out penetration is an optimistic scenario. Should (1) customers delay adoption due to maintenance concerns, (2) Nvidia/Broadcom CPO switch yields disappoint, or (3) PIC/EIC lifetime differences raise real-world replacement costs, CPO TAM would fall short of the US$97B high-end estimate.",
+    "Light source (CW Laser/EML) supply tightness through 2H28: should InP substrate expansion disappoint or China further tighten InP export controls, both module and CPO production lines would be affected. Tightness supports module margins but drags AI rack shipment cadence.",
+    "AI rack shipment mix uncertainty: the TAM model assumes 48k GB300, 58k Vera Rubin, and 132k Rubin Ultra clusters. Should Hyperscaler Capex be revised down due to inference-vs-training mix shifts or China market loss from geopolitics, all component TAMs would compress in parallel.",
+    "Technology substitution risk: broad OCS adoption reduces optical module replacement demand (one OCS supports 800G/1.6T/3.2T without replacement), potentially suppressing long-term module volumes. Near-term OCS scale remains small, and the LITE/COHR duopoly benefits across both — risk is manageable.",
+    "Valuation risk: the AI optical complex has undergone multiple rounds of multiple expansion across 2024–2026. Some names already reflect multi-year growth in current P/E. Should Capex expectations be cut or CPO commercialization disappoint, multiple compression risk is material."
+  ]
+};
+
+const MONITORING = {
+  tc: [
+    'GTC 2027 (預估 2027 年 3 月):Rubin Ultra 最終規格 (NVL144 Kyber vs NVL576 Oberon 之比重)、3.2T Scale Out 商用時點。',
+    'Nvidia 季度法說:CX-9 NIC 出貨節奏、Quantum-X / Spectrum-X Photonics 商用化進度、Vera Rubin 出貨節奏。',
+    'LITE 季度法說:CW Laser 產能擴張進度、OCS Backlog 變化、SiPh 1.6T/3.2T 出貨組合。',
+    'COHR 季度法說:OCS 客戶洽談數、64×64 與 320×320 出貨組合、產能加倍進度。',
+    'InP 基板供應:穩懋 MOCVD 機台擴張進度、中國政府 InP 出口管制動態。',
+    'OCP (Open Compute Project) 更新:OCS 標準化進度、CSP 採用節奏。'
+  ],
+  en: [
+    'GTC 2027 (est. March 2027): Rubin Ultra final specifications (NVL144 Kyber vs. NVL576 Oberon mix); 3.2T scale-out commercialization timing.',
+    'Nvidia quarterly results: CX-9 NIC shipment cadence; Quantum-X / Spectrum-X Photonics commercialization progress; Vera Rubin shipment pace.',
+    'LITE quarterly results: CW Laser capacity expansion; OCS backlog evolution; SiPh 1.6T/3.2T mix.',
+    'COHR quarterly results: OCS customer engagement count; 64×64 vs. 320×320 mix; capacity doubling progress.',
+    'InP substrate supply: VPEC MOCVD tool expansion; China InP export control developments.',
+    'OCP (Open Compute Project) updates: OCS standardization progress; CSP adoption cadence.'
+  ]
+};
+
+const GLOSSARY = [
+  ['Scale Up', {tc:'在同一台設備或同一機架/Supernode 內增加 GPU 與運算資源。',en:'Adding GPUs and compute within the same equipment, rack, or supernode.'}],
+  ['Scale Out', {tc:'透過交換器技術連接多台設備,當代 AI Cluster 可達 100k+ GPU。',en:'Connecting multiple devices through switching; modern AI clusters reach 100k+ GPUs.'}],
+  ['CPO', {tc:'Co-Packaged Optics. 光引擎與 Switch ASIC 共封裝。',en:'Co-Packaged Optics. Optical engine and switch ASIC packaged together.'}],
+  ['NPO / OBO', {tc:'Near Package Optics / On-Board Optics. 介於可插拔與 CPO 之間的過渡方案。',en:'Near Package / On-Board Optics. Intermediate between pluggable and CPO.'}],
+  ['OCS', {tc:'Optical Circuit Switch. 完全基於光信號的交換機。',en:'Optical Circuit Switch. Fully optical-signal-based switch.'}],
+  ['SiPh', {tc:'Silicon Photonics. 在矽基板上整合光學元件。',en:'Silicon Photonics. Optical components on silicon substrate.'}],
+  ['EML', {tc:'Electro-absorption Modulated Laser. 傳統長距傳輸主流光源。',en:'Electro-absorption Modulated Laser. Mainstream long-distance light source.'}],
+  ['CW Laser', {tc:'Continuous Wave Laser. SiPh 與 CPO 主流光源。',en:'Continuous Wave Laser. Primary light source for SiPh and CPO.'}],
+  ['ELS', {tc:'External Laser Source. CPO 架構中為光引擎提供 CW 光源。',en:'External Laser Source. Provides CW light to CPO optical engines.'}],
+  ['FAU', {tc:'Fiber Array Unit. 將多通道光信號耦合至光纖陣列。',en:'Fiber Array Unit. Couples multi-channel optical signals to fiber arrays.'}],
+  ['Shuffle Box', {tc:'CPO 機架中對光引擎輸出進行重組與分配的跳線管理盒。',en:'Optical jumper management device routing optical engine outputs in CPO racks.'}],
+  ['MPO', {tc:'Multi-fiber Push On. 多芯光纖連接器。',en:'Multi-fiber Push On. Multi-fiber connector.'}],
+  ['TAM', {tc:'Total Addressable Market. 機架全生命週期連線元件總價值。',en:'Total Addressable Market. Full-lifecycle connection component value.'}],
+  ['MRM', {tc:'Micro Ring Modulator. Nvidia CPO 採用之高密度光調變器。',en:'Micro Ring Modulator. High-density modulator used in Nvidia CPO.'}],
+  ['MZM', {tc:'Mach-Zehnder Modulator. Broadcom CPO 採用之較成熟光調變器。',en:'Mach-Zehnder Modulator. Mature modulator used in Broadcom CPO.'}],
+  ['InP', {tc:'磷化銦。EML 與 CW Laser 之基板材料,供應緊縮主要瓶頸。',en:'Indium Phosphide. Substrate for EML and CW lasers; primary supply bottleneck.'}],
+  ['VCSEL', {tc:'Vertical-Cavity Surface-Emitting Laser. Scale Up 短距潛在光源。',en:'Vertical-Cavity Surface-Emitting Laser. Short-distance scale-up light source.'}],
+  ['DSF', {tc:'Disaggregated Scheduled Fabric. Meta 採用,使 attach rate 高達 1:8~1:12。',en:"Disaggregated Scheduled Fabric. Meta's design driving 1:8~1:12 attach rates."}],
+  ['CoWoS', {tc:'TSMC 之 2.5D 先進封裝技術,為 CPO 共封關鍵。',en:'TSMC 2.5D advanced packaging; key enabler of CPO co-packaging.'}],
+  ['M9 CCL', {tc:'高層數 (78+) Copper Clad Laminate,Rubin Ultra Kyber PCB Midplane 之關鍵基材。',en:'High-layer (78+) Copper Clad Laminate; key substrate for Rubin Ultra Kyber PCB midplane.'}]
+];
+
+const DISCLAIMER = {
+  tc: '本報告為市場研究綜述,綜合 Goldman Sachs Global Tech 2026 年 4 月 17 日報告之公開觀點,僅供參考用途。內容不構成投資建議或要約。所提及之證券、產業或技術趨勢之未來表現存在不確定性,投資人應自行評估風險承受度並諮詢專業顧問。GS 觀點為原作者 Allen Chang 等之看法;本綜述加註之產業鏈分析與風險評估為個人觀點,可能隨市場資訊更新而調整。',
+  en: "This report is a market research synthesis combining the public views of Goldman Sachs Global Tech's 17 April 2026 report, provided for reference only. It does not constitute investment advice or a solicitation. Future performance of securities, sectors, or technology trends mentioned herein is uncertain. Investors should independently assess risk tolerance and consult professional advisors."
+};
+/* ===========================================================================
+   COMPANIES DATABASE — 22 companies, full bilingual profiles
+   =========================================================================== */
+
+const COMPANIES = [
+  // ============ LIGHT SOURCE & InP ============
+  {
+    ticker:'LITE', exchange:'NASDAQ', cat:'light',
+    name_en:'Lumentum Holdings', name_tc:'Lumentum Holdings',
+    mcap:'~$10-15B', segment_en:'Photonic Products + Cloud & Networking', segment_tc:'光電產品 + 雲與網路',
+    role_en:'Western duopoly leader in CW Laser / EML / 300mw light sources; OCS pioneer; SiPh modules. Holds DR4/FR4/LR4/ER4 transceivers + Quantum-X compatible ELS. OCS backlog exceeded US$400M in Feb 2026.',
+    role_tc:'西方雙寡頭領導者,主導 CW Laser / EML / 300mw 光源;OCS 先驅;SiPh 模組。同時持有 DR4/FR4/LR4/ER4 光模組與 Quantum-X 相容 ELS。OCS Backlog 已於 2026/2 突破 US$400m。',
+    products_en:['300mw CW Laser (for CPO ELS)','EML for 800G/1.6T pluggable','OCS — backlog $400M+ Feb 2026','SiPh-based optical modules','Quantum-X ELS supply'],
+    products_tc:['300mw CW Laser(供 CPO ELS)','EML 用於 800G/1.6T 可插拔光模組','OCS — Backlog $400M+ (2026/2)','SiPh 矽光子模組','Quantum-X ELS 供應'],
+    thesis_en:'Multi-vector exposure: light source tightness pricing power + OCS commercialization + SiPh module mix shift + CPO ELS supply to Nvidia. Capacity expansion (40% growth CY3Q25–CY2Q26) underway. Triple beneficiary across light source / OCS / themes 1, 2, 6.',
+    thesis_tc:'多向受惠:光源緊縮帶來定價權 + OCS 商業化 + SiPh 模組組合升級 + 供應 Quantum-X 之 ELS。產能擴張 (CY3Q25–CY2Q26 + 40%) 進行中。橫跨光源 / OCS / 主題 1/2/6 之三料受惠者。',
+    risks_en:['InP substrate supply bottleneck constrains capacity ramp','CPO transition could compress traditional pluggable module margins long-term','Customer concentration (Nvidia + hyperscalers)'],
+    risks_tc:['InP 基板供應瓶頸限制擴產','CPO 轉換長期可能壓縮傳統可插拔模組利潤','客戶集中度(Nvidia + 雲端業者)'],
+    tags:['Light Source','OCS','SiPh','Theme 1']
+  },
+  {
+    ticker:'COHR', exchange:'NYSE', cat:'light',
+    name_en:'Coherent Corp', name_tc:'Coherent Corp',
+    mcap:'~$10-15B', segment_en:'Networking + Materials + Lasers', segment_tc:'網路 + 材料 + 雷射',
+    role_en:'Post II-VI merger giant. Co-leader with LITE in CW Laser / EML. Engaged with 10+ OCS customers, shipping 64×64 and 320×320 systems. Committed to doubling capacity. Develops InP and indium phosphide-based components in-house.',
+    role_tc:'II-VI 合併後巨頭。與 LITE 雙寡頭領導 CW Laser / EML。與 10+ 家客戶洽談 OCS,出貨 64×64 與 320×320 系統。承諾產能加倍。內部開發 InP 與磷化銦元件。',
+    products_en:['CW Laser (high-power, datacom)','EML for high-speed transceivers','OCS — 64×64 / 320×320 systems','InP wafer/epi capability (vertical)','Optical modules incl. 800G/1.6T'],
+    products_tc:['CW Laser(高功率、資料通訊)','EML 用於高速光模組','OCS — 64×64 / 320×320 系統','InP 晶圓/磊晶能力(垂直整合)','光模組含 800G/1.6T'],
+    thesis_en:'Same triple-beneficiary profile as LITE with additional vertical integration into InP materials. Management guides sequential OCS revenue growth through 2026. Capacity doubling vs LITE 40% gives faster supply ramp potential.',
+    thesis_tc:'與 LITE 相同的三料受惠定位,並擁有 InP 材料垂直整合優勢。管理層預期 2026 年 OCS 營收逐季成長。產能加倍速度高於 LITE 之 40%,擴產更快。',
+    risks_en:['Integration risks from II-VI merger','InP feedstock supply','Higher leverage than LITE'],
+    risks_tc:['II-VI 合併整合風險','InP 原料供應','槓桿率高於 LITE'],
+    tags:['Light Source','OCS','SiPh','Theme 1']
+  },
+  {
+    ticker:'3105.TW', exchange:'TPE', cat:'light',
+    name_en:'WIN Semiconductors (VPEC)', name_tc:'穩懋半導體',
+    mcap:'~TWD 50-80B', segment_en:'GaAs / InP MOCVD foundry', segment_tc:'GaAs / InP MOCVD 代工',
+    role_en:'Asian leader in InP MOCVD foundry. Expanding InP MOCVD tools from 60 to 64 by 2H26. Critical upstream supplier for both EML and CW Laser production. PA foundry exposure (5G/Wi-Fi) provides ballast through datacom cycle.',
+    role_tc:'亞洲 InP MOCVD 代工龍頭。2H26 將 InP MOCVD 機台由 60 台擴至 64 台。為 EML 與 CW Laser 量產之關鍵上游。射頻 PA 代工(5G/Wi-Fi)業務提供資料中心週期之底盤。',
+    products_en:['InP epitaxial wafer foundry','GaAs PA foundry (5G, Wi-Fi)','VCSEL epi services','Compound semi MOCVD capacity'],
+    products_tc:['InP 磊晶代工','GaAs 射頻 PA 代工(5G、Wi-Fi)','VCSEL 磊晶服務','化合物半導體 MOCVD 產能'],
+    thesis_en:'Pure InP supply tightness play. Among handful of MOCVD foundries with InP capacity to ramp. Beneficiary of supply tightness through 2H28 — capacity addition translates directly to revenue. Geopolitically positioned vs Chinese suppliers facing export controls.',
+    thesis_tc:'純 InP 供應緊縮受惠者。極少數具備 InP MOCVD 量產擴產能力的代工廠。直接受惠 2H28 之前的供應緊縮週期——擴產等同營收增長。地緣政治上相對中國同業具備優勢。',
+    risks_en:['PA business cyclicality from 5G/handset','InP capacity build lead times','Competition from Landmark, YJ Semi'],
+    risks_tc:['射頻 PA 業務隨手機 5G 週期波動','InP 擴產的前置時間','面對 Landmark、YJ Semi 競爭'],
+    tags:['Light Source','InP','Theme 1']
+  },
+  {
+    ticker:'3081.TW', exchange:'TPE', cat:'light',
+    name_en:'Landmark Optoelectronics', name_tc:'光環科技',
+    mcap:'~TWD 20-30B', segment_en:'InP / GaAs epitaxial wafer', segment_tc:'InP / GaAs 磊晶片',
+    role_en:'Taiwan-based InP epitaxial wafer supplier. Major capacity expansion in 2026 to meet AI optical demand. Supplies downstream EML and CW laser manufacturers. Smaller and more focused than VPEC.',
+    role_tc:'台灣 InP 磊晶片廠。2026 年大幅擴產以滿足 AI 光通訊需求。供應下游 EML 與 CW 雷射廠。規模小於穩懋但更聚焦。',
+    products_en:['InP epitaxial wafers','GaAs epi wafers','VCSEL wafer services'],
+    products_tc:['InP 磊晶片','GaAs 磊晶片','VCSEL 晶圓服務'],
+    thesis_en:'Pure-play InP epi exposure. Direct beneficiary of supply tightness. Smaller market cap = higher beta to the InP cycle than VPEC.',
+    thesis_tc:'純 InP 磊晶曝險。直接受惠供應緊縮。市值較穩懋小,對 InP 週期之 beta 較高。',
+    risks_en:['Customer concentration','Smaller scale vs VPEC','Capacity ramp execution'],
+    risks_tc:['客戶集中度','規模小於穩懋','擴產執行風險'],
+    tags:['Light Source','InP','Theme 1']
+  },
+
+  // ============ OPTICAL MODULES & SiPh ============
+  {
+    ticker:'300308.SZ', exchange:'SZSE', cat:'module',
+    name_en:'Innolight Technology', name_tc:'中際旭創',
+    mcap:'~CNY 100-150B', segment_en:'High-speed optical modules', segment_tc:'高速光模組',
+    role_en:'Global #1 optical module supplier by market share. Major shipper of 800G/1.6T modules to global hyperscalers. Targets SiPh OCS launch in 2027. Critical China-listed exposure to AI optical theme.',
+    role_tc:'全球光模組市佔率第一。為全球雲端業者大量出貨 800G/1.6T 模組。目標 2027 推出 SiPh OCS。中國 A 股 AI 光通訊主要曝險。',
+    products_en:['800G QSFP-DD / OSFP modules','1.6T QSFP-DD 1600 / OSFP-XD modules','3.2T modules in development','SiPh-based DR / FR / LR transceivers','SiPh OCS (target 2027)'],
+    products_tc:['800G QSFP-DD / OSFP 光模組','1.6T QSFP-DD 1600 / OSFP-XD 光模組','3.2T 光模組研發中','SiPh DR / FR / LR 光模組','SiPh OCS(目標 2027)'],
+    thesis_en:'Primary scale-out volume beneficiary. Attach-rate doubling (1:2~3 → 1:4~6) at VR200 + 10× cumulative module growth through Rubin Ultra NVL576 drive multi-year topline. SiPh mix shift expands gross margins.',
+    thesis_tc:'Scale Out 量增主要受惠者。VR200 attach rate 倍增 (1:2~3 → 1:4~6) + 至 Rubin Ultra NVL576 之 10 倍累積模組量增,驅動多年期營收。SiPh 組合升級擴張毛利率。',
+    risks_en:['US-China geopolitical / export control risk','InP supply constraints (upstream)','CPO long-term substitution risk for pluggable modules'],
+    risks_tc:['中美地緣政治 / 出口管制風險','InP 上游供應限制','CPO 長期對可插拔模組之替代風險'],
+    tags:['Modules','SiPh','China','Theme 2','Theme 8']
+  },
+  {
+    ticker:'FN', exchange:'NYSE', cat:'module',
+    name_en:'Fabrinet', name_tc:'Fabrinet',
+    mcap:'~$15-20B', segment_en:'Contract manufacturing — optical', segment_tc:'光學代工',
+    role_en:'Thai-based contract manufacturer for optical components and modules. Builds for Nvidia, LITE, COHR, and other US players. Captive capacity that often gates upstream supplier ramps. Indirect beneficiary of overall optical module growth.',
+    role_tc:'位於泰國的光學元件與模組代工廠。為 Nvidia、LITE、COHR 等美系廠商代工。其產能常為上游廠商擴產之瓶頸。間接受惠光模組整體成長。',
+    products_en:['Optical module assembly (800G / 1.6T)','Subsystem assembly for hyperscalers','InP-based laser packaging','OCS sub-assembly capacity'],
+    products_tc:['光模組組裝(800G / 1.6T)','雲端業者子系統組裝','InP 雷射封裝','OCS 次組件產能'],
+    thesis_en:'Pick-and-shovel exposure across the entire optical complex without single-vendor risk. Customer concentration with Nvidia provides upside but is also a risk. Steady margins; lower volatility than upstream component plays.',
+    thesis_tc:'橫跨整個光通訊產業鏈之賣鏟子曝險,且無單一供應商風險。對 Nvidia 客戶集中度提供上行空間亦為風險。利潤穩定,波動較上游元件廠低。',
+    risks_en:['Customer concentration (Nvidia)','Margins compressed if supply tightness eases','Thai labor cost inflation'],
+    risks_tc:['客戶集中度(Nvidia)','供應緊縮緩解可能壓縮利潤','泰國勞動成本上升'],
+    tags:['Modules','EMS','Theme 2']
+  },
+  {
+    ticker:'300502.SZ', exchange:'SZSE', cat:'module',
+    name_en:'Eoptolink Technology', name_tc:'新易盛',
+    mcap:'~CNY 40-60B', segment_en:'High-speed optical modules', segment_tc:'高速光模組',
+    role_en:'China-listed #2 optical module supplier behind Innolight. Strong position in 800G with growing 1.6T pipeline. Direct exposure to North American hyperscalers despite US-China tensions.',
+    role_tc:'中國 A 股光模組市占第二大廠,僅次於中際旭創。在 800G 市場具強勢地位,1.6T 產品線成長中。儘管中美緊張,仍直接供應北美雲端業者。',
+    products_en:['400G / 800G / 1.6T transceivers','SiPh-based modules in development','Active optical cables (AOC)','DCI long-haul modules'],
+    products_tc:['400G / 800G / 1.6T 光模組','SiPh 模組開發中','主動光纜(AOC)','資料中心互連長距離模組'],
+    thesis_en:'High-beta play on Chinese optical module growth. Trades at premium to Innolight historically. Operational leverage from 1.6T volume ramp.',
+    thesis_tc:'中國光模組高 beta 標的。歷史估值高於中際旭創。1.6T 量產帶來營運槓桿。',
+    risks_en:['Higher valuation vs Innolight','US export control exposure','Chinese listing premium volatility'],
+    risks_tc:['估值高於中際旭創','美方出口管制曝險','中國上市公司溢價波動性'],
+    tags:['Modules','SiPh','China','Theme 2','Theme 8']
+  },
+  {
+    ticker:'002281.SZ', exchange:'SZSE', cat:'module',
+    name_en:'Accelink Technologies', name_tc:'光迅科技',
+    mcap:'~CNY 30-50B', segment_en:'Optical components / OCS', segment_tc:'光通訊元件 / OCS',
+    role_en:'Chinese optical components incumbent. Active in OCS development for Chinese hyperscalers. Lower exposure to North American hyperscalers than Innolight/Eoptolink, but state-backed and likely beneficiary of China domestic AI buildout.',
+    role_tc:'中國光通訊元件老牌廠商。積極開發 OCS 供應中國雲端業者。對北美雲端業者曝險低於中際旭創/新易盛,但有國家背書,中國本土 AI 基建主要受惠者。',
+    products_en:['Optical components & subassemblies','High-speed transceivers','OCS development','Wavelength selective switches'],
+    products_tc:['光通訊元件與次組件','高速光模組','OCS 開發','波長選擇開關'],
+    thesis_en:'Domestic China AI buildout proxy. Lower geopolitical exposure than peers. State-backed reduces downside but caps upside multiples.',
+    thesis_tc:'中國本土 AI 基建代理標的。地緣政治曝險低於同業。國家背書降低下行風險但限制估值上行。',
+    risks_en:['Slower margin expansion vs peers','State influence on capital allocation','OCS commercialization timing'],
+    risks_tc:['利潤擴張速度慢於同業','政府對資本配置之影響','OCS 商業化時點'],
+    tags:['Modules','OCS','China','Theme 8']
+  },
+
+  // ============ CPO SWITCH ASIC ============
+  {
+    ticker:'NVDA', exchange:'NASDAQ', cat:'asic',
+    name_en:'NVIDIA Corporation', name_tc:'輝達',
+    mcap:'~$4-5T', segment_en:'Data Center + Networking', segment_tc:'資料中心 + 網路',
+    role_en:'AI rack ecosystem core. Quantum-X (InfiniBand) and Spectrum-X (Ethernet) photonic switches commercialize 2026 using MRM (Micro Ring Modulator). Directly authors the architecture roadmap (GB300 → VR200 → Rubin Ultra) that drives the 9× TAM unlock.',
+    role_tc:'AI 機架生態系核心。Quantum-X (InfiniBand) 與 Spectrum-X (Ethernet) 光子交換機 2026 年商用,採用 MRM (Micro Ring Modulator) 技術。直接定義架構路線圖 (GB300 → VR200 → Rubin Ultra),驅動 9 倍 TAM 解鎖。',
+    products_en:['Quantum-X Photonics (InfiniBand CPO Switch, 2026)','Spectrum-X Photonics (Ethernet CPO Switch, 2026)','CX-9 NIC (1.6T per port)','GB300 / Vera Rubin / Rubin Ultra GPU platforms','MGX reference architectures'],
+    products_tc:['Quantum-X Photonics (InfiniBand CPO Switch, 2026)','Spectrum-X Photonics (Ethernet CPO Switch, 2026)','CX-9 NIC (每埠 1.6T)','GB300 / Vera Rubin / Rubin Ultra GPU 平台','MGX 參考架構'],
+    thesis_en:'Direct architect of the 9× TAM unlock thesis. Networking adds incremental US$140B+ TAM on top of GPU sales by Rubin Ultra era. CPO switching becomes a meaningful revenue line item alongside GPUs.',
+    thesis_tc:'9 倍 TAM 解鎖論點的直接架構師。Rubin Ultra 時代,網路在 GPU 之外新增 US$140B+ TAM。CPO 交換機營收將成為與 GPU 並列的重要產品線。',
+    risks_en:['Concentration of compute + networking ecosystem dominance attracts regulatory scrutiny','MRM yield ramp execution','China revenue at risk from geopolitics'],
+    risks_tc:['運算 + 網路生態系雙重主導引發監管關注','MRM 良率擴量執行','中國營收因地緣政治受影響'],
+    tags:['ASIC','CPO','GPU','Theme 3']
+  },
+  {
+    ticker:'AVGO', exchange:'NASDAQ', cat:'asic',
+    name_en:'Broadcom Inc', name_tc:'博通',
+    mcap:'~$1.5-2T', segment_en:'Semiconductor Solutions + Infrastructure Software', segment_tc:'半導體解決方案 + 基礎設施軟體',
+    role_en:'Dual leader in ASIC and switch silicon. Bailly (51.2T CPO) delivered March 2024, Davisson (102.4T CPO) October 2025 using MZM primarily. Major custom XPU partner to Google (TPU) and Meta (MTIA), providing alternative CSP-led path to CPO.',
+    role_tc:'ASIC 與 Switch 矽雙料領導者。Bailly (51.2T CPO) 2024/3 交付,Davisson (102.4T CPO) 2025/10 交付,主採 MZM。為 Google (TPU) 與 Meta (MTIA) 自研晶片重要合作夥伴,提供 CSP 主導之 CPO 替代路徑。',
+    products_en:['Bailly CPO Switch (51.2T, 2024)','Davisson CPO Switch (102.4T, 2025)','Tomahawk / Jericho switch families','Custom XPU (TPU, MTIA, etc.)','Optical PHY chips'],
+    products_tc:['Bailly CPO Switch (51.2T, 2024)','Davisson CPO Switch (102.4T, 2025)','Tomahawk / Jericho 交換機家族','客製化 XPU (TPU、MTIA 等)','光學 PHY 晶片'],
+    thesis_en:'Dual exposure: merchant switch ASIC + custom XPU partnerships. MZM is more mature than Nvidia MRM = potentially faster ramp. Wins from both Nvidia-led racks (merchant switch) and CSP-led racks (custom XPU).',
+    thesis_tc:'雙重曝險:商用 Switch ASIC + 客製化 XPU 合作。MZM 技術較 Nvidia 之 MRM 成熟,擴量速度可能更快。同時受惠於 Nvidia 主導機架(商用 Switch)與 CSP 自研機架(客製化 XPU)。',
+    risks_en:['VMware integration overhang','Customer concentration (Google, Meta)','Software-segment execution'],
+    risks_tc:['VMware 整合餘音','客戶集中度(Google、Meta)','軟體業務執行'],
+    tags:['ASIC','CPO','Custom XPU','Theme 3']
+  },
+  {
+    ticker:'MRVL', exchange:'NASDAQ', cat:'asic',
+    name_en:'Marvell Technology', name_tc:'Marvell Technology',
+    mcap:'~$80-100B', segment_en:'Data Center + Carrier + Enterprise', segment_tc:'資料中心 + 電信 + 企業',
+    role_en:'Acquired Celestial AI (XPU-CPO startup) February 2026. Strategy combines CPO with custom XPUs targeting CSP custom-silicon market. 204T Ethernet switch sampling planned for 2027. AEC active electrical cable leadership.',
+    role_tc:'2026 年 2 月併購 Celestial AI (XPU 用 CPO 新創)。策略為 CPO 結合客製化 XPU,鎖定 CSP 自研晶片市場。2027 年計畫送樣 204T Ethernet 交換機。同時為 AEC 主動銅纜領導者。',
+    products_en:['204T Ethernet switch (2027 sampling)','XPU-CPO via Celestial AI','AEC active electrical cables','Optical DSP / PHY','Data infrastructure ASICs'],
+    products_tc:['204T Ethernet 交換機(2027 送樣)','XPU 用 CPO(透過 Celestial AI)','AEC 主動銅纜','光學 DSP / PHY','資料基礎設施 ASIC'],
+    thesis_en:'Smaller of the three CPO ASIC leaders but with most aggressive XPU-CPO strategy. Catalyst-rich 2026-27 with Celestial AI integration + 204T sampling. AEC business is upside option as copper extends into ACC/AEC era.',
+    thesis_tc:'三大 CPO ASIC 中規模最小但 XPU-CPO 策略最積極。2026-27 催化劑密集:Celestial AI 整合 + 204T 送樣。AEC 業務為銅纜延伸至 ACC/AEC 時代的上行選擇權。',
+    risks_en:['Smaller scale vs NVDA/AVGO','Custom silicon win rate vs incumbents','Optical DSP market may compress as CPO replaces pluggable'],
+    risks_tc:['規模小於 NVDA/AVGO','客製化矽贏率對既有業者不確定','光學 DSP 市場可能因 CPO 取代可插拔而壓縮'],
+    tags:['ASIC','CPO','Custom XPU','AEC','Theme 3']
+  },
+  {
+    ticker:'2454.TW', exchange:'TPE', cat:'asic',
+    name_en:'MediaTek', name_tc:'聯發科',
+    mcap:'~TWD 1.5-2T', segment_en:'Mobile + Smart Home + Custom ASIC', segment_tc:'行動 + 智慧家庭 + 客製化 ASIC',
+    role_en:'Co-developing Odin CPO (6.4T) with Ranovus targeting XPU applications. Entering the ASIC-platform CPO market through this partnership. Worth monitoring for AWS/Google ASIC integration opportunities given its existing relationships with US hyperscalers in mobile and edge SoCs.',
+    role_tc:'與 Ranovus 共同開發 Odin CPO (6.4T),目標 XPU 用 CPO。透過此合作切入 ASIC 平台 CPO 市場。值得關注其與 AWS/Google 之 ASIC 業務整合機會,因其於行動與邊緣 SoC 領域已有合作關係。',
+    products_en:['Odin CPO (6.4T, with Ranovus)','Custom ASIC services','Smartphone Dimensity SoC','Edge AI processors'],
+    products_tc:['Odin CPO (6.4T,與 Ranovus 合作)','客製化 ASIC 服務','智慧手機 Dimensity SoC','邊緣 AI 處理器'],
+    thesis_en:'Optionality play. Modest direct exposure to AI optical TAM but high upside if Odin CPO secures CSP design wins. Stock primarily driven by smartphone cycle.',
+    thesis_tc:'選擇權標的。直接 AI 光通訊 TAM 曝險有限,但若 Odin CPO 取得 CSP 設計贏單則有大幅上行。股價主要受智慧手機週期驅動。',
+    risks_en:['CPO is sideline business','Smartphone cycle dominates valuation','Competition from Broadcom / Marvell in custom ASIC'],
+    risks_tc:['CPO 為非主要業務','智慧手機週期主導估值','面對 Broadcom / Marvell 在客製化 ASIC 之競爭'],
+    tags:['ASIC','CPO','Theme 3']
+  },
+
+  // ============ FIBER & CONNECTORS ============
+  {
+    ticker:'GLW', exchange:'NYSE', cat:'fiber',
+    name_en:'Corning Incorporated', name_tc:'康寧',
+    mcap:'~$50-60B', segment_en:'Optical Communications + Display + Specialty', segment_tc:'光通訊 + 顯示 + 特殊材料',
+    role_en:'Global leader in single-mode, multi-mode, and specialty fiber including hollow-core. Major beneficiary of $21B Fiber + MPO TAM in Rubin Ultra NVL576. Technology-neutral position — wins across pluggable optics, NPO, and CPO since all rely on fiber.',
+    role_tc:'單模、多模、特殊光纖(含 hollow-core)全球領導者。Rubin Ultra NVL576 之 US$21bn 光纖 + MPO TAM 主要受惠者。技術中性定位——在可插拔、NPO、CPO 三大新技術中均受惠,因均依賴光纖。',
+    products_en:['Single-mode fiber (G.652, G.654)','Multi-mode fiber (OM4, OM5)','Hollow-core fiber','MPO connectors','Optical cable assemblies'],
+    products_tc:['單模光纖(G.652、G.654)','多模光纖(OM4、OM5)','空心光纖 hollow-core','MPO 連接器','光纜組件'],
+    thesis_en:'Most diversified beneficiary in optical complex — captures upside regardless of CPO vs pluggable mix. Display business provides cyclical ballast. Hollow-core fiber emerges as differentiated long-haul opportunity.',
+    thesis_tc:'光通訊產業鏈最多元化受惠者——無論 CPO 對可插拔之組合如何皆能受惠。顯示業務提供週期性底盤。空心光纖為差異化的長距離機會。',
+    risks_en:['Display business cyclicality','Fiber pricing pressure from Asian competitors','Slower margin expansion vs pure-play optical'],
+    risks_tc:['顯示業務週期性','光纖價格受亞洲對手壓力','利潤擴張速度慢於純光通訊標的'],
+    tags:['Fiber','MPO','Theme 4']
+  },
+
+  // ============ ADVANCED PACKAGING ============
+  {
+    ticker:'TSM', exchange:'NYSE / TPE 2330', cat:'pack',
+    name_en:'Taiwan Semiconductor Manufacturing', name_tc:'台積電',
+    mcap:'~$1-1.5T', segment_en:'Foundry — Advanced Nodes + Packaging', segment_tc:'晶圓代工 — 先進製程 + 封裝',
+    role_en:'CPO co-packaging depends heavily on CoWoS and SoIC. Quantum-X, Bailly, Davisson and other CPO switch ASIC + optical engine co-packaging all run through TSMC. Rubin Ultra Spec B (NVL576) L2 scale-up across 8 racks requires advanced packaging for ELS, optical engines, and shuffle boxes.',
+    role_tc:'CPO 共封高度依賴 CoWoS 與 SoIC。Quantum-X、Bailly、Davisson 等 CPO Switch ASIC 與光引擎共封均落於台積電。Rubin Ultra Spec B (NVL576) 8 機架 L2 scale-up 之 ELS、光引擎、Shuffle Box 等元件均需先進封裝。',
+    products_en:['CoWoS-S / CoWoS-L (2.5D packaging)','SoIC 3D packaging','N3 / N3P / N2 advanced nodes','Specialty / RF foundry'],
+    products_tc:['CoWoS-S / CoWoS-L (2.5D 封裝)','SoIC 3D 封裝','N3 / N3P / N2 先進製程','特殊製程 / 射頻代工'],
+    thesis_en:'Indirectly reinforces multi-year CoWoS capacity tightness thesis. CPO adds incremental advanced packaging demand on top of GPU + custom ASIC demand. Pricing power throughout the cycle.',
+    thesis_tc:'間接強化 CoWoS 多年期產能緊縮論點。CPO 在 GPU + 客製化 ASIC 需求之上新增先進封裝需求。週期中具備定價權。',
+    risks_en:['Geopolitical / Taiwan straits risk','Customer concentration (Nvidia, Apple, AMD)','CoWoS competition from ASE/Amkor in mid-term'],
+    risks_tc:['地緣政治 / 台海風險','客戶集中度(Nvidia、Apple、AMD)','中期 ASE/Amkor 在 CoWoS 之競爭'],
+    tags:['Packaging','CoWoS','Foundry','Theme 5']
+  },
+  {
+    ticker:'3711.TW', exchange:'TPE', cat:'pack',
+    name_en:'ASE Technology Holding', name_tc:'日月光投控',
+    mcap:'~TWD 600-800B', segment_en:'OSAT / EMS', segment_tc:'封測 / 電子製造服務',
+    role_en:'Largest OSAT provider globally. VIPack platform for opto-electronic co-packaging extends CPO ecosystem beyond TSMC. Picking up advanced packaging volume as TSMC CoWoS remains capacity-constrained. EMS arm provides upside from AI server assembly.',
+    role_tc:'全球最大封測廠。VIPack 平台為光電共封而生,將 CPO 生態系延伸至台積電之外。在 TSMC CoWoS 產能仍受限時承接先進封裝量增。EMS 業務從 AI 伺服器組裝獲得上行。',
+    products_en:['VIPack opto-electronic co-packaging','Advanced OSAT services (FOWLP, FCBGA)','EMS for AI servers','Test services'],
+    products_tc:['VIPack 光電共封','先進封測服務(FOWLP、FCBGA)','AI 伺服器 EMS','測試服務'],
+    thesis_en:'Multi-vector advanced packaging exposure. Captures overflow from TSMC CoWoS capacity tightness. VIPack positions ASE for the CPO transition. EMS business has direct AI server upside.',
+    thesis_tc:'多元化先進封裝曝險。受惠於 TSMC CoWoS 產能緊縮的溢出。VIPack 為 CPO 轉換期之關鍵定位。EMS 業務直接受惠 AI 伺服器需求。',
+    risks_en:['Lower margins vs TSMC','Cyclicality in test/EMS','OSAT pricing competition'],
+    risks_tc:['利潤率低於台積電','測試/EMS 業務週期性','OSAT 價格競爭'],
+    tags:['Packaging','OSAT','EMS','Theme 5']
+  },
+
+  // ============ PCB MIDPLANE & M9 CCL (Rubin Ultra Kyber beneficiaries) ============
+  {
+    ticker:'2383.TW', exchange:'TPE', cat:'pcb',
+    name_en:'Elite Material (EMC)', name_tc:'台光電',
+    mcap:'~TWD 200-300B', segment_en:'Copper Clad Laminate (CCL)', segment_tc:'銅箔基板 (CCL)',
+    role_en:'Leading supplier of M9 CCL — the critical 78+ layer high-speed substrate enabling Rubin Ultra NVL144 (Kyber) PCB midplane. NVL144 Kyber requires 2 boards per rack at ~US$112,500 ASP each, yielding US$14.85B TAM across 14,850 racks. Years of mass-production experience in high-layer HDI.',
+    role_tc:'M9 CCL 主要供應商——為 78+ 層高速基板,是 Rubin Ultra NVL144 (Kyber) PCB Midplane 之關鍵材料。NVL144 Kyber 單機架需 2 片、每片 ASP ~US$112,500,對應 14,850 機架之 US$14.85bn TAM。具備高層數 HDI 量產經驗多年。',
+    products_en:['M9 high-speed CCL (78+ layer)','Halogen-free CCL for AI server','Low-loss substrate (Megtron 6 / 7 grade)','Materials for NVL144 Kyber midplane'],
+    products_tc:['M9 高速 CCL(78+ 層)','AI 伺服器無鹵 CCL','低損耗基板(Megtron 6 / 7 等級)','NVL144 Kyber midplane 用材料'],
+    thesis_en:'Premier pick within the Kyber-exclusive theme. PCB midplane is net-new content in Rubin Ultra Spec A architecture — incremental US$14.85B TAM. Highest gross margin segment within CCL. Should see structural ASP uplift in 2027-2028.',
+    thesis_tc:'Kyber 獨家受惠主題中的首選標的。PCB Midplane 為 Rubin Ultra Spec A 架構之全新內容——新增 US$14.85bn TAM。為 CCL 中毛利率最高的區段。2027-2028 應有結構性 ASP 上行。',
+    risks_en:['Architecture mix uncertainty — if Rubin Ultra adopts mostly NVL576 (Oberon) rather than NVL144 (Kyber), PCB midplane TAM compresses','Copper / glass fiber raw material costs','Competition from Iteq, Nan Ya PCB'],
+    risks_tc:['架構組合不確定性——若 Rubin Ultra 偏向 NVL576 (Oberon) 而非 NVL144 (Kyber),PCB midplane TAM 將壓縮','銅箔 / 玻纖原料成本','聯茂、南亞電路板之競爭'],
+    tags:['PCB','CCL','Kyber','Theme 7']
+  },
+  {
+    ticker:'6213.TW', exchange:'TPE', cat:'pcb',
+    name_en:'Iteq Corporation', name_tc:'聯茂電子',
+    mcap:'~TWD 50-80B', segment_en:'Copper Clad Laminate (CCL)', segment_tc:'銅箔基板 (CCL)',
+    role_en:'Major Taiwan CCL supplier focused on high-speed materials. Direct competitor to EMC in M-series materials for AI server / switch / midplane applications. Smaller scale but higher beta to AI/HPC PCB mix shift.',
+    role_tc:'主要台廠 CCL 廠之一,專注高速材料。在 M 系列材料(AI 伺服器、交換機、midplane)為 EMC 之直接競爭者。規模較小但 AI/HPC PCB 組合升級之 beta 較高。',
+    products_en:['High-speed CCL (M6 / M7 / M9 grades)','AI server / switch CCL','Halogen-free / low-loss substrates'],
+    products_tc:['高速 CCL(M6 / M7 / M9 等級)','AI 伺服器 / 交換機 CCL','無鹵 / 低損耗基板'],
+    thesis_en:'Secondary play in the PCB midplane theme. Operational leverage from mix shift to higher-grade materials. Cheaper valuation vs EMC reflects scale gap.',
+    thesis_tc:'PCB midplane 主題之次要標的。產品組合升級到較高等級材料帶來營運槓桿。估值較 EMC 低反映規模差距。',
+    risks_en:['Smaller scale vs EMC','Customer wins for M9 grade uncertain','CCL pricing competition'],
+    risks_tc:['規模小於 EMC','M9 等級之客戶贏單仍不確定','CCL 價格競爭'],
+    tags:['PCB','CCL','Kyber','Theme 7']
+  },
+
+  {
+    ticker:'BDC', exchange:'NYSE', cat:'fiber',
+    name_en:'Belden Inc', name_tc:'Belden Inc',
+    mcap:'~$5-8B', segment_en:'Networking Cabling & Connectivity', segment_tc:'網路線纜與連接',
+    role_en:'Major supplier of high-performance cabling, fiber, and connectivity infrastructure for data centers. Includes both copper and fiber product lines. Mentioned in GS report as supply chain participant for fiber + connector / cable theme. Smaller direct AI exposure than Corning but more diversified across enterprise networking and industrial markets.',
+    role_tc:'高性能資料中心線纜、光纖與連接基礎建設主要供應商。涵蓋銅纜與光纖兩條產品線。在 GS 報告中於光纖 + 連接器/線纜主題被提及。直接 AI 曝險低於 Corning,但在企業網路與工業市場多元化程度較高。',
+    products_en:['Fiber optic cable assemblies','Cat6/Cat7/Cat8 copper cabling','Industrial connectivity','Cable management systems','Pre-terminated solutions for data center'],
+    products_tc:['光纖纜線組件','Cat6/Cat7/Cat8 銅線纜','工業連接','線纜管理系統','資料中心預先端接解決方案'],
+    thesis_en:'Secondary fiber connectivity play. Diversified industrial customer base lowers AI cycle beta. Cleaner balance sheet and dividend payer. Less direct upside than Corning, but also less downside.',
+    thesis_tc:'次要光纖連接標的。多元化工業客戶基礎降低 AI 週期 beta。資產負債表較乾淨且配息。直接上行少於 Corning,但下行也較小。',
+    risks_en:['Industrial customer cyclicality','Lower AI exposure vs pure-play optical','Commodity cable pricing pressure','Slower growth profile'],
+    risks_tc:['工業客戶週期性','AI 曝險低於純光通訊','商品化線纜價格壓力','成長型態較慢'],
+    tags:['Cabling','Connectivity','Industrial','Theme 4']
+  },
+
+  {
+    ticker:'6239.TW', exchange:'TPE', cat:'pack',
+    name_en:'Powertech Technology', name_tc:'力成科技',
+    mcap:'~TWD 100-150B', segment_en:'Memory & Logic Packaging', segment_tc:'記憶體與邏輯封裝',
+    role_en:'Taiwan-based OSAT focused on memory (HBM) packaging and FCBGA. Critical supplier for HBM stacks used in AI GPUs. Indirect optical exposure via AI server packaging volume. Listed in GS report Theme 5 alongside TSMC and ASE.',
+    role_tc:'台灣記憶體 (HBM) 與 FCBGA 封裝廠。AI GPU 用 HBM 堆疊之關鍵供應商。透過 AI 伺服器封裝量間接曝險光通訊。在 GS 報告主題 5 與 TSMC、ASE 並列。',
+    products_en:['HBM packaging','FCBGA / Flip Chip','Memory packaging (DDR/LPDDR)','Wafer-level packaging','Test services'],
+    products_tc:['HBM 封裝','FCBGA / Flip Chip','記憶體封裝 (DDR/LPDDR)','晶圓級封裝','測試服務'],
+    thesis_en:'Indirect AI optical exposure via HBM packaging for AI GPUs. Smaller and more memory-focused than ASE. Operating leverage from HBM volume ramp. Less exposed to CoWoS transitions.',
+    thesis_tc:'透過 AI GPU 用 HBM 封裝間接曝險 AI 光通訊。規模小於 ASE 且更聚焦記憶體。HBM 量產帶來營運槓桿。較少曝險於 CoWoS 轉換。',
+    risks_en:['Memory cycle volatility','Smaller scale vs ASE','HBM customer concentration','Test/EMS pricing pressure'],
+    risks_tc:['記憶體景氣循環波動','規模小於 ASE','HBM 客戶集中','測試/EMS 價格壓力'],
+    tags:['Packaging','HBM','OSAT','Theme 5']
+  },
+
+  {
+    ticker:'8046.TW', exchange:'TPE', cat:'pcb',
+    name_en:'Nan Ya PCB', name_tc:'南亞電路板',
+    mcap:'~TWD 80-120B', segment_en:'High-end PCB & IC Substrate', segment_tc:'高階 PCB 與 IC 載板',
+    role_en:'Taiwan PCB and IC substrate maker. Beneficiary of Rubin Ultra NVL144 (Kyber) PCB midplane theme. Supplies high-layer high-speed boards for new midplane architecture. Also major IC substrate (FCBGA) supplier. Listed in GS report Theme 7 alongside EMC, Iteq, KCE.',
+    role_tc:'台灣 PCB 與 IC 載板廠。Rubin Ultra NVL144 (Kyber) PCB midplane 主題之受惠者。供應新 midplane 架構所需高層數高速電路板。亦為主要 IC 載板 (FCBGA) 供應商。在 GS 報告主題 7 與 EMC、聯茂、KCE 並列。',
+    products_en:['78+ layer HDI PCB','IC substrate (FCBGA)','Rigid-flex PCB','AI server motherboards','High-frequency PCB for 5G/AI'],
+    products_tc:['78+ 層 HDI PCB','IC 載板 (FCBGA)','軟硬複合板','AI 伺服器主機板','5G/AI 用高頻 PCB'],
+    thesis_en:'Diversified PCB play vs single-product CCL plays. IC substrate business adds capacity for AI ASIC packaging. Less pure-play than EMC on Kyber midplane but more diversified.',
+    thesis_tc:'相對純 CCL 標的之多元化 PCB 標的。IC 載板業務增加 AI ASIC 封裝產能。對 Kyber midplane 純粹度低於 EMC,但多元化程度較高。',
+    risks_en:['Smaller M9 grade exposure vs EMC','IC substrate competition with Unimicron, Kinsus','Capex required for capacity ramp','PCB pricing pressure'],
+    risks_tc:['M9 等級曝險小於 EMC','IC 載板面對欣興、景碩之競爭','擴產所需資本支出','PCB 價格壓力'],
+    tags:['PCB','IC Substrate','Kyber','Theme 7']
+  },
+  // ============ FUTU CHART ADDITIONS: LIGHT (Substrate) ============
+  {
+    ticker:'AXTI', exchange:'NASDAQ', cat:'light',
+    name_en:'AXT Inc', name_tc:'AXT Inc',
+    mcap:'~$200-300M', segment_en:'Compound Semi Substrates', segment_tc:'化合物半導體基板',
+    role_en:'Leading supplier of InP and GaAs substrates — the foundational wafers on which EML and CW lasers are grown. Featured in Futu chart in both 磷化銦襯底 (InP substrate) and 砷化鎵基板 (GaAs substrate) sections. Direct upstream beneficiary of the InP supply tightness cycle through 2H28.',
+    role_tc:'領導性磷化銦與砷化鎵基板供應商——為 EML 與 CW Laser 磊晶基礎晶圓。在富途圖表 磷化銦襯底 與 砷化鎵基板 兩個區塊均列出。直接受惠於 2H28 之前的 InP 供應緊縮週期。',
+    products_en:['InP substrates (2"-6")','GaAs substrates','Germanium substrates','Raw material supply (PBN crucibles)','Specialty crystal materials'],
+    products_tc:['InP 基板 (2"-6")','GaAs 基板','鍺基板','原物料 (PBN 坩堝)','特殊晶體材料'],
+    thesis_en:'Pure-play substrate micro-cap with highest beta to InP supply tightness. Limited Western/non-Chinese supply alternatives elevate strategic value. Tier-1 of upstream optical supply chain.',
+    thesis_tc:'純基板微型股,對 InP 供應緊縮具最高 beta。西方/非中國供應替代有限,提升策略價值。光通訊上游供應鏈一線標的。',
+    risks_en:['Micro-cap volatility','Chinese subsidiary geopolitical risk','Substrate margin volatility','Single-product concentration'],
+    risks_tc:['微型股波動','中國子公司地緣政治風險','基板利潤波動','單一產品集中'],
+    tags:['InP Substrate','GaAs','Upstream','Theme 1']
+  },
+
+  // ============ FUTU CHART ADDITIONS: MODULES (incl. driver / TIA silicon) ============
+  {
+    ticker:'AAOI', exchange:'NASDAQ', cat:'module',
+    name_en:'Applied Optoelectronics', name_tc:'Applied Optoelectronics',
+    mcap:'~$1-2B', segment_en:'Datacenter Optical Transceivers', segment_tc:'資料中心光模組',
+    role_en:'Tier-2 datacenter optical module supplier targeting 100G/200G/400G/800G transceivers. Major Amazon customer (Trainium-related deployments). 1.6T pipeline in development with vertically integrated InP capability. Listed in Futu chart 激光器/光源 (矽光) section.',
+    role_tc:'二線資料中心光模組廠,鎖定 100G/200G/400G/800G 光模組。主要客戶為 Amazon (Trainium 部署相關)。1.6T 產品線開發中,具備垂直整合 InP 能力。在富途圖表 激光器/光源 (矽光) 章節列出。',
+    products_en:['100G/200G/400G/800G transceivers','CWDM4/PSM4 optics','1.6T modules in development','InP epitaxy in-house','CATV/HFC products (legacy)'],
+    products_tc:['100G/200G/400G/800G 光模組','CWDM4/PSM4 光學','1.6T 模組開發中','內部 InP 磊晶','CATV/HFC 產品 (舊事業)'],
+    thesis_en:'Smaller-scale optical module play with high operational leverage. Customer wins from Amazon Trainium provide upside but concentrate risk. Trades at lower valuation than Innolight/Eoptolink reflecting tier-2 status. 1.6T qualification is key 2026-27 catalyst.',
+    thesis_tc:'小型化光模組標的,具高營運槓桿。Amazon Trainium 客戶贏單提供上行但集中風險。估值低於中際旭創/新易盛反映二線地位。1.6T 認證為 2026-27 關鍵催化劑。',
+    risks_en:['Customer concentration (Amazon)','Legacy CATV business decline drag','Lower scale vs Asian peers','Margin volatility through cycles'],
+    risks_tc:['客戶集中度 (Amazon)','舊 CATV 業務萎縮拖累','規模小於亞洲同業','景氣循環中利潤波動'],
+    tags:['Modules','Amazon','InP Integrated','Theme 2']
+  },
+  {
+    ticker:'MTSI', exchange:'NASDAQ', cat:'module',
+    name_en:'MACOM Technology Solutions', name_tc:'MACOM Technology Solutions',
+    mcap:'~$10-15B', segment_en:'High-Performance Analog Semiconductor', segment_tc:'高性能類比半導體',
+    role_en:'Provides laser drivers, TIAs (transimpedance amplifiers), and optical front-end chipsets for 400G/800G/1.6T transceivers. Featured in Futu chart 電子集成電路 (Electronic IC) section. Strategic component supplier to most major optical module vendors. CPO-compatible portfolio.',
+    role_tc:'提供 400G/800G/1.6T 光模組之雷射驅動、TIA、光學前端晶片組。在富途圖表 電子集成電路 章節列出。為主要光模組廠之策略性元件供應商。CPO 相容產品線。',
+    products_en:['Laser drivers (EML/CW)','TIA (transimpedance amplifier)','Modulator drivers','Coherent driver IC','RF/microwave amplifiers'],
+    products_tc:['雷射驅動 (EML/CW)','TIA 轉阻放大器','調變器驅動','相干驅動 IC','RF/微波放大器'],
+    thesis_en:'Indirect optical module exposure through component supply. Lower revenue beta than pure-play optical names but cleaner margins. Supplies both pluggable and CPO ecosystems — architecturally neutral. Aerospace/defense business provides cyclical ballast.',
+    thesis_tc:'透過元件供應間接曝險光模組。營收 beta 低於純光通訊但利潤較乾淨。同時供應可插拔與 CPO 生態系——架構中性。航太國防業務提供週期性底盤。',
+    risks_en:['Customer concentration risk','Component pricing pressure','CPO long-term TAM compression risk','Slower growth vs pure-play optical'],
+    risks_tc:['客戶集中度風險','元件價格壓力','CPO 長期 TAM 壓縮風險','成長慢於純光通訊'],
+    tags:['Lasers','Drivers','TIA','Optical Components']
+  },
+
+  // ============ FUTU CHART ADDITIONS: ASIC (Compute) ============
+  {
+    ticker:'AMD', exchange:'NASDAQ', cat:'asic',
+    name_en:'Advanced Micro Devices', name_tc:'超微 (AMD)',
+    mcap:'~$300-400B', segment_en:'Data Center GPU + CPU', segment_tc:'資料中心 GPU + CPU',
+    role_en:'Primary GPU/XPU competitor to NVDA. MI300X/MI350X/MI400 data center GPUs target AI training/inference workloads. UALink interconnect alliance (with Meta, Cisco, Broadcom, etc.) is open-standard alternative to NVLink. ZT Systems acquisition adds rack-scale design capability. Listed in Futu chart ASIC與xPU設計 section.',
+    role_tc:'NVDA 主要 GPU/XPU 競爭者。MI300X/MI350X/MI400 資料中心 GPU 鎖定 AI 訓練/推論。UALink 互連聯盟 (與 Meta、Cisco、Broadcom 等) 為 NVLink 開放標準替代。併購 ZT Systems 增加機架級設計能力。在富途圖表 ASIC與xPU設計 章節列出。',
+    products_en:['MI300X / MI350X / MI400 data center GPUs','UALink interconnect (open standard alliance)','Pensando DPU','ZT Systems rack-level design','EPYC server CPUs'],
+    products_tc:['MI300X / MI350X / MI400 資料中心 GPU','UALink 互連 (開放標準聯盟)','Pensando DPU','ZT Systems 機架級設計','EPYC 伺服器 CPU'],
+    thesis_en:'Alternative to Nvidia in GPU duopoly. UALink alliance is the most credible NVLink alternative — if it gains traction, optical interconnect adoption pattern in non-Nvidia racks could differ from the Nvidia-centric model. AI Capex diversification away from Nvidia would benefit AMD optical exposure.',
+    thesis_tc:'GPU 雙寡頭中 Nvidia 之替代。UALink 聯盟為最可信 NVLink 替代——若獲動能,非 Nvidia 機架光通訊採用模式可能不同於以 Nvidia 為主之模型。AI Capex 從 Nvidia 分散將有利 AMD 光通訊曝險。',
+    risks_en:['MI400 ramp execution','Lower software/CUDA moat vs Nvidia','Customer concentration with hyperscalers','Geopolitical China revenue at risk'],
+    risks_tc:['MI400 擴量執行','軟體/CUDA 護城河弱於 Nvidia','雲端業者客戶集中','中國營收地緣政治風險'],
+    tags:['GPU','UALink','NVLink Alternative']
+  },
+  {
+    ticker:'INTC', exchange:'NASDAQ', cat:'asic',
+    name_en:'Intel Corporation', name_tc:'英特爾',
+    mcap:'~$80-120B', segment_en:'Compute + Foundry + AI Accelerators', segment_tc:'運算 + 代工 + AI 加速器',
+    role_en:'US semiconductor giant. AI accelerator portfolio (Gaudi 3) competes in AI inference. Intel Foundry Services (IFS) targets external customers including potential optical/CPO production. Has prior history in silicon photonics. Featured in Futu chart ASIC與xPU設計 section.',
+    role_tc:'美國半導體巨頭。AI 加速器產品線 (Gaudi 3) 競逐 AI 推論。Intel Foundry Services (IFS) 鎖定外部客戶,可能含光學/CPO 製造。曾涉足矽光子。在富途圖表 ASIC與xPU設計 章節列出。',
+    products_en:['Gaudi AI accelerators','Xeon server CPUs','Intel Foundry Services (IFS)','Process technology (Intel 3, 18A)','AI Silicon roadmap'],
+    products_tc:['Gaudi AI 加速器','Xeon 伺服器 CPU','Intel Foundry Services (IFS)','製程技術 (Intel 3、18A)','AI 矽路線圖'],
+    thesis_en:'Turnaround story with AI optionality. IFS offers alternative US-based fabrication capacity for optical components. Less direct optical exposure than NVDA/AVGO/MRVL but broader semi platform with CHIPS Act tailwind.',
+    thesis_tc:'翻身故事含 AI 選擇權。IFS 為光學元件提供美國本土製造產能替代。直接光通訊曝險小於 NVDA/AVGO/MRVL 但半導體平台較廣,CHIPS 法案提供順風。',
+    risks_en:['Foundry ramp execution','CPU market share decline','AI accelerator competitive vs NVDA','Process technology delays'],
+    risks_tc:['代工擴量執行','CPU 市占下滑','AI 加速器面對 NVDA 競爭','製程技術延遲'],
+    tags:['ASIC','Foundry','AI Accelerator','US Manufacturing']
+  },
+
+  // ============ FUTU CHART ADDITIONS: FIBER (Connectors) ============
+  {
+    ticker:'APH', exchange:'NYSE', cat:'fiber',
+    name_en:'Amphenol Corporation', name_tc:'安費諾',
+    mcap:'~$70-90B', segment_en:'Connectors & Cabling', segment_tc:'連接器與線纜',
+    role_en:'Largest connector and cabling supplier globally. Featured in Futu chart MPO 連接器 and 波分復用器 (WDM) sections. Direct beneficiary of fiber + MPO TAM expansion in Rubin Ultra NVL576 architecture. Industrial/military diversification provides ballast.',
+    role_tc:'全球最大連接器/線纜供應商。在富途圖表 MPO 連接器 與 波分復用器 章節列出。Rubin Ultra NVL576 架構之光纖 + MPO TAM 擴張直接受惠者。工業/軍用多元化提供底盤。',
+    products_en:['MPO / MTP connectors','Fiber optic assemblies','Backplane connectors','High-speed I/O (cable management)','AOC / DAC cables'],
+    products_tc:['MPO / MTP 連接器','光纖組件','底板連接器','高速 I/O (線纜管理)','AOC / DAC 纜線'],
+    thesis_en:'Diversified connectivity giant with AI optical exposure. Scale advantages over single-product fiber peers. Less pure-play than GLW but more diversified. Stable margin profile.',
+    thesis_tc:'多元化連接巨頭具 AI 光通訊曝險。規模優勢勝過單一產品光纖同業。對 AI 純粹度不如 GLW 但多元化程度較高。利潤穩定。',
+    risks_en:['Conglomerate discount','Lower AI cycle beta','Currency exposure','Cyclical end markets'],
+    risks_tc:['集團折價','AI 週期 beta 較低','匯率曝險','終端市場週期性'],
+    tags:['MPO','Connectors','WDM','Theme 4']
+  },
+
+  // ============ FUTU CHART ADDITIONS: PACK / FOUNDRY ============
+  {
+    ticker:'AMKR', exchange:'NASDAQ', cat:'pack',
+    name_en:'Amkor Technology', name_tc:'Amkor Technology',
+    mcap:'~$5-7B', segment_en:'OSAT (Outsourced Assembly & Test)', segment_tc:'封測代工',
+    role_en:'World #2 OSAT after ASE. Direct competitor to TSMC InFO and CoWoS via SLIM and S-SWIFT advanced packaging technologies. Picks up overflow demand as TSMC CoWoS remains capacity-constrained. New Arizona facility (US) for advanced packaging. Featured in Futu chart 封裝測試服務 section.',
+    role_tc:'全球第二大 OSAT (僅次於 ASE)。透過 SLIM 與 S-SWIFT 先進封裝技術直接競爭 TSMC InFO 與 CoWoS。在 TSMC CoWoS 產能仍受限時承接溢出需求。亞利桑那 (美) 新廠進行先進封裝。在富途圖表 封裝測試服務 章節列出。',
+    products_en:['SLIM advanced packaging','S-SWIFT high-density interconnect','2.5D / 3D packaging','Wafer-level packaging','Arizona US facility (under construction)'],
+    products_tc:['SLIM 先進封裝','S-SWIFT 高密度互連','2.5D / 3D 封裝','晶圓級封裝','亞利桑那美廠 (建設中)'],
+    thesis_en:'Alternative to TSMC for advanced packaging. Captures overflow demand from TSMC CoWoS bottleneck. US Arizona facility well-positioned for geopolitical de-risking. Lower margins than TSMC but stable cash generation.',
+    thesis_tc:'TSMC 先進封裝之替代。承接 TSMC CoWoS 瓶頸之溢出需求。亞利桑那美廠有利地緣政治去風險。利潤率低於 TSMC 但現金流穩定。',
+    risks_en:['Lower margin vs TSMC CoWoS','Customer concentration (Apple)','Capex burden for capacity ramp','Technology lag vs TSMC SoIC'],
+    risks_tc:['利潤率低於 TSMC CoWoS','客戶集中度 (Apple)','擴產資本支出負擔','技術相對 TSMC SoIC 落後'],
+    tags:['OSAT','US Manufacturing','Theme 5']
+  },
+  {
+    ticker:'TSEM', exchange:'NASDAQ', cat:'pack',
+    name_en:'Tower Semiconductor', name_tc:'Tower半導體',
+    mcap:'~$5-6B', segment_en:'Specialty Foundry — SiPh capable', segment_tc:'特殊製程代工 — 具矽光子能力',
+    role_en:'Israel-based specialty foundry. Strong in silicon photonics (SiPh) processes — critical for SiPh transceiver manufacturing. Featured in Futu chart 晶圓代工 (foundry) section. Was target of Intel acquisition (cancelled 2023); partnership with Intel for US capacity continues.',
+    role_tc:'以色列特殊製程代工廠。在矽光子製程具優勢——對 SiPh 光模組製造關鍵。在富途圖表 晶圓代工 章節列出。曾為 Intel 併購目標 (2023 取消);與 Intel 美國產能合作持續。',
+    products_en:['Silicon photonics foundry','RF / SiGe / BCD processes','Analog / Mixed-signal foundry','MEMS','Sensor processes'],
+    products_tc:['矽光子代工','RF / SiGe / BCD 製程','類比 / 混合信號代工','MEMS','感測器製程'],
+    thesis_en:'Pure-play SiPh foundry beneficiary. Intel partnership for US capacity. Niche positioning protects margins. Less direct AI scale exposure than mainline foundries but highly leveraged to SiPh penetration thesis.',
+    thesis_tc:'純矽光子代工受惠者。與 Intel 美國產能合作。利基定位保護利潤。直接 AI 規模曝險低於主流代工但對矽光子滲透率主題高度槓桿。',
+    risks_en:['Smaller scale vs TSMC','Niche concentration','Capacity utilization cyclicality','Intel partnership execution'],
+    risks_tc:['規模小於 TSMC','利基集中','產能利用率週期','與 Intel 合作執行'],
+    tags:['Foundry','SiPh','Specialty']
+  },
+  {
+    ticker:'GFS', exchange:'NASDAQ', cat:'pack',
+    name_en:'GlobalFoundries', name_tc:'GlobalFoundries',
+    mcap:'~$25-35B', segment_en:'Specialty Foundry — Fotonix SiPh', segment_tc:'特殊製程代工 — Fotonix 矽光子',
+    role_en:'US/Singapore-based specialty foundry. Major silicon photonics manufacturing capability via Fotonix platform. Featured in Futu chart 晶圓代工 section. Mature node leader (12nm-22nm) for AI peripheral chips, optical components. Direct CHIPS Act beneficiary.',
+    role_tc:'美國/新加坡特殊製程代工廠。透過 Fotonix 平台具主要矽光子製造能力。在富途圖表 晶圓代工 章節列出。成熟製程 (12-22nm) 領導者,用於 AI 周邊晶片、光學元件。CHIPS 法案直接受惠者。',
+    products_en:['Fotonix SiPh foundry platform','12nm-22nm FDX (FD-SOI)','8inch/12inch specialty','RF / Mixed-signal foundry','Mature node manufacturing'],
+    products_tc:['Fotonix 矽光子代工平台','12nm-22nm FDX (FD-SOI)','8 吋/12 吋特殊製程','RF / 混合信號代工','成熟製程製造'],
+    thesis_en:'Specialty foundry play with SiPh exposure via Fotonix. US-listed alternative to TSMC. CHIPS Act incentives provide tailwind. Margin profile improving via mix shift toward specialty processes.',
+    thesis_tc:'特殊製程代工標的,透過 Fotonix 具矽光子曝險。為 TSMC 之美國上市替代。CHIPS 法案補助提供順風。透過特殊製程組合改善利潤。',
+    risks_en:['Lower margin vs TSMC','Mature node competition from China','Customer concentration','Cyclicality'],
+    risks_tc:['利潤率低於 TSMC','成熟製程面對中國競爭','客戶集中','週期性'],
+    tags:['Foundry','SiPh','Fotonix','US Manufacturing']
+  },
+  {
+    ticker:'UMC', exchange:'NYSE (ADR)', cat:'pack',
+    name_en:'United Microelectronics', name_tc:'聯華電子',
+    mcap:'~$12-18B', segment_en:'Specialty Foundry', segment_tc:'特殊製程代工',
+    role_en:'Taiwan-listed (2303.TW) specialty foundry with NYSE ADR. Mature/specialty node leader (14nm-90nm). Featured in Futu chart 晶圓代工 section. Limited direct optical exposure but supplies wide range of AI peripheral chips and analog/RF components.',
+    role_tc:'台灣 (2303.TW) 特殊製程代工廠,具 NYSE ADR。成熟/特殊製程 (14-90nm) 領導者。在富途圖表 晶圓代工 章節列出。直接光通訊曝險有限,但供應廣泛 AI 周邊晶片與類比/RF 元件。',
+    products_en:['14nm-90nm specialty foundry','RF / HV / eFlash processes','Mixed-signal foundry','Image sensor foundry','MEMS / Sensor processes'],
+    products_tc:['14nm-90nm 特殊製程代工','RF / HV / eFlash 製程','混合信號代工','影像感測器代工','MEMS / 感測器製程'],
+    thesis_en:'Pure foundry play with specialty positioning. Lower scale than TSMC but stable margins. Less direct AI upside but ASE/Powertech ecosystem ballast. ADR provides USD exposure for US investors.',
+    thesis_tc:'純代工標的,特殊製程定位。規模低於 TSMC 但利潤穩定。直接 AI 上行較低,但 ASE/力成生態系底盤。ADR 為美國投資人提供美元曝險。',
+    risks_en:['Mature node price pressure','Customer mix','Geopolitical Taiwan exposure','Slower growth vs leading edge'],
+    risks_tc:['成熟製程價格壓力','客戶組合','台灣地緣政治曝險','成長慢於先進製程'],
+    tags:['Foundry','Specialty','Mature Node']
+  },
+
+  // ============ FUTU CHART ADDITIONS: SYSTEM (Networking OEM / EMS) ============
+  {
+    ticker:'CSCO', exchange:'NASDAQ', cat:'system',
+    name_en:'Cisco Systems', name_tc:'思科',
+    mcap:'~$200-250B', segment_en:'Networking + Security + Software', segment_tc:'網路 + 安全 + 軟體',
+    role_en:'Legacy networking giant. Silicon One unified silicon platform (G100/G200/G400/G500) targeting AI clusters. Acquired Acacia (2021) for coherent optics. Splunk acquisition (2024) adds observability. Featured in Futu chart in ASIC and 光子集成電路 sections.',
+    role_tc:'老牌網路巨頭。Silicon One 統一矽平台 (G100/G200/G400/G500) 鎖定 AI 集群。2021 併購 Acacia 進入相干光學。2024 併購 Splunk 加入可觀測性。在富途圖表 ASIC 與 光子集成電路 章節列出。',
+    products_en:['Silicon One G100/G200/G400/G500','Nexus 9000 / 8000 switches','Acacia coherent optics (CIM 8L)','Splunk observability platform','AI Pod reference architectures'],
+    products_tc:['Silicon One G100/G200/G400/G500','Nexus 9000 / 8000 交換機','Acacia 相干光學 (CIM 8L)','Splunk 可觀測性平台','AI Pod 參考架構'],
+    thesis_en:'Mature compounder with AI optionality. Silicon One competes with Broadcom merchant switching. Acacia has DCI tailwinds. Diversified across enterprise, telco, cloud markets.',
+    thesis_tc:'成熟複利型公司含 AI 選擇權。Silicon One 與 Broadcom 商用交換競爭。Acacia 具 DCI 順風。橫跨企業、電信、雲端市場多元化。',
+    risks_en:['Slower growth vs pure AI plays','Customer mix-shift from on-prem to cloud','Splunk integration risk','Margin pressure'],
+    risks_tc:['成長慢於純 AI 標的','客戶從地端轉雲端','Splunk 整合風險','利潤壓力'],
+    tags:['Networking','Silicon One','Acacia','DCI']
+  },
+  {
+    ticker:'CIEN', exchange:'NYSE', cat:'system',
+    name_en:'Ciena Corporation', name_tc:'Ciena',
+    mcap:'~$10-15B', segment_en:'Networking + Coherent Optics', segment_tc:'網路 + 相干光學',
+    role_en:'Leader in coherent DSP and long-haul/metro optical transport equipment. WaveLogic family of coherent DSPs powers 400ZR/800ZR data center interconnect (DCI) modules. Featured in Futu chart VSFF 連接器 section. Strategic beneficiary of AI cluster geographic distribution.',
+    role_tc:'相干 DSP 與長距/都會光傳輸設備領導者。WaveLogic 相干 DSP 系列驅動 400ZR/800ZR 資料中心互連 (DCI) 模組。在富途圖表 VSFF 連接器 章節列出。AI 集群地理分散之策略性受惠者。',
+    products_en:['WaveLogic 5/6 coherent DSPs','WaveLogic 6e Nano','400ZR / 800ZR DCI modules','Coherent line systems (6500/8700)','Blue Planet automation software'],
+    products_tc:['WaveLogic 5/6 相干 DSP','WaveLogic 6e Nano','400ZR / 800ZR DCI 模組','相干線路系統 (6500/8700)','Blue Planet 自動化軟體'],
+    thesis_en:'AI campus geographic distribution drives multi-region interconnect demand. Coherent DSP leadership positions for long-term DCI growth. Less direct CPO exposure than enterprise switches but key for inter-DC.',
+    thesis_tc:'AI 園區地理分散推動跨區互連需求。相干 DSP 領導地位為長期 DCI 成長定位。直接 CPO 曝險小於企業交換機,但對跨資料中心連接關鍵。',
+    risks_en:['Telco customer cyclicality','Coherent DSP commoditization','AI direct exposure secondary to compute','Long sales cycles'],
+    risks_tc:['電信客戶週期性','相干 DSP 商品化','AI 直接曝險次於運算','銷售週期長'],
+    tags:['Coherent DSP','DCI','Long-haul','VSFF']
+  },
+  {
+    ticker:'JBL', exchange:'NYSE', cat:'system',
+    name_en:'Jabil Inc', name_tc:'捷普科技',
+    mcap:'~$20-25B', segment_en:'Diversified EMS / Manufacturing Services', segment_tc:'多元化 EMS / 製造服務',
+    role_en:'Global EMS provider building networking gear and AI hardware. Featured in Futu chart 封裝測試服務 section. Optical module assembly capability for some optical vendors. US-listed alternative to Taiwan/China ODM exposure.',
+    role_tc:'全球 EMS 廠商,為 OEM 客戶建構網路設備與 AI 硬體。在富途圖表 封裝測試服務 章節列出。具備光模組組裝能力。台灣/中國 ODM 曝險之美國上市替代。',
+    products_en:['Networking equipment EMS','AI server contract manufacturing','Optical module assembly (select vendors)','Industrial EMS (legacy)','Healthcare device manufacturing'],
+    products_tc:['網路設備 EMS','AI 伺服器代工製造','光模組組裝 (選定廠商)','工業 EMS (舊業)','醫療設備製造'],
+    thesis_en:'Diversified US-listed EMS with AI server exposure. Lower margins than Taiwanese ODMs but cleaner balance sheet. Less direct AI upside but also lower geopolitical exposure.',
+    thesis_tc:'多元化美國上市 EMS,具 AI 伺服器曝險。利潤率低於台灣 ODM 但資產負債表較乾淨。AI 上行較低,但地緣政治曝險也較低。',
+    risks_en:['Diversified revenue dilutes AI thesis','Margin volatility across segments','Customer concentration risks','Currency exposure'],
+    risks_tc:['多元化營收稀釋 AI 論點','各事業群間利潤波動','客戶集中風險','匯率曝險'],
+    tags:['EMS','Server ODM','US Manufacturing']
+  },
+
+  // ============ FUTU CHART ADDITIONS: TEST EQUIPMENT ============
+  {
+    ticker:'TER', exchange:'NASDAQ', cat:'test',
+    name_en:'Teradyne Inc', name_tc:'泰瑞達',
+    mcap:'~$20-30B', segment_en:'Automatic Test Equipment (ATE)', segment_tc:'自動測試設備',
+    role_en:'Leading ATE supplier for semiconductor production. Major beneficiary of AI chip production volume. Featured in Futu chart 測試設備 (Test Equipment) section. Advanced packaging (CoWoS, HBM) drives higher test content per chip. Robotics segment provides diversification.',
+    role_tc:'領導性 ATE 半導體量產測試設備供應商。AI 晶片量產主要受惠者。在富途圖表 測試設備 章節列出。先進封裝 (CoWoS、HBM) 推動每顆晶片測試內容增加。機器人事業提供多元化。',
+    products_en:['J750 / UltraFLEX ATE platforms','Mixed-signal / Digital / Memory test','SoC / MCU testing','MagiQ test platforms','Robotics (Universal Robots)'],
+    products_tc:['J750 / UltraFLEX ATE 平台','混合信號 / 數位 / 記憶體測試','SoC / MCU 測試','MagiQ 測試平台','機器人 (Universal Robots)'],
+    thesis_en:'Pure-play ATE leader with high beta to AI chip volume. Advanced packaging drives test content growth. Robotics segment provides diversification ballast. Direct beneficiary of HBM and AI accelerator ramp.',
+    thesis_tc:'純 ATE 領導者,對 AI 晶片量具高 beta。先進封裝推動測試內容增長。機器人事業提供多元化底盤。HBM 與 AI 加速器擴量之直接受惠者。',
+    risks_en:['Semi cycle cyclicality','ATE pricing pressure','Customer concentration','Competition from Advantest'],
+    risks_tc:['半導體週期性','ATE 價格壓力','客戶集中','面對愛德萬之競爭'],
+    tags:['ATE','Test','HBM','Advanced Packaging']
+  },
+  {
+    ticker:'KEYS', exchange:'NYSE', cat:'test',
+    name_en:'Keysight Technologies', name_tc:'是德科技',
+    mcap:'~$30-40B', segment_en:'Electronic Measurement & Test', segment_tc:'電子量測與測試',
+    role_en:'Leader in electronic measurement, RF test, and design verification tools. Featured in Futu chart 測試設備 section. High-speed signal testing (224G PAM4, optical) critical for AI/optical chip validation and 1.6T/3.2T module qualification.',
+    role_tc:'領導性電子量測、RF 測試、設計驗證工具。在富途圖表 測試設備 章節列出。高速信號測試 (224G PAM4、光學) 對 AI/光晶片驗證與 1.6T/3.2T 模組認證關鍵。',
+    products_en:['Network analyzers','Oscilloscopes (224G)','Optical test instruments','Wireless test (5G/6G)','Design verification software'],
+    products_tc:['網路分析儀','示波器 (224G)','光學測試儀器','無線測試 (5G/6G)','設計驗證軟體'],
+    thesis_en:'Pure-play test/measurement leader. AI/optical signal speed migration drives instrument upgrades (every speed transition = re-tooling). Less semi-cycle dependent than TER. Stable software/service mix.',
+    thesis_tc:'純測試/量測領導者。AI/光信號速率遷移推動儀器升級 (每次速率轉換 = 重新建置)。對半導體週期依賴度低於 TER。軟體服務組合穩定。',
+    risks_en:['Capex spending cyclicality','Customer mix shift','Software/services pricing','Competition from Tektronix/R&S'],
+    risks_tc:['資本支出週期','客戶組合移轉','軟體服務價格','面對 Tektronix/R&S 競爭'],
+    tags:['Test','Measurement','Optical Test','224G PAM4']
+  },
+  {
+    ticker:'FORM', exchange:'NASDAQ', cat:'test',
+    name_en:'FormFactor Inc', name_tc:'FormFactor',
+    mcap:'~$3-5B', segment_en:'Probe Card & Wafer Test', segment_tc:'探針卡與晶圓測試',
+    role_en:'Leading probe card supplier for semiconductor wafer test. Featured in Futu chart 測試設備 section. Probe cards critical for advanced packaging (CoWoS) test step. SiPh wafer testing represents growing TAM opportunity.',
+    role_tc:'領導性探針卡半導體晶圓測試供應商。在富途圖表 測試設備 章節列出。探針卡對先進封裝 (CoWoS) 測試步驟關鍵。矽光子晶圓測試代表成長中之 TAM 機會。',
+    products_en:['MEMS probe cards','Vertical probe cards','Test sockets','Advanced packaging probes','SiPh wafer probes (emerging)'],
+    products_tc:['MEMS 探針卡','垂直探針卡','測試插座','先進封裝探針','矽光子晶圓探針 (新興)'],
+    thesis_en:'Smaller-cap pure-play probe card supplier. Operating leverage from AI wafer volume + advanced packaging. SiPh testing is high-growth optionality. Higher beta than larger test names.',
+    thesis_tc:'小型純探針卡供應商。AI 晶圓量 + 先進封裝帶來營運槓桿。矽光子測試為高成長選擇權。對較大測試標的 beta 較高。',
+    risks_en:['Smaller scale','Customer concentration','Cyclical capex','Margin pressure'],
+    risks_tc:['規模較小','客戶集中','週期性資本支出','利潤壓力'],
+    tags:['Probe Card','Test','Advanced Packaging']
+  },
+  {
+    ticker:'KLIC', exchange:'NASDAQ', cat:'test',
+    name_en:'Kulicke & Soffa Industries', name_tc:'庫力索法',
+    mcap:'~$1-2B', segment_en:'Semiconductor Packaging Equipment', segment_tc:'半導體封裝設備',
+    role_en:'Leading wire bonder and advanced packaging equipment supplier. Featured in Futu chart 封裝設備 (Packaging Equipment) section. Direct equipment supplier to OSAT companies (ASE, Amkor, Powertech) for packaging step. TCB tools critical for HBM stacking.',
+    role_tc:'領導性打線設備與先進封裝設備供應商。在富途圖表 封裝設備 章節列出。為 OSAT (ASE、Amkor、Powertech) 之封裝設備直接供應商。TCB 設備對 HBM 堆疊關鍵。',
+    products_en:['Wire bonders','Thermocompression bonders (TCB)','Flip chip bonders','LED equipment (legacy)','Advanced packaging tools'],
+    products_tc:['打線機','熱壓鍵合 (TCB)','覆晶鍵合機','LED 設備 (舊業)','先進封裝工具'],
+    thesis_en:'Pure-play packaging equipment supplier. Advanced packaging (TCB for HBM, CoWoS) drives equipment growth. Higher cyclicality than ATE. Small-cap operating leverage in upcycle.',
+    thesis_tc:'純封裝設備供應商。先進封裝 (HBM 用 TCB、CoWoS) 推動設備成長。週期性高於 ATE。上行週期中小型股具營運槓桿。',
+    risks_en:['Capex cycle volatility','Customer concentration','LED business decline','Technology obsolescence risk'],
+    risks_tc:['資本支出週期波動','客戶集中','LED 業務萎縮','技術過時風險'],
+    tags:['Packaging Equipment','TCB','Bonders','HBM']
+  },
+  {
+    ticker:'VIAV', exchange:'NASDAQ', cat:'test',
+    name_en:'Viavi Solutions', name_tc:'Viavi Solutions',
+    mcap:'~$3-4B', segment_en:'Optical Test & Measurement', segment_tc:'光學測試與量測',
+    role_en:'Optical test and measurement specialist. Featured in Futu chart 濾波片 (filter) section — VIAV makes optical filters used in transceiver assemblies. Also produces optical performance verification instruments for fiber/datacenter networks. 3D sensing for smartphones.',
+    role_tc:'光學測試與量測專家。在富途圖表 濾波片 章節列出——VIAV 製造光模組組裝用光學濾波片。亦生產光纖/資料中心網路之光性能驗證儀器。智慧手機 3D 感測。',
+    products_en:['Optical filters (for transceivers)','Network performance verification','Optical test instruments','Fiber characterization tools','3D sensing components'],
+    products_tc:['光學濾波片 (光模組用)','網路性能驗證','光學測試儀器','光纖特性化工具','3D 感測元件'],
+    thesis_en:'Niche optical test player. Filter business provides direct optical exposure. 3D sensing business adds smartphone-cycle volatility. Smaller cap, higher beta to optical thesis.',
+    thesis_tc:'利基光學測試標的。濾波片業務提供直接光通訊曝險。3D 感測業務增加智慧手機週期波動。小型股,對光通訊主題 beta 較高。',
+    risks_en:['Smaller scale','Smartphone 3D sensing cycle','Customer concentration','Competitive pressure on filter business'],
+    risks_tc:['規模較小','智慧手機 3D 感測週期','客戶集中','濾波片業務競爭壓力'],
+    tags:['Optical Test','Filters','Measurement']
+  }
+];
+/* ===========================================================================
+   RENDER HELPERS — pure functions returning HTML
+   =========================================================================== */
+
+function renderTabs(lang) {
+  return TABS.map(t => `
+    <button class="tab-btn" data-tab-id="${t.id}">
+      <span class="tab-label-en">${t.en}</span>
+      <span class="tab-label-tc">${t.tc}</span>
+    </button>
+  `).join('');
+}
+
+function renderOverview(lang) {
+  const m = META[lang];
+  return `
+    <div class="section-label">${m.overviewSection}</div>
+    <h1 class="page-title">${m.title}</h1>
+    <p class="page-subtitle">${m.subtitle}</p>
+    <div class="bluf-grid">
+      ${BLUF_STATS.map(s => `
+        <div class="bluf-card">
+          <div class="bluf-label">${s[lang].label}</div>
+          <div class="bluf-value">${s[lang].value}</div>
+          <div class="bluf-caption">${s[lang].caption}</div>
+        </div>
+      `).join('')}
+    </div>
+    <h2 class="subsec">${lang === 'tc' ? '執行摘要' : 'Executive Summary'}</h2>
+    <div class="bluf-list">
+      ${BLUF[lang].map((b, i) => `
+        <div class="bluf-row">
+          <div class="bluf-row-num">${String(i + 1).padStart(2, '0')}</div>
+          <div class="bluf-row-text">${b}</div>
+        </div>
+      `).join('')}
+    </div>
+    <h2 class="subsec">${lang === 'tc' ? '核心論點' : 'Core Thesis'}</h2>
+    ${THESIS[lang]}
+  `;
+}
+
+function renderArch(lang) {
+  return `
+    <div class="section-label">${lang === 'tc' ? '架構分析' : 'Architecture Analysis'}</div>
+    <h1 class="page-title">${lang === 'tc' ? '四代產品架構深度拆解' : 'Four Architectures: Detailed Decomposition'}</h1>
+    <p class="page-subtitle">${lang === 'tc' ? 'GS 將機架架構區分為下列五種規格,出貨節奏橫跨 2H25–2028' : 'GS classifies rack architectures into five specifications spanning 2H25–2028'}</p>
+    <div class="arch-grid">
+      ${ARCH_DATA.map(a => {
+        const d = a[lang];
+        return `
+          <div class="arch-card">
+            <div class="arch-card-head">
+              <div class="arch-card-name">${d.name}</div>
+              <div class="arch-card-period">${d.period}</div>
+            </div>
+            <dl class="arch-card-body">
+              <dt>Scale Up</dt><dd>${d.scaleUp}</dd>
+              <dt>Scale Out</dt><dd>${d.scaleOut}</dd>
+              <dt>GPU</dt><dd>${d.gpu}</dd>
+              <dt>${lang === 'tc' ? '重點' : 'Key Points'}</dt><dd>${d.key}</dd>
+            </dl>
+          </div>
+        `;
+      }).join('')}
+    </div>
+    <h2 class="subsec">${lang === 'tc' ? '關鍵觀察' : 'Key Observations'}</h2>
+    <ul>
+      ${lang === 'tc' ? `
+        <li>Scale Up 從 Vera Rubin (NVL72) 至 Rubin Ultra (NVL144/NVL576) 經歷兩次架構翻轉:(a) 銅纜 → PCB Midplane (NVL144 Kyber);(b) PCB Midplane → 銅纜 + CPO 跨機架 (NVL576 Oberon)。兩條技術路徑並存反映 Nvidia 對 supernode 設計仍在探索期。</li>
+        <li>Scale Out 規格升級節奏明確:1.6T (2025–2026) → 3.2T (2027–2028),且 CPO 在 Scale Out 滲透率從 0% (GB300) 升至 25% (VR200 Spec B) 再升至 29% (Rubin Ultra)。即便如此,可插拔光模組數量仍從 GB300 的 216 顆/機架 大幅增加至 Rubin Ultra NVL576 的 2,500 顆/運算單元。</li>
+        <li>PCB Midplane 為 Rubin Ultra Spec A 獨有架構,單機架 2 片,每片 ASP 約 US$112,500,對應 NVL144 Kyber 架構之 14,850 個機架 TAM,對 M9 CCL 與 78+ 層 HDI 供應鏈有顯著影響。</li>
+      ` : `
+        <li>Scale-up transitions twice from Vera Rubin (NVL72) to Rubin Ultra: (a) copper → PCB midplane (NVL144 Kyber); (b) PCB midplane → copper + cross-rack CPO (NVL576 Oberon). The parallel paths reflect that Nvidia's supernode design remains exploratory.</li>
+        <li>Scale-out roadmap is clear: 1.6T (2025–26) → 3.2T (2027–28), with CPO scale-out penetration rising from 0% (GB300) to 25% (VR200 Spec B) to 29% (Rubin Ultra). Despite this, pluggable optical module volume rises from 216/rack (GB300) to 2,500/cluster (Rubin Ultra NVL576).</li>
+        <li>PCB midplane is exclusive to Rubin Ultra Spec A — 2 boards per rack at ~US$112,500 ASP each, corresponding to a US$14.85B TAM across 14,850 NVL144 Kyber racks. Material implications for M9 CCL and 78+ layer HDI supply chains.</li>
+      `}
+    </ul>
+  `;
+}
+
+function renderTAM(lang) {
+  const headerLabel = lang === 'tc' ? '架構 (全生命週期 TAM)' : 'Architecture (full-lifecycle TAM)';
+  const valueLabel = lang === 'tc' ? '合計 US$m' : 'Total US$m';
+
+  // --- Exhibit 6 · Per-Rack Dollar Content (stacked bars) ---
+  const maxRack = Math.max(...EXHIBIT_6.archs.map(a => a.total)); // 1169
+  const perRackBars = EXHIBIT_6.archs.map(a => {
+    const suPct = (a.scaleUp / maxRack) * 100;
+    const soPct = (a.scaleOut / maxRack) * 100;
+    return `
+      <div class="perrack-row" data-arch="${a.short}" data-su="$${a.scaleUp}k" data-so="$${a.scaleOut}k" data-total="$${a.total}k" data-period="${a.period}">
+        <div class="perrack-label">${a.label[lang]}<div class="perrack-label-sub">${a.period}</div></div>
+        <div class="perrack-bar-wrap">
+          <div class="perrack-seg-su" style="width:${suPct}%"></div>
+          <div class="perrack-seg-so" style="width:${soPct}%"></div>
+        </div>
+        <div class="perrack-total">$${a.total.toLocaleString()}k</div>
+      </div>
+    `;
+  }).join('');
+
+  // --- Exhibit 8 · TAM Split (Scale-up / Scale-out) ---
+  const tamSplitRows = EXHIBIT_8.map(a => {
+    const suPct = ((a.scaleUp / a.total) * 100).toFixed(0);
+    const soPct = ((a.scaleOut / a.total) * 100).toFixed(0);
+    return `
+      <tr>
+        <td>${a.label[lang]}</td>
+        <td>${a.racks}k</td>
+        <td>$${a.scaleUp.toLocaleString()}M</td>
+        <td class="pct-cell">${suPct}%</td>
+        <td>$${a.scaleOut.toLocaleString()}M</td>
+        <td class="pct-cell">${soPct}%</td>
+        <td class="total-cell">$${a.total.toLocaleString()}M</td>
+      </tr>
+    `;
+  }).join('');
+
+  return `
+    <div class="section-label">${lang === 'tc' ? '市場規模' : 'TAM Analysis'}</div>
+    <h1 class="page-title">${lang === 'tc' ? 'TAM 規模:US$15bn → US$154bn 的 9 倍解鎖' : 'TAM: The 9× Unlock from $15B to $154B'}</h1>
+    <p class="page-subtitle">${lang === 'tc' ? '以下整理 GS 提供的全生命週期 (full lifecycle) 連線 TAM,假設機架出貨量 GB300 48k 台、Vera Rubin 58k 台、Rubin Ultra 132k 運算單元 (NVL576 計算)' : 'Full-lifecycle connection TAM per GS, assuming rack shipments of 48k (GB300), 58k (Vera Rubin), and 132k computing units (Rubin Ultra NVL576)'}</p>
+    <div class="tam-viz">
+      <div class="tam-row" style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;color:var(--text-faint);text-transform:uppercase;margin-bottom:4px">
+        <div>${headerLabel}</div><div></div><div style="text-align:right">${valueLabel}</div>
+      </div>
+      ${TAM_DATA.map(d => `
+        <div class="tam-row tam-data-row" data-label="${d.label[lang]}" data-value="$${d.total.toLocaleString()}M" data-pct="${d.pct}">
+          <div class="tam-label">${d.label[lang]}</div>
+          <div class="tam-bar-wrap"><div class="tam-bar" style="width:${d.pct}%"></div></div>
+          <div class="tam-value">$${d.total.toLocaleString()}M</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <h2 class="subsec">${lang === 'tc' ? 'Exhibit 6 · 每機架美金內容拆解 (US$k)' : 'Exhibit 6 · Dollar Content per Rack (US$k)'}</h2>
+    <p>${lang === 'tc'
+      ? 'GS 將每代架構之網路成本拆解為 scale-up(機架內連接,主要為銅纜或 CPO)與 scale-out(機架間連接,主要為光模組)。從 GB300 的 US$315k 一路擴張至 Rubin Ultra NVL576 的 US$1,169k,代表每機架網路內容暴增 3.7×。Spec B 在 scale-up 完全採用 CPO,推升 scale-up TAM 至 US$803k(銅纜僅占 US$234k)。'
+      : 'GS decomposes per-rack networking cost into scale-up (in-rack, dominated by copper or CPO) and scale-out (rack-to-rack, dominated by optical modules). From GB300 at $315k to Rubin Ultra NVL576 at $1,169k, per-rack networking content expands 3.7×. Spec B adopts CPO for scale-up entirely, pushing scale-up TAM to $803k (copper drops to just $234k).'}</p>
+    <div class="perrack-wrap">
+      <div class="perrack-legend">
+        <span><span class="perrack-legend-dot su"></span>${lang === 'tc' ? 'Scale-up(機架內)' : 'Scale-up (in-rack)'}</span>
+        <span><span class="perrack-legend-dot so"></span>${lang === 'tc' ? 'Scale-out(機架間)' : 'Scale-out (rack-to-rack)'}</span>
+      </div>
+      ${perRackBars}
+    </div>
+
+    <h2 class="subsec">${lang === 'tc' ? 'Exhibit 8 · Scale-up / Scale-out TAM 分拆 (US$m)' : 'Exhibit 8 · Scale-up / Scale-out TAM Split (US$m)'}</h2>
+    <p>${lang === 'tc'
+      ? '每機架內容乘以 GS 機架出貨量預估(GB300 48k、Vera Rubin 58k、Rubin Ultra 66k/132k),得到全週期 TAM。Rubin Ultra Spec B 達 US$154,313M,其中 scale-up 與 scale-out 接近持平(US$105,970M vs US$48,344M)。Scale-up 部分為 Rubin Ultra 從 Spec A 跳到 Spec B 之主要 TAM 增長(從 US$25bn → US$106bn)。'
+      : 'Per-rack content × GS rack shipment forecasts (GB300 48k, Vera Rubin 58k, Rubin Ultra 66k/132k) yields full-lifecycle TAM. Rubin Ultra Spec B reaches $154,313M with scale-up and scale-out near-balanced ($105,970M vs $48,344M). Scale-up is where the Spec A→B jump creates the largest incremental TAM ($25B → $106B).'}</p>
+    <div style="overflow-x:auto">
+      <table class="tam-split-table">
+        <thead>
+          <tr>
+            <th>${lang === 'tc' ? '架構' : 'Architecture'}</th>
+            <th>${lang === 'tc' ? '機架數' : 'Racks'}</th>
+            <th>Scale-up</th>
+            <th>%</th>
+            <th>Scale-out</th>
+            <th>%</th>
+            <th>${lang === 'tc' ? '合計 TAM' : 'Total TAM'}</th>
+          </tr>
+        </thead>
+        <tbody>${tamSplitRows}</tbody>
+      </table>
+    </div>
+
+    <h2 class="subsec">${lang === 'tc' ? '年度展開與 CPO 元件量' : 'Annual Breakdown & CPO Components'}</h2>
+    <ul>
+      ${lang === 'tc' ? `
+        <li>依年度展開(GS high-end Spec B 估算):2026E TAM US$41.6bn;2027E TAM US$34.3bn;2028E TAM US$122.7bn — 2028 為大爆發年。</li>
+        <li>CPO 部分(scale up 與 scale out 合計):2026E US$24.8bn;2027E US$1.0bn(產品週期過渡期);2028E US$70.9bn;三年合計約 US$97bn 高端情境。</li>
+        <li>CPO 元件年度出貨量(2028E high-end):Optical engine & FAU 40,172k 顆;ELS 19,902k 顆;Fiber cable + MPO 532,330k 顆;Shufflebox 4,423k 顆。Scale Out CPO Switch 年需求達 110k 台。</li>
+      ` : `
+        <li>By year (GS high-end Spec B): 2026E TAM US$41.6B; 2027E US$34.3B; 2028E US$122.7B — 2028 is the breakout year.</li>
+        <li>CPO (scale-up + scale-out): 2026E US$24.8B; 2027E US$1.0B (cycle transition); 2028E US$70.9B; three-year cumulative ~US$97B high-end scenario.</li>
+        <li>CPO component shipments (2028E high-end): Optical engine & FAU 40,172k units; ELS 19,902k; Fiber + MPO 532,330k; Shufflebox 4,423k. Scale-out CPO switch demand reaches 110k units annually.</li>
+      `}
+    </ul>
+    <h2 class="subsec">${lang === 'tc' ? 'Rubin Ultra NVL576 元件貢獻拆解 (US$154bn)' : 'Rubin Ultra NVL576 Component Mix (US$154B)'}</h2>
+    <ul>
+      ${lang === 'tc' ? `
+        <li>連線 TAM 組成:光模組 32.4bn (21%)、光引擎 & FAU 56.0bn (36%)、PCB Midplane 14.9bn (10%)、銅纜 30.8bn (20%,backplane + flyover 合計)、Fiber cable + MPO 21.0bn (14%)、ELS 10.2bn (7%)、Shufflebox 4.0bn (3%)。</li>
+        <li><strong>結論:CPO 相關元件 (光引擎 + ELS + Fiber/MPO + Shufflebox) 合計 US$91bn,占 Rubin Ultra NVL576 TAM 之 59%,為新增 TAM 之最大貢獻者。</strong></li>
+      ` : `
+        <li>Composition: optical modules 32.4B (21%), optical engine & FAU 56.0B (36%), PCB midplane 14.9B (10%), copper 30.8B (20%), Fiber + MPO 21.0B (14%), ELS 10.2B (7%), Shufflebox 4.0B (3%).</li>
+        <li><strong>Conclusion: CPO-related components (optical engine + ELS + Fiber/MPO + Shufflebox) total US$91B, 59% of NVL576 TAM — the largest incremental driver.</strong></li>
+      `}
+    </ul>
+  `;
+}
+
+function renderTech(lang) {
+  // CPO BoM
+  const bomHeaders = lang === 'tc' ? ['項目', '單價 US$', '數量', '金額 US$', '占比'] : ['Item', 'Unit US$', 'Qty', 'Total US$', '%'];
+  const bomTable = `
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr>${bomHeaders.map((h,i)=>`<th class="${i>0?'num':''}">${h}</th>`).join('')}</tr></thead>
+        <tbody>
+          ${CPO_BOM.map(r => `
+            <tr>
+              <td>${r[lang]}</td>
+              <td class="num">${r.unit.toLocaleString()}</td>
+              <td class="num">${r.qty}</td>
+              <td class="num">${r.total.toLocaleString()}</td>
+              <td class="num highlight">${r.pct}</td>
+            </tr>
+          `).join('')}
+          <tr class="total"><td>${lang === 'tc' ? 'BoM 合計' : 'Total BoM'}</td><td class="num">—</td><td class="num">—</td><td class="num">75,803</td><td class="num">100%</td></tr>
+          <tr class="total"><td>${lang === 'tc' ? '售價 (含 Mark-up US$62,220)' : 'Selling Price (incl. mark-up US$62,220)'}</td><td class="num">—</td><td class="num">—</td><td class="num highlight">130,000</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  // CPO players
+  const players = `
+    <div class="player-grid">
+      ${CPO_PLAYERS.map(p => `
+        <div class="player-card">
+          <div class="player-name">${p[lang].name}</div>
+          <div class="player-body">${p[lang].body}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  // SiPh compare
+  const siphLabels = lang === 'tc' 
+    ? {eml:'EML 方案',siph:'SiPh 方案',bom:'總 BoM',asp:'ASP',gm:'毛利率'}
+    : {eml:'EML Solution',siph:'SiPh Solution',bom:'Total BoM',asp:'ASP',gm:'Gross Margin'};
+  const siphCompare = `
+    <div class="siph-compare">
+      <div class="siph-side eml">
+        <h5>${siphLabels.eml}</h5>
+        <div class="siph-stat"><span class="siph-stat-label">${siphLabels.bom}</span><span class="siph-stat-value">US$310</span></div>
+        <div class="siph-stat"><span class="siph-stat-label">${siphLabels.asp}</span><span class="siph-stat-value">US$430</span></div>
+        <div class="siph-stat"><span class="siph-stat-label">${siphLabels.gm}</span><span class="siph-stat-value">28%</span></div>
+      </div>
+      <div class="siph-side siph">
+        <h5>${siphLabels.siph}</h5>
+        <div class="siph-stat"><span class="siph-stat-label">${siphLabels.bom}</span><span class="siph-stat-value">US$230 (−26%)</span></div>
+        <div class="siph-stat"><span class="siph-stat-label">${siphLabels.asp}</span><span class="siph-stat-value">US$365 (−15%)</span></div>
+        <div class="siph-stat"><span class="siph-stat-label">${siphLabels.gm}</span><span class="siph-stat-value">37% (+9pp)</span></div>
+      </div>
+    </div>
+  `;
+
+  // Timeline
+  const quarters = ['2025Q1','Q2','Q3','Q4','2026Q1','Q2','Q3','Q4','2027Q1','Q2','Q3','Q4','2028Q1','Q2','Q3','Q4'];
+  const states = ['vt','vt','vt','vt','vt','vt','vt','vt','t','t','t','t','b','b','b','b'];
+  const tlLabels = lang === 'tc'
+    ? {vt:'極緊',t:'緊',b:'平衡',lvt:'極緊縮 Very Tight',lt:'緊縮 Tight',lb:'平衡 Balance'}
+    : {vt:'VT',t:'T',b:'B',lvt:'Very Tight',lt:'Tight',lb:'Balance'};
+  const cells = states.map(s => {
+    const cls = s === 'vt' ? 'tl-very-tight' : s === 't' ? 'tl-tight' : 'tl-balance';
+    return `<div class="timeline-cell ${cls}">${tlLabels[s]}</div>`;
+  }).join('');
+  const timeline = `
+    <div class="timeline">${cells}</div>
+    <div class="timeline-labels">${quarters.map(q => `<span>${q}</span>`).join('')}</div>
+    <div class="timeline-legend">
+      <div class="timeline-legend-item"><span class="timeline-legend-swatch tl-very-tight"></span>${tlLabels.lvt}</div>
+      <div class="timeline-legend-item"><span class="timeline-legend-swatch tl-tight"></span>${tlLabels.lt}</div>
+      <div class="timeline-legend-item"><span class="timeline-legend-swatch tl-balance"></span>${tlLabels.lb}</div>
+    </div>
+  `;
+
+  return `
+    <div class="section-label">${lang === 'tc' ? '技術深度' : 'Technology Deep Dive'}</div>
+    <h1 class="page-title">${lang === 'tc' ? '技術:CPO · SiPh · 光源 · OCS' : 'Technology: CPO · SiPh · Light Source · OCS'}</h1>
+    <p class="page-subtitle">${lang === 'tc' ? '光通訊四大技術主題:CPO 商用化、矽光子滲透率、光源緊縮週期、OCS 光學電路交換機' : 'Four optical technology themes: CPO commercialization, SiPh penetration, light source tightness, OCS optical circuit switch'}</p>
+
+    <h2 class="subsec">${lang === 'tc' ? '一、CPO (Co-Packaged Optics) 技術原理' : 'I. CPO (Co-Packaged Optics) Technology'}</h2>
+    ${lang === 'tc' ? `
+      <p>CPO 是將光引擎與 Switch ASIC 共同封裝在同一基板上的技術,將電氣傳輸路徑從數公分縮短至毫米級,大幅降低功耗、延遲,並省去 DSP 與 retimer。GS 將 CPO 與傳統可插拔光模組、OBO/NPO 並列為光學技術演進的三個世代。</p>
+      <p>CPO 的權衡在於維護成本:可插拔光模組失效時可單獨更換、Switch 系統完好;NPO 失效需更換整片 Switch PCB;CPO with Switch 失效會影響 Switch ASIC;CPO with XPU 失效會影響整顆 GPU。考量 PIC 與 EIC 壽命差異,GS 預期 CPO 與可插拔模組將長期共存。</p>
+    ` : `
+      <p>Co-Packaged Optics (CPO) integrates optical engines onto the same substrate as the switch ASIC, shortening electrical paths from centimeters to millimeters. This dramatically reduces power consumption and latency while eliminating DSPs and retimers. GS positions CPO alongside traditional pluggable modules and OBO/NPO as the three generations of optics technology evolution.</p>
+      <p>The trade-off lies in maintenance: a failed pluggable module can be replaced individually, leaving the switch intact. NPO failures require replacing the entire switch PCB; CPO-with-Switch failures impact the switch ASIC; CPO-with-XPU failures affect the entire GPU. Given PIC vs EIC lifetime differences, GS expects CPO and pluggable modules to coexist long-term.</p>
+    `}
+
+    <h3 class="subsec-2">${lang === 'tc' ? 'Quantum-X CPO Switch BoM 拆解 (GSe)' : 'Quantum-X CPO Switch BoM (GSe)'}</h3>
+    ${bomTable}
+
+    <h3 class="subsec-2">${lang === 'tc' ? '關鍵玩家佈局' : 'Key Player Positioning'}</h3>
+    ${players}
+
+    <h2 class="subsec">${lang === 'tc' ? '二、矽光子 (SiPh) 滲透率:6% → 46%' : 'II. Silicon Photonics: 6% → 46%'}</h2>
+    ${lang === 'tc' ? `
+      <p>GS 預估矽光子在資料中心光模組市場的滲透率將從 1Q24 的 6% 大幅提升至 4Q28E 的 46%。SiPh 與 EML 將長期共存,SiPh 主導短中距高速應用、EML 主導長距傳輸。在 800G 應用上 SiPh 較 EML 之 BoM 低 26%、售價低 15%;在 1.6T 應用上 BoM 低 32%、售價低 20%。GS 預估光模組供應商毛利率將升至 48–55%。</p>
+    ` : `
+      <p>GS forecasts SiPh penetration in the datacom optical module market rises from 6% in 1Q24 to 46% by 4Q28E. SiPh and EML will coexist long-term — SiPh dominates short-to-medium-distance high-speed applications, EML retains long-distance transmission. SiPh enjoys 26% BoM saving + 15% price advantage at 800G; 32% + 20% at 1.6T. GS forecasts module supplier gross margins rise to 48–55%.</p>
+    `}
+
+    <h3 class="subsec-2">${lang === 'tc' ? '800G 光模組 BoM 對比' : '800G Module BoM Comparison'}</h3>
+    ${siphCompare}
+
+    <h2 class="subsec">${lang === 'tc' ? '三、光源 (CW Laser / EML) 供應緊縮週期' : 'III. Light Source Supply Tightness Cycle'}</h2>
+    ${lang === 'tc' ? `
+      <p>GS 評估光源供應將維持 2025–2027 年 Tight 狀態,2H28 起進入 Balance,主因:AI 伺服器放量、速率遷移、光連接擴大導致需求激增;InP 基板供應受限同時用於 EML 與 CW Laser;中國地緣政治與出口管制風險;產能擴張需要時間。</p>
+    ` : `
+      <p>GS estimates light source supply remains Tight through 2025–2027 and transitions to Balance from 2H28, driven by: AI server ramp, speed migration, and optical connection expansion; InP substrate constraints (used in both EML and CW lasers); China geopolitical / export control risks; capacity expansion lead time.</p>
+    `}
+
+    <h3 class="subsec-2">${lang === 'tc' ? '光源供應時間軸 (GSe)' : 'Light Source Supply Timeline (GSe)'}</h3>
+    ${timeline}
+
+    ${lang === 'tc' ? `
+      <p style="margin-top:16px">供應鏈擴產進度:VPEC 將 InP MOCVD 機台從 60 台擴至 64 台 (2H26);Landmark 與 YJ Semi 大幅擴產;Lumentum 計畫 CY3Q25–CY2Q26 擴產 40%;Coherent 承諾產能加倍。緊縮週期對光模組與 CPO 廠商為 Margin 支撐(供應緊縮 → 定價權上升)。</p>
+    ` : `
+      <p style="margin-top:16px">Capacity expansion: VPEC scales InP MOCVD tools from 60 to 64 in 2H26; Landmark and YJ Semi commit material expansion; Lumentum plans 40% capacity growth CY3Q25–CY2Q26; Coherent commits to doubling capacity. Tightness supports module / CPO supplier margins (tightness → pricing power).</p>
+    `}
+
+    <h2 class="subsec">${lang === 'tc' ? '四、OCS (光學電路交換機)' : 'IV. OCS (Optical Circuit Switch)'}</h2>
+    ${lang === 'tc' ? `
+      <p>OCS 與傳統交換機的根本差異在於 OCS 完全基於光信號、不需要光電光轉換,具備更高頻寬、更低功耗、更佳擴展性。OCS 可無差別通過 800G/1.6T/3.2T,意味資料中心升級速率時不需更換 OCS——這對快速演進的 AI 集群是最佳解。</p>
+      <h3 class="subsec-2">關鍵進展</h3>
+      <ul>
+        <li>Innolight 目標 2027 推出 SiPh OCS。</li>
+        <li>Lumentum OCS Backlog 已於 2026/2 突破 US$400m。</li>
+        <li>Coherent 與超過 10 家客戶洽談 OCS,出貨涵蓋 64×64 與 320×320 系統。</li>
+        <li>Google 2015 年啟動 Apollo OCS,2023 TPU v4 首度導入,2025 TPU v7 SuperPod 互連 9,216 chips。</li>
+        <li>OCP 2025 OCS 計畫參與者:Lumentum、iPronics、Google、Nvidia、Coherent、Microsoft。</li>
+      </ul>
+    ` : `
+      <p>OCS differs fundamentally from traditional switches in being purely optical — no optical-electrical-optical conversion. This yields higher bandwidth, lower power, and better scalability. OCS supports 800G/1.6T/3.2T indifferently, meaning data centers need not replace OCS when upgrading speeds — an optimal fit for rapidly evolving AI clusters.</p>
+      <h3 class="subsec-2">Key Developments</h3>
+      <ul>
+        <li>Innolight targets SiPh OCS launch in 2027.</li>
+        <li>Lumentum OCS backlog exceeded US$400M by February 2026.</li>
+        <li>Coherent engaged with 10+ OCS customers, shipments including 64×64 and 320×320 systems.</li>
+        <li>Google launched Apollo OCS in 2015; TPU v4 first deployed 2023; TPU v7 SuperPod connects 9,216 chips via OCS in 2025.</li>
+        <li>OCP 2025 OCS project participants: Lumentum, iPronics, Google, Nvidia, Coherent, Microsoft.</li>
+      </ul>
+    `}
+
+    <h2 class="subsec">${lang === 'tc' ? '五、Exhibit 17 · 資料中心連線速率路線圖' : 'V. Exhibit 17 · Data Center Connection Speed Roadmap'}</h2>
+    ${lang === 'tc' ? `
+      <p>GS 整理各速率世代於 2024 Q1–2028 Q4 的季度滲透率與生命週期狀態。400G 自 2025 起逐季衰退;800G 2024-2026 主流,2027 起被 1.6T 蠶食;1.6T 2026 進入主流並維持到 2028;3.2T 2027 Q2 開始驗證,2028 Q4 進入量產(11%);6.4T 仍處於前期測試,2028 年底前不會普及。<strong>速率遷移正是光通訊 TAM 9× 解鎖的時間軸基礎</strong>——每次速率轉換意味光模組、CPO 元件全面換代。</p>
+    ` : `
+      <p>GS maps quarterly penetration and lifecycle status for each speed tier across 2024 Q1–2028 Q4. 400G declines from 2025 onward; 800G is mainstream 2024-2026 and gets eaten by 1.6T from 2027; 1.6T enters mainstream in 2026 and persists through 2028; 3.2T begins verification 2027 Q2 and reaches mass volume (11%) by 2028 Q4; 6.4T remains in pre-verification through 2028. <strong>Speed migration is the temporal backbone of the 9× TAM unlock</strong> — each transition forces full optical module / CPO replacement.</p>
+    `}
+    ${renderSpeedRoadmap(lang)}
+  `;
+}
+
+function renderSpeedRoadmap(lang) {
+  const yearGroups = [
+    { year:'2024', span:4 },
+    { year:'2025', span:4 },
+    { year:'2026', span:4 },
+    { year:'2027', span:4 },
+    { year:'2028', span:4 }
+  ];
+  const yearHeaders = `
+    <div class="speed-cell row-label">${lang === 'tc' ? '速率' : 'Speed'}</div>
+    ${EXHIBIT_17.quarters.map((q, i) => `
+      <div class="speed-cell year-hdr">${q.split(' ')[0].slice(2)}${q.split(' ')[1]}</div>
+    `).join('')}
+  `;
+  const speedRows = EXHIBIT_17.speeds.map((speed, sIdx) => {
+    const cells = EXHIBIT_17.rows[sIdx].map((cell, qIdx) => {
+      if (!cell) return `<div class="speed-cell empty"></div>`;
+      const quarter = EXHIBIT_17.quarters[qIdx];
+      const status = EXHIBIT_17.statusLabels[cell.s][lang];
+      return `<div class="speed-cell s-${cell.s}" data-speed="${speed}" data-quarter="${quarter}" data-pct="${cell.p}" data-status="${status}">${cell.p}%</div>`;
+    }).join('');
+    return `<div class="speed-cell row-label">${speed}</div>${cells}`;
+  }).join('');
+
+  const legend = ['verify','sample','volume','main','decline'].map(k => `
+    <div class="speed-legend-item">
+      <span class="speed-legend-swatch s-${k}"></span>
+      <span>${EXHIBIT_17.statusLabels[k][lang]}</span>
+    </div>
+  `).join('');
+
+  return `
+    <div class="speed-wrap">
+      <div class="speed-grid">
+        ${yearHeaders}
+        ${speedRows}
+      </div>
+      <div class="speed-legend">${legend}</div>
+    </div>
+  `;
+}
+
+function renderAdoption(lang) {
+  const headers = lang === 'tc'
+    ? ['客戶 / 平台', '年份', 'Attach Rate (GSe)', 'Data Rate']
+    : ['Customer / Platform', 'Year', 'Attach Rate (GSe)', 'Data Rate'];
+  const attachTable = `
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr>${headers.map((h,i) => `<th class="${i>0?'num':''}">${h}</th>`).join('')}</tr></thead>
+        <tbody>
+          ${ATTACH_DATA.map(r => `
+            <tr ${r.hl ? 'style="background:rgba(6,182,212,0.04)"' : ''}>
+              <td>${r.customer[lang]}</td>
+              <td class="num">${r.year}</td>
+              <td class="num ${r.hl ? 'highlight' : ''}">${r.rate}</td>
+              <td class="num">${r.speed}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  const techHeader = lang === 'tc' ? '技術' : 'Technology';
+  const cols = ADOPTION_DATA.columns.map(c => typeof c === 'string' ? c : c[lang]);
+  const adoptRows = ADOPTION_DATA.rows.map(r => {
+    const cells = r.values.map(v => {
+      let cls = 'adopt-none', label = '—';
+      if (v === 'Y') { cls = 'adopt-yes'; label = '✓'; }
+      else if (v === 'O') { cls = 'adopt-progress'; label = '○'; }
+      else if (v.startsWith('O')) { cls = 'adopt-progress'; label = "○ '" + v.slice(1); }
+      return `<td class="${cls}">${label}</td>`;
+    }).join('');
+    return `<tr><td><strong>${r.tech[lang]}</strong></td>${cells}</tr>`;
+  }).join('');
+  const adoptTable = `
+    <div class="table-wrap">
+      <table class="data adoption">
+        <thead>
+          <tr><th>${techHeader}</th>${cols.map(c => `<th class="num">${c}</th>`).join('')}</tr>
+        </thead>
+        <tbody>${adoptRows}</tbody>
+      </table>
+    </div>
+    <p style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);letter-spacing:0.03em;margin-top:8px">${lang === 'tc' ? '✓ 已採用 · ○ 看到採用進展(註明預期年份) · — 尚無資料' : "✓ Adopted · ○ Adoption in progress (year noted) · — No visible activity"}</p>
+  `;
+
+  return `
+    <div class="section-label">${lang === 'tc' ? '採用節奏' : 'Adoption Pace'}</div>
+    <h1 class="page-title">${lang === 'tc' ? '採用節奏:Attach Rate 與 CSP 採用' : 'Adoption: Attach Rate & CSP Deployment'}</h1>
+    <p class="page-subtitle">${lang === 'tc' ? '光模組 attach rate 演化、CSP 對不同光連線技術之採用節奏' : 'Optical module attach rate evolution and CSP adoption pace across optical connection technologies'}</p>
+
+    <h2 class="subsec">${lang === 'tc' ? '光模組 Attach Rate:VR200 翻倍至 1:4~6' : 'Optical Module Attach Rate: VR200 Doubles to 1:4~6'}</h2>
+    ${lang === 'tc' ? `
+      <p>Attach rate 取決於 (1) 網路層數;(2) 光連線在整體連接中的比例;(3) 伺服器側 port rate 與網路側 data rate 的差距。VR200 的 attach rate 倍增 (1:2~3 → 1:4~6) 是 GB300→VR200 過渡期最大的單一驅動力,主因伺服器側 compute tray 每 GPU 支援 1.6T。</p>
+    ` : `
+      <p>Attach rate depends on (1) network topology; (2) optics share of overall connections; (3) gap between server-side port rate and network-side data rate. VR200's attach-rate doubling (1:2~3 → 1:4~6) is the single largest driver across the GB300→VR200 transition.</p>
+    `}
+    ${attachTable}
+
+    <h2 class="subsec">${lang === 'tc' ? 'CSP 採用節奏矩陣' : 'CSP Adoption Matrix'}</h2>
+    ${lang === 'tc' ? `
+      <p>GS 整理各 CSP 在不同光連線技術的採用節奏,反映其資料中心基礎建設成熟度與內部設計需求的差異。Google 是 OCS 採用最積極且最早 (2015 年 Apollo 計畫);Nvidia 在 CPO Scale Out 全面領先 (Quantum-X 2026 商用);中國 CSP 在 CPO Scale Up/Out 雙線並進但可能受 InP 出口管制限制。</p>
+    ` : `
+      <p>GS maps adoption pace across CSPs and optical connection technologies. Google has the most aggressive and earliest OCS adoption (2015 Apollo program); Nvidia leads in CPO scale-out (Quantum-X 2026); Chinese CSPs pursue both CPO scale-up and scale-out but may be constrained by InP export controls.</p>
+    `}
+    ${adoptTable}
+
+    <h2 class="subsec">${lang === 'tc' ? '影響採用節奏的四大因素' : 'Four Factors Shaping Adoption'}</h2>
+    <ul>
+      ${lang === 'tc' ? `
+        <li><strong>舊設備折舊與利用率</strong>——若當代產能尚未折舊完畢,快速跳代的財務壓力顯著。</li>
+        <li><strong>新基建準備度</strong>——新建廠房、電力、散熱基礎建設需要時間。</li>
+        <li><strong>等待成本下降</strong>——新技術初期成本顯著高於量產期。</li>
+        <li><strong>技術方向不確定性</strong>——多條技術路徑競合時,過早重金投入有風險。</li>
+      ` : `
+        <li><strong>Depreciation and utilization of legacy facilities</strong> — un-depreciated capacity creates financial pressure against rapid generation transitions.</li>
+        <li><strong>New infrastructure readiness</strong> — buildings, power grids, and cooling systems require lead time.</li>
+        <li><strong>Waiting for cost reduction</strong> — early-stage technology costs substantially exceed mass production.</li>
+        <li><strong>Technology direction uncertainty</strong> — heavy early investment is risky when multiple paths compete.</li>
+      `}
+    </ul>
+  `;
+}
+
+function renderCompanies(lang) {
+  // Count per category
+  const counts = {};
+  COMPANIES.forEach(c => { counts[c.cat] = (counts[c.cat] || 0) + 1; });
+  counts.all = COMPANIES.length;
+
+  const filterLabels = lang === 'tc'
+    ? {label:'分類篩選',all:'全部',light:'光源',module:'光模組',asic:'CPO ASIC',fiber:'光纖',pack:'封裝代工',pcb:'PCB / CCL',system:'OEM / ODM',test:'測試設備'}
+    : {label:'Filter',all:'All',light:'Light Source',module:'Modules',asic:'CPO ASIC',fiber:'Fiber',pack:'Pack / Foundry',pcb:'PCB / CCL',system:'OEM / ODM',test:'Test Equipment'};
+
+  const filters = ['all','light','module','asic','fiber','pack','pcb','system','test'];
+  const searchPlaceholder = lang === 'tc' ? '搜尋代號或公司名…' : 'Search ticker or name…';
+  const filterBar = `
+    <div class="filter-bar">
+      <span class="filter-label">${filterLabels.label}:</span>
+      ${filters.map(f => `
+        <button class="filter-btn ${f === 'all' ? 'active' : ''}" data-filter="${f}">
+          ${filterLabels[f]}<span class="filter-count">${counts[f] || 0}</span>
+        </button>
+      `).join('')}
+      <div class="filter-search-wrap">
+        <svg class="filter-search-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="7" cy="7" r="5"/>
+          <path d="m11 11 3.5 3.5" stroke-linecap="round"/>
+        </svg>
+        <input type="text" id="company-search" class="filter-search" placeholder="${searchPlaceholder}" autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+  `;
+
+  // Company cards
+  const cards = COMPANIES.map((c, idx) => {
+    const name = lang === 'tc' ? c.name_tc : c.name_en;
+    const altName = lang === 'tc' ? c.name_en : c.name_tc;
+    const role = lang === 'tc' ? c.role_tc : c.role_en;
+    const segment = lang === 'tc' ? c.segment_tc : c.segment_en;
+    const catLabel = filterLabels[c.cat] || c.cat;
+    return `
+      <div class="company-card" data-cat="${c.cat}" data-idx="${idx}" data-ticker="${c.ticker.toLowerCase()}" data-name-en="${c.name_en.toLowerCase()}" data-name-tc="${c.name_tc}">
+        <div class="company-card-head">
+          <div class="cc-ticker">${c.ticker}</div>
+          <div class="cc-cat ${c.cat}">${catLabel}</div>
+        </div>
+        <div class="cc-name">${name}</div>
+        <div class="cc-name-2">${altName}</div>
+        <div class="cc-meta">
+          <span><b>${c.exchange}</b></span>
+          <span>${lang === 'tc' ? '市值' : 'Mcap'} <b>${c.mcap}</b></span>
+        </div>
+        <div class="cc-role">${role}</div>
+        <div class="cc-click-hint">${lang === 'tc' ? '點擊查看詳情' : 'Click for details'}</div>
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <div class="section-label">${lang === 'tc' ? '供應鏈受惠標的' : 'Supply Chain Beneficiaries'}</div>
+    <h1 class="page-title">${lang === 'tc' ? '公司名單 · 點擊查看詳情' : 'Companies · Click for Details'}</h1>
+    <p class="page-subtitle">${lang === 'tc' ? `本節依產業鏈位階整理 GS 報告所指涉之 ${COMPANIES.length} 家主要受惠標的,以供應鏈分層而非個股建議方式呈現。實際投資決策需綜合考量估值、進場時點、部位配置與風險承受度。點擊任一公司卡片可開啟完整詳情。` : `This section maps the ${COMPANIES.length} principal beneficiaries identified by the GS analysis by supply-chain position, presented as thematic groupings rather than security recommendations. Click any card for full company details including thesis and risks.`}</p>
+    ${filterBar}
+    <div class="companies-grid" id="companies-grid">${cards}</div>
+    <div class="filter-empty" id="filter-empty" style="display:none">${lang === 'tc' ? '沒有符合的標的 · 請調整篩選或關鍵字' : 'No matches · adjust filter or search term'}</div>
+  `;
+}
+
+function renderRisks(lang) {
+  const risks = RISKS[lang].map((r, i) => `
+    <div class="risk-item">
+      <div class="risk-num">${String(i + 1).padStart(2, '0')}</div>
+      <div class="risk-text">${r}</div>
+    </div>
+  `).join('');
+
+  const monitoring = MONITORING[lang].map(m => `<div class="monitor-item">${m}</div>`).join('');
+
+  const glossRows = GLOSSARY.map(([term, def]) => `
+    <tr>
+      <td style="width:160px"><strong style="color:var(--cyan);font-family:var(--font-mono);font-size:12px;letter-spacing:0.04em">${term}</strong></td>
+      <td>${def[lang]}</td>
+    </tr>
+  `).join('');
+
+  return `
+    <div class="section-label">${lang === 'tc' ? '風險與觀察' : 'Risks & Monitoring'}</div>
+    <h1 class="page-title">${lang === 'tc' ? '風險因素與後續觀察項目' : 'Key Risks & Monitoring Checklist'}</h1>
+    <p class="page-subtitle">${lang === 'tc' ? '五大風險、六項持續觀察清單、二十項名詞釋義' : 'Five key risks, six monitoring items, and 20 term glossary'}</p>
+
+    <h2 class="subsec">${lang === 'tc' ? '五大風險因素' : 'Five Key Risks'}</h2>
+    <div class="risk-list">${risks}</div>
+
+    <h2 class="subsec">${lang === 'tc' ? '後續觀察項目 (Monitoring Checklist)' : 'Monitoring Checklist'}</h2>
+    <div class="monitor-list">${monitoring}</div>
+
+    <div class="glossary">
+      <button class="glossary-head" id="glossary-toggle-btn">
+        <span>${lang === 'tc' ? '附錄 · 關鍵名詞釋義 (20 個名詞)' : 'Appendix · Glossary (20 terms)'}</span>
+      </button>
+      <div class="glossary-body">
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>${lang === 'tc' ? '名詞' : 'Term'}</th><th>${lang === 'tc' ? '釋義' : 'Definition'}</th></tr></thead>
+            <tbody>${glossRows}</tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderCompanyModal(idx, lang) {
+  const c = COMPANIES[idx];
+  if (!c) return;
+  const name = lang === 'tc' ? c.name_tc : c.name_en;
+  const altName = lang === 'tc' ? c.name_en : c.name_tc;
+  const role = lang === 'tc' ? c.role_tc : c.role_en;
+  const thesis = lang === 'tc' ? c.thesis_tc : c.thesis_en;
+  const products = lang === 'tc' ? c.products_tc : c.products_en;
+  const risks = lang === 'tc' ? c.risks_tc : c.risks_en;
+  const segment = lang === 'tc' ? c.segment_tc : c.segment_en;
+
+  const head = `
+    <div class="modal-pager">
+      <button class="modal-pager-btn" data-pager="prev" aria-label="Previous company" title="${lang === 'tc' ? '上一家 (←)' : 'Previous (←)'}">‹</button>
+      <span class="modal-pager-counter"><span class="pager-now">${String(idx + 1).padStart(2, '0')}</span><span class="pager-divider">/</span>${String(COMPANIES.length).padStart(2, '0')}</span>
+      <button class="modal-pager-btn" data-pager="next" aria-label="Next company" title="${lang === 'tc' ? '下一家 (→)' : 'Next (→)'}">›</button>
+    </div>
+    <div class="modal-ticker-row">
+      <div class="modal-ticker">${c.ticker}</div>
+      <div class="modal-exchange">${c.exchange}</div>
+    </div>
+    <div class="modal-name">${name}</div>
+    <div class="modal-name-2">${altName}</div>
+    <div class="modal-stats">
+      <div class="modal-stat">
+        <div class="modal-stat-label">${lang === 'tc' ? '市值' : 'Market Cap'}</div>
+        <div class="modal-stat-value">${c.mcap}</div>
+      </div>
+      <div class="modal-stat">
+        <div class="modal-stat-label">${lang === 'tc' ? '業務' : 'Segment'}</div>
+        <div class="modal-stat-value" style="font-size:11px">${segment}</div>
+      </div>
+      <div class="modal-stat">
+        <div class="modal-stat-label">${lang === 'tc' ? '類別' : 'Category'}</div>
+        <div class="modal-stat-value" style="text-transform:capitalize">${c.cat}</div>
+      </div>
+    </div>
+  `;
+
+  const body = `
+    <div class="modal-section">
+      <div class="modal-section-label">${lang === 'tc' ? '在光通訊產業鏈中的角色' : 'Role in Optical Networking'}</div>
+      <p>${role}</p>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-label">${lang === 'tc' ? '關鍵產品 / 業務' : 'Key Products / Lines'}</div>
+      <ul class="modal-product-list">
+        ${products.map(p => `<li>${p}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-label">${lang === 'tc' ? '投資邏輯' : 'Investment Thesis'}</div>
+      <p>${thesis}</p>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-label">${lang === 'tc' ? '風險因素' : 'Risk Factors'}</div>
+      <ul class="modal-risks-list">
+        ${risks.map(r => `<li>${r}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-label">${lang === 'tc' ? '相關報告章節 / 主題' : 'Related Sections / Themes'}</div>
+      <div class="modal-tags">
+        ${c.tags.map(t => `<span class="modal-tag">${t}</span>`).join('')}
+      </div>
+    </div>
+  `;
+
+  return { head, body };
+}
+/* ===========================================================================
+   APP LOGIC — tab switching, modal, language, password gate
+   =========================================================================== */
+
+const $ = (sel, ctx) => (ctx || document).querySelector(sel);
+const $$ = (sel, ctx) => [...(ctx || document).querySelectorAll(sel)];
+
+let currentLang = 'tc';
+let currentTab = 'overview';
+
+function render() {
+  document.documentElement.lang = currentLang === 'tc' ? 'zh-Hant' : 'en';
+  document.body.setAttribute('data-lang', currentLang);
+
+  // Render tabs (idempotent — same HTML, just toggle active)
+  const tabsInner = $('#tabs-inner');
+  tabsInner.innerHTML = renderTabs(currentLang);
+  $$('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tabId === currentTab);
+    b.addEventListener('click', () => setTab(b.dataset.tabId));
+  });
+  initTabsScrollFade();
+
+  // Render active tab content
+  const main = $('#main-content');
+  let content = '';
+  switch (currentTab) {
+    case 'overview':  content = renderOverview(currentLang); break;
+    case 'arch':      content = renderArch(currentLang); break;
+    case 'tam':       content = renderTAM(currentLang); break;
+    case 'tech':      content = renderTech(currentLang); break;
+    case 'adoption':  content = renderAdoption(currentLang); break;
+    case 'companies': content = renderCompanies(currentLang); break;
+    case 'risks':     content = renderRisks(currentLang); break;
+  }
+  main.innerHTML = `<div class="tab-panel active">${content}</div>`;
+
+  // Footer disclaimer
+  $('#disclaimer-text').textContent = DISCLAIMER[currentLang];
+
+  // Wire up tab-specific interactions
+  if (currentTab === 'companies') initCompaniesTab();
+  if (currentTab === 'risks') initGlossaryToggle();
+  if (currentTab === 'overview') animateBlufValues();
+  if (currentTab === 'tam') { initTamTooltips(); initPerRackTooltips(); }
+  if (currentTab === 'tech') initSpeedTooltips();
+
+  // Lang button highlights
+  $$('.lang-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.langBtn === currentLang);
+  });
+}
+
+function setTab(id) {
+  currentTab = id;
+  hideTooltip();
+  render();
+  // Scroll back to top of content on tab change
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* === Number counter animation for BLUF stats (viewport-aware) === */
+function animateValue(el, target, duration, prefix, suffix) {
+  const startTime = performance.now();
+  function update(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+    const current = target * eased;
+    const display = (Math.abs(target) >= 100)
+      ? Math.round(current).toLocaleString()
+      : current.toFixed(target % 1 === 0 ? 0 : 1);
+    el.textContent = prefix + display + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+function animateBlufValues() {
+  const els = document.querySelectorAll('.bluf-value');
+  if (els.length === 0) return;
+
+  // Parse and stash target values; reset display to "0"
+  const items = [];
+  els.forEach((el) => {
+    if (el.dataset.animated === '1') return;
+    const text = el.textContent.trim();
+    const m = text.match(/^([^\d-]*)([-\d,.]+)(.*)$/);
+    if (!m) return;
+    const target = parseFloat(m[2].replace(/,/g, ''));
+    if (isNaN(target)) return;
+    el.dataset.prefix = m[1];
+    el.dataset.target = target;
+    el.dataset.suffix = m[3];
+    el.textContent = m[1] + '0' + m[3];
+    items.push(el);
+  });
+
+  // IntersectionObserver: animate only when card enters viewport (>40% visible)
+  if (!('IntersectionObserver' in window)) {
+    // Fallback for older browsers — animate all immediately
+    items.forEach((el, i) => setTimeout(() => {
+      animateValue(el, parseFloat(el.dataset.target), 1100, el.dataset.prefix, el.dataset.suffix);
+      el.dataset.animated = '1';
+    }, 120 + i * 70));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    let triggerOrder = 0;
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.target.dataset.animated !== '1') {
+        const el = entry.target;
+        const target = parseFloat(el.dataset.target);
+        el.dataset.animated = '1';
+        setTimeout(() => animateValue(el, target, 1100, el.dataset.prefix, el.dataset.suffix), 120 + triggerOrder * 70);
+        triggerOrder++;
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.4, rootMargin: '0px 0px -8% 0px' });
+
+  items.forEach(el => observer.observe(el));
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  render();
+}
+
+/* === Companies tab interactions === */
+
+function initCompaniesTab() {
+  let activeFilter = 'all';
+  let searchQuery = '';
+
+  function applyFilters() {
+    const q = searchQuery.toLowerCase().trim();
+    let visibleCount = 0;
+    $$('.company-card').forEach(card => {
+      const catMatch = activeFilter === 'all' || card.dataset.cat === activeFilter;
+      const ticker = card.dataset.ticker || '';
+      const nameEn = card.dataset.nameEn || '';
+      const nameTc = card.dataset.nameTc || '';
+      const queryMatch = !q
+        || ticker.includes(q)
+        || nameEn.includes(q)
+        || nameTc.includes(searchQuery.trim()); // TC: case-sensitive substring
+      const show = catMatch && queryMatch;
+      card.style.display = show ? '' : 'none';
+      if (show) visibleCount++;
+    });
+    const emptyEl = $('#filter-empty');
+    if (emptyEl) emptyEl.style.display = (visibleCount === 0) ? 'block' : 'none';
+  }
+
+  // Filter buttons
+  $$('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      $$('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  // Search input — real-time filtering
+  const searchInput = $('#company-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      applyFilters();
+    });
+  }
+
+  // Card click → open modal
+  $$('.company-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const idx = parseInt(card.dataset.idx, 10);
+      openCompanyModal(idx);
+    });
+  });
+}
+
+/* === Modal === */
+
+let currentModalIdx = -1;
+let lastFocusedBeforeModal = null;
+
+function openCompanyModal(idx) {
+  const data = renderCompanyModal(idx, currentLang);
+  if (!data) return;
+  lastFocusedBeforeModal = document.activeElement;
+  currentModalIdx = idx;
+  $('#modal-head').innerHTML = data.head;
+  $('#modal-body').innerHTML = data.body;
+  $('#modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  $('#modal').scrollTop = 0;
+  // a11y: focus first interactive element after open transition
+  setTimeout(() => {
+    const firstBtn = $('#modal').querySelector('[data-pager="next"]') || $('#modal-close');
+    if (firstBtn && firstBtn.focus) firstBtn.focus();
+  }, 50);
+}
+
+function navigateModal(direction) {
+  if (currentModalIdx < 0) return;
+  let next = currentModalIdx + direction;
+  if (next < 0) next = COMPANIES.length - 1;
+  if (next >= COMPANIES.length) next = 0;
+  const data = renderCompanyModal(next, currentLang);
+  if (!data) return;
+  currentModalIdx = next;
+  $('#modal-head').innerHTML = data.head;
+  $('#modal-body').innerHTML = data.body;
+  $('#modal').scrollTop = 0;
+}
+
+function closeModal() {
+  $('#modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentModalIdx = -1;
+  // a11y: return focus to whatever triggered the modal
+  if (lastFocusedBeforeModal && typeof lastFocusedBeforeModal.focus === 'function') {
+    try { lastFocusedBeforeModal.focus(); } catch (e) {}
+  }
+  lastFocusedBeforeModal = null;
+}
+
+$('#modal-close').addEventListener('click', closeModal);
+$('#modal-overlay').addEventListener('click', (e) => {
+  if (e.target.id === 'modal-overlay') closeModal();
+});
+
+// Pager click delegation
+$('#modal-head').addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-pager]');
+  if (!btn) return;
+  if (btn.dataset.pager === 'prev') navigateModal(-1);
+  else if (btn.dataset.pager === 'next') navigateModal(1);
+});
+
+// Focus trap helper
+function trapModalFocus(e) {
+  const modal = $('#modal');
+  if (!modal) return;
+  const focusables = modal.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  const visible = Array.from(focusables).filter(el => !el.disabled && el.offsetParent !== null);
+  if (visible.length === 0) return;
+  const first = visible[0];
+  const last = visible[visible.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  const isOpen = $('#modal-overlay').classList.contains('open');
+  if (!isOpen) return;
+  if (e.key === 'Escape') closeModal();
+  else if (e.key === 'ArrowLeft')  { e.preventDefault(); navigateModal(-1); }
+  else if (e.key === 'ArrowRight') { e.preventDefault(); navigateModal(1); }
+  else if (e.key === 'Tab') trapModalFocus(e);
+});
+
+/* === Glossary toggle === */
+
+function initGlossaryToggle() {
+  const btn = $('#glossary-toggle-btn');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      btn.parentElement.classList.toggle('open');
+    });
+  }
+}
+
+/* === Custom tooltip (cursor-following, replaces native title) === */
+
+function showTooltip(html, x, y) {
+  const t = $('#custom-tooltip');
+  if (!t) return;
+  t.innerHTML = html;
+  t.style.left = x + 'px';
+  t.style.top = y + 'px';
+  t.classList.add('visible');
+  t.setAttribute('aria-hidden', 'false');
+}
+
+function moveTooltip(x, y) {
+  const t = $('#custom-tooltip');
+  if (!t) return;
+  // Edge-aware: if cursor is in the right 30% of viewport, flip tooltip to the left
+  const flipLeft = x > window.innerWidth * 0.7;
+  t.style.left = x + 'px';
+  t.style.top = y + 'px';
+  t.style.transform = flipLeft ? 'translate(-100%, -50%) translateX(-14px)' : 'translate(14px, -50%)';
+}
+
+function hideTooltip() {
+  const t = $('#custom-tooltip');
+  if (!t) return;
+  t.classList.remove('visible');
+  t.setAttribute('aria-hidden', 'true');
+}
+
+function initTamTooltips() {
+  $$('.tam-data-row').forEach(row => {
+    row.addEventListener('mouseenter', (e) => {
+      const label = row.dataset.label || '';
+      const value = row.dataset.value || '';
+      const pct = row.dataset.pct || '';
+      const labelKey = currentLang === 'tc' ? '架構' : 'Arch';
+      const tamKey = currentLang === 'tc' ? '全週期 TAM' : 'Full-Cycle TAM';
+      const shareKey = currentLang === 'tc' ? '佔比' : 'Share';
+      const html = `
+        <div class="ctt-row"><span class="ctt-key">${labelKey}</span><span class="ctt-val">${label}</span></div>
+        <div class="ctt-divider"></div>
+        <div class="ctt-row"><span class="ctt-key">${tamKey}</span><span class="ctt-val accent">${value}</span></div>
+        <div class="ctt-row"><span class="ctt-key">${shareKey}</span><span class="ctt-val accent">${pct}%</span></div>
+      `;
+      showTooltip(html, e.clientX, e.clientY);
+    });
+    row.addEventListener('mousemove', (e) => moveTooltip(e.clientX, e.clientY));
+    row.addEventListener('mouseleave', hideTooltip);
+  });
+}
+
+function initPerRackTooltips() {
+  $$('.perrack-row').forEach(row => {
+    row.addEventListener('mouseenter', (e) => {
+      const arch = row.dataset.arch || '';
+      const su = row.dataset.su || '';
+      const so = row.dataset.so || '';
+      const total = row.dataset.total || '';
+      const period = row.dataset.period || '';
+      const archKey = currentLang === 'tc' ? '架構' : 'Arch';
+      const periodKey = currentLang === 'tc' ? '時程' : 'Period';
+      const suKey = 'Scale-up';
+      const soKey = 'Scale-out';
+      const totalKey = currentLang === 'tc' ? '每機架' : 'Per Rack';
+      const html = `
+        <div class="ctt-row"><span class="ctt-key">${archKey}</span><span class="ctt-val">${arch}</span></div>
+        <div class="ctt-row"><span class="ctt-key">${periodKey}</span><span class="ctt-val">${period}</span></div>
+        <div class="ctt-divider"></div>
+        <div class="ctt-row"><span class="ctt-key">${suKey}</span><span class="ctt-val">${su}</span></div>
+        <div class="ctt-row"><span class="ctt-key">${soKey}</span><span class="ctt-val">${so}</span></div>
+        <div class="ctt-row"><span class="ctt-key">${totalKey}</span><span class="ctt-val accent">${total}</span></div>
+      `;
+      showTooltip(html, e.clientX, e.clientY);
+    });
+    row.addEventListener('mousemove', (e) => moveTooltip(e.clientX, e.clientY));
+    row.addEventListener('mouseleave', hideTooltip);
+  });
+}
+
+function initSpeedTooltips() {
+  $$('.speed-cell[data-speed]').forEach(cell => {
+    cell.addEventListener('mouseenter', (e) => {
+      const speed = cell.dataset.speed || '';
+      const quarter = cell.dataset.quarter || '';
+      const pct = cell.dataset.pct || '';
+      const status = cell.dataset.status || '';
+      const speedKey = currentLang === 'tc' ? '速率' : 'Speed';
+      const qKey = currentLang === 'tc' ? '時點' : 'Quarter';
+      const penKey = currentLang === 'tc' ? '滲透率' : 'Penetration';
+      const stKey = currentLang === 'tc' ? '生命週期' : 'Lifecycle';
+      const html = `
+        <div class="ctt-row"><span class="ctt-key">${speedKey}</span><span class="ctt-val accent">${speed}</span></div>
+        <div class="ctt-row"><span class="ctt-key">${qKey}</span><span class="ctt-val">${quarter}</span></div>
+        <div class="ctt-divider"></div>
+        <div class="ctt-row"><span class="ctt-key">${penKey}</span><span class="ctt-val accent">${pct}%</span></div>
+        <div class="ctt-row"><span class="ctt-key">${stKey}</span><span class="ctt-val">${status}</span></div>
+      `;
+      showTooltip(html, e.clientX, e.clientY);
+    });
+    cell.addEventListener('mousemove', (e) => moveTooltip(e.clientX, e.clientY));
+    cell.addEventListener('mouseleave', hideTooltip);
+  });
+}
+
+/* === Scroll-aware fade-out on horizontal tab bar === */
+
+function initTabsScrollFade() {
+  const inner = $('#tabs-inner');
+  const nav = inner ? inner.closest('nav.tabs') : null;
+  if (!inner || !nav) return;
+  function check() {
+    const atEnd = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 4;
+    const hasOverflow = inner.scrollWidth > inner.clientWidth + 2;
+    nav.classList.toggle('scrolled-right', atEnd || !hasOverflow);
+  }
+  inner.addEventListener('scroll', check, { passive: true });
+  window.addEventListener('resize', check);
+  // Run once after layout settles
+  setTimeout(check, 50);
+}
+
+/* === Language toggle === */
+
+$$('.lang-toggle button').forEach(b => {
+  b.addEventListener('click', () => setLang(b.dataset.langBtn));
+});
+
+/* === Password gate (SHA-256: 23008133) === */
+
+const EXPECTED_HASH = 'bebc79734038e684e2d9bd00f8a0bcebb96fbffbdb699ffd076732806fe1cde0';
+
+/* Pure-JS SHA-256 fallback for sandboxed iframes where crypto.subtle is unavailable */
+function sha256_js(ascii) {
+  function rightRotate(value, amount) { return (value >>> amount) | (value << (32 - amount)); }
+  var mathPow = Math.pow;
+  var maxWord = mathPow(2, 32);
+  var lengthProperty = 'length';
+  var i, j;
+  var result = '';
+  var words = [];
+  var asciiBitLength = ascii[lengthProperty] * 8;
+  var hash = [];
+  var k = [];
+  var primeCounter = 0;
+  var isComposite = {};
+  for (var candidate = 2; primeCounter < 64; candidate++) {
+    if (!isComposite[candidate]) {
+      for (i = 0; i < 313; i += candidate) { isComposite[i] = candidate; }
+      hash[primeCounter] = (mathPow(candidate, .5) * maxWord) | 0;
+      k[primeCounter++] = (mathPow(candidate, 1/3) * maxWord) | 0;
+    }
+  }
+  ascii += '\x80';
+  while (ascii[lengthProperty] % 64 - 56) ascii += '\x00';
+  for (i = 0; i < ascii[lengthProperty]; i++) {
+    j = ascii.charCodeAt(i);
+    if (j >> 8) return;
+    words[i >> 2] |= j << ((3 - i) % 4) * 8;
+  }
+  words[words[lengthProperty]] = ((asciiBitLength / maxWord) | 0);
+  words[words[lengthProperty]] = (asciiBitLength);
+  for (j = 0; j < words[lengthProperty];) {
+    var w = words.slice(j, j += 16);
+    var oldHash = hash;
+    hash = hash.slice(0, 8);
+    for (i = 0; i < 64; i++) {
+      var w15 = w[i - 15], w2 = w[i - 2];
+      var a = hash[0], e = hash[4];
+      var temp1 = hash[7]
+        + (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25))
+        + ((e & hash[5]) ^ ((~e) & hash[6]))
+        + k[i]
+        + (w[i] = (i < 16) ? w[i] : (
+            w[i - 16]
+            + (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3))
+            + w[i - 7]
+            + (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))
+          ) | 0
+        );
+      var temp2 = (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22))
+        + ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+      hash = [(temp1 + temp2) | 0].concat(hash);
+      hash[4] = (hash[4] + temp1) | 0;
+    }
+    for (i = 0; i < 8; i++) { hash[i] = (hash[i] + oldHash[i]) | 0; }
+  }
+  for (i = 0; i < 8; i++) {
+    for (j = 3; j + 1; j--) {
+      var b = (hash[i] >> (j * 8)) & 255;
+      result += ((b < 16) ? '0' : '') + b.toString(16);
+    }
+  }
+  return result;
+}
+
+async function sha256(str) {
+  // Prefer Web Crypto API (faster, native); fall back to pure JS for sandboxed previews
+  try {
+    if (window.crypto && window.crypto.subtle && window.crypto.subtle.digest) {
+      const enc = new TextEncoder().encode(str);
+      const buf = await window.crypto.subtle.digest('SHA-256', enc);
+      return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+  } catch (e) { /* fall through */ }
+  return sha256_js(str);
+}
+
+async function unlock(pwd) {
+  const errEl = $('#gate-error');
+  const btn = $('#gate-btn');
+  const input = $('#gate-input');
+  errEl.textContent = '';
+  if (!pwd) {
+    errEl.textContent = currentLang === 'tc' ? '請輸入通行碼' : 'Please enter access key';
+    return;
+  }
+  const originalLabel = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = (currentLang === 'tc' ? '驗證中' : 'Verifying') + '<span class="gate-spinner"></span>';
+  try {
+    const h = await sha256(pwd);
+    if (h === EXPECTED_HASH) {
+      await new Promise(r => setTimeout(r, 350));
+      btn.classList.add('success');
+      btn.innerHTML = currentLang === 'tc' ? '✓ 已授權' : '✓ Authorized';
+      await new Promise(r => setTimeout(r, 240));
+      $('#gate').classList.add('hidden');
+      $('#app').style.display = 'block';
+      render();
+      try { sessionStorage.setItem('gs_optical_unlocked_v2', '1'); } catch (e) {}
+    } else {
+      await new Promise(r => setTimeout(r, 200));
+      errEl.textContent = currentLang === 'tc'
+        ? '通行碼錯誤 · Access key incorrect'
+        : 'Incorrect access key · 通行碼錯誤';
+      input.value = '';
+      input.focus();
+      btn.disabled = false;
+      btn.classList.remove('success');
+      btn.innerHTML = originalLabel;
+    }
+  } catch (e) {
+    errEl.textContent = 'Verification error: ' + e.message;
+    btn.disabled = false;
+    btn.classList.remove('success');
+    btn.innerHTML = originalLabel;
+  }
+}
+
+/* Wire up both button click and Enter key — avoid form.onsubmit which can mis-behave in sandboxed iframes */
+$('#gate-btn').addEventListener('click', () => unlock($('#gate-input').value));
+$('#gate-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    unlock($('#gate-input').value);
+  }
+});
+
+try {
+  if (sessionStorage.getItem('gs_optical_unlocked_v2') === '1') {
+    $('#gate').classList.add('hidden');
+    $('#app').style.display = 'block';
+    render();
+  }
+} catch (e) { /* sessionStorage unavailable */ }
+</script>
+
+</body>
+</html>
